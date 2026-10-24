@@ -74,7 +74,7 @@ tests/                 unit (int) and end-to-end (e2e)
 - Server Components by default. `'use client'` only for components that need state or browser APIs: menus, the Comfort panel, the cookie banner and forms. Keep client components small and at the leaves.
 - Pages are statically generated. When an editor publishes in Payload, an `afterChange` hook calls `revalidatePath` for that page. No client-side fetching of page content.
 - Images use `next/image` with explicit `sizes`, AVIF/WebP and fixed aspect ratios. Only the hero image gets `priority`.
-- Fonts are self-hosted with `next/font/local`: Figtree for headings, Atkinson Hyperlegible Next for body, at most 2 weights each, `display: swap`.
+- Fonts are self-hosted with `next/font/local`: Figtree for headings and Atkinson Hyperlegible Next for body, one variable Latin file per family (about 55 KB in total), `display: swap`.
 - No carousels, autoplay, video backgrounds or decorative animation (website brief). Transitions stay under 200 ms and are switched off by `prefers-reduced-motion` and low-stimulation mode.
 - Icons are inline SVG components. No icon fonts or whole-library imports.
 - Third-party scripts: Plausible only, loaded with `strategy="lazyOnload"` after consent.
