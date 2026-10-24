@@ -3,5 +3,11 @@
   "framework": "nextjs",
   "regions": ["lhr1"],
   "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm payload migrate && pnpm build"
+  "buildCommand": "pnpm payload migrate && pnpm build",
+  "crons": [
+    {
+      "path": "/cron/retention",
+      "schedule": "15 3 * * *"
+    }
+  ]
 }

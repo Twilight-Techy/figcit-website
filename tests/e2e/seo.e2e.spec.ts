@@ -39,3 +39,8 @@ test.describe('SEO base', () => {
     expect(res.headers()['content-type']).toContain('image/png')
   })
 })
+
+test('the retention job refuses requests without the cron secret', async ({ request }) => {
+  const res = await request.get('/cron/retention')
+  expect(res.status()).toBe(401)
+})

@@ -55,7 +55,7 @@ Each page is done when it matches Figma at 1440 px and 390 px, matches the copy 
 
 | ID  | Task                                                                                                                                                                                       | Done when                                                        | Status |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | ------ |
-| T24 | Form backend: FormSubmissions collection (admin-only), server actions, Zod schemas, rate limiting, honeypot and Turnstile, Resend notification to admin@figcit.co.uk, 12-month auto-delete | Invalid, spam and rate-limited requests are rejected and tested  | ⬜     |
+| T24 | Form backend: FormSubmissions collection (admin-only), server actions, Zod schemas, rate limiting, honeypot and Turnstile, Resend notification to admin@figcit.co.uk, 12-month auto-delete | Invalid, spam and rate-limited requests are rejected and tested  | ✅     |
 | T25 | Four forms (Get early access, Book a conversation, Hub interest, Partner with us) with all states from design page 11                                                                      | Success, error and loading states match design; no health fields | ⬜     |
 
 ## Phase 5: Quality and launch
