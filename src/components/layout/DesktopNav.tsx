@@ -49,7 +49,7 @@ export function DesktopNav({ groups }: { groups: NavGroup[] }) {
 
   return (
     <nav ref={navRef} aria-label="Main">
-      <ul className="flex items-center gap-8">
+      <ul className="flex items-center gap-8 whitespace-nowrap">
         {groups.map((group) =>
           group.kind === 'link' ? (
             <li key={group.label}>
