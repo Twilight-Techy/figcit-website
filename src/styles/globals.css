@@ -108,6 +108,49 @@
     padding-inline: var(--fc-gutter);
   }
 
+  /* Header layouts. The full menu needs ~1280px; with larger text it needs ~1600px, and
+   * rem-based breakpoints don't follow the root font size, so the switch lives here. */
+  .header-desktop {
+    display: none;
+  }
+  .header-mobile {
+    display: flex;
+  }
+  @media (min-width: 80rem) {
+    .header-desktop {
+      display: flex;
+    }
+    .header-mobile {
+      display: none;
+    }
+  }
+  @media (min-width: 80rem) and (max-width: 99.99rem) {
+    :root[data-text-size='lg'] .header-desktop {
+      display: none;
+    }
+    :root[data-text-size='lg'] .header-mobile {
+      display: flex;
+    }
+  }
+
+  /* Comfort panel: pinned to the viewport on small screens, anchored to its button
+   * once the desktop header shows. */
+  .comfort-panel {
+    position: fixed;
+    inset-inline: 1.25rem;
+    top: 4.75rem;
+    margin-inline: auto;
+    max-width: 26.25rem;
+  }
+  @media (min-width: 48rem) {
+    .comfort-panel {
+      position: absolute;
+      inset-inline: auto 0;
+      top: calc(100% + 0.75rem);
+      width: 26.25rem;
+    }
+  }
+
   /* Shapes and flourishes that low-stimulation mode removes. */
   .decorative {
     display: var(--fc-decoration);

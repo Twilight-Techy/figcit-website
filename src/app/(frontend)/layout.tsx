@@ -19,7 +19,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-GB" className={`${figtree.variable} ${atkinson.variable}`}>
+    <html
+      lang="en-GB"
+      className={`${figtree.variable} ${atkinson.variable}`}
+      // comfort-init.js sets Comfort attributes on <html> before React hydrates.
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Render-blocking on purpose: ~400 bytes that prevent a flash of the wrong theme. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="/comfort-init.js" />
+      </head>
       <body>
         <SkipLink />
         <Header />
