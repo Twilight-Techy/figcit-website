@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
+import { Header } from '@/components/layout/Header'
 import { SkipLink } from '@/components/layout/SkipLink'
 import { env } from '@/lib/env'
 import { atkinson, figtree } from '@/lib/fonts'
@@ -21,7 +22,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en-GB" className={`${figtree.variable} ${atkinson.variable}`}>
       <body>
         <SkipLink />
-        {/* Header (T05) and Footer with crisis notice (T06) go here. */}
+        <Header />
+        {/* Footer with crisis notice (T06) goes here. */}
         <main id="main">{children}</main>
       </body>
     </html>
