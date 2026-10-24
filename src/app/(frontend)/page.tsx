@@ -1,3 +1,12 @@
+import { site } from '@/content/site'
+import { buildMetadata } from '@/lib/seo'
+
+export const metadata = buildMetadata({
+  title: site.defaultTitle,
+  description: site.defaultDescription,
+  path: '/',
+})
+
 // Placeholder until T13 builds the Home page from Payload blocks.
 export default function HomePage() {
   return (

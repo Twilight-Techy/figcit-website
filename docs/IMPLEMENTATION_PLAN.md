@@ -23,7 +23,7 @@ Tasks are picked up one at a time, in order. Each task is one pull request that 
 | T06 | Footer: tagline, links, crisis notice, company details from SiteSettings                                                                   | Crisis notice on every page and not removable in the CMS                        | ⬜                                                                           |
 | T07 | Comfort panel: low-stimulation mode, three text sizes, light and dark theme; saved and applied before first paint                          | Matches design state C; no flash on load; reduced motion respected              | ✅                                                                           |
 | T08 | Cookie banner and consent: equal Accept and Reject, settings link, Plausible loaded only after Accept                                      | Matches design state D; no analytics request before consent                     | ✅ Cookie icon drawn to match; swap for the Figma asset when access returns  |
-| T09 | SEO base: metadata helper, canonical URLs, Open Graph, Organization JSON-LD, sitemap, robots, www redirect                                 | Lighthouse SEO ≥ 95; sitemap lists every page                                   | ⬜                                                                           |
+| T09 | SEO base: metadata helper, canonical URLs, Open Graph, Organization JSON-LD, sitemap, robots, www redirect                                 | Lighthouse SEO ≥ 95; sitemap lists every page                                   | ✅ Lighthouse SEO score checked in T27                                       |
 
 ## Phase 2: Content model
 

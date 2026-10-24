@@ -46,6 +46,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // The bare domain redirects to www (printed QR codes point at www, rules §9).
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'figcit.co.uk' }],
+        destination: 'https://www.figcit.co.uk/:path*',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]
   },
