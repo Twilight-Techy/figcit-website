@@ -1,5 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
@@ -46,5 +47,14 @@ export default buildConfig({
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    // Media in object storage, never the server's temporary disk (rules §5).
+    vercelBlobStorage({
+      enabled: Boolean(env.BLOB_READ_WRITE_TOKEN),
+      token: env.BLOB_READ_WRITE_TOKEN,
+      collections: { media: true },
+      alwaysInsertFields: true,
+      addRandomSuffix: true,
+    }),
+  ],
 })

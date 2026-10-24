@@ -1,14 +1,19 @@
-import type { CollectionConfig } from 'payload'
+import { APIError, type CollectionConfig } from 'payload'
 
-const MAX_UPLOAD_BYTES = 5 * 1024 * 1024
+import { anyone, authenticated } from '@/access'
+
+export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024
 
 export const Media: CollectionConfig = {
   slug: 'media',
   access: {
-    read: () => true,
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: anyone,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
+  },
+  admin: {
+    useAsTitle: 'alt',
   },
   fields: [
     {
@@ -17,26 +22,30 @@ export const Media: CollectionConfig = {
       required: true,
       admin: {
         description:
-          'Describe the photo for screen readers. Leave empty only for decorative images.',
+          'Describe the photo for screen readers, for example "A student resting on a sofa with a cup of tea".',
       },
     },
   ],
   upload: {
     mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
-    // Sizes used by the Figma layouts (rules §5). Object storage is added in T03.
-    imageSizes: [
-      { name: 'card', width: 640 },
-      { name: 'hero', width: 1280 },
-      { name: 'full', width: 1920 },
-    ],
+    focalPoint: true,
+    // Re-encoding strips EXIF (including location) and caps the stored original (rules §5).
+    resizeOptions: { width: 2400, withoutEnlargement: true },
     formatOptions: { format: 'webp', options: { quality: 80 } },
+    // Sizes used by the Figma layouts.
+    imageSizes: [
+      { name: 'card', width: 640, formatOptions: { format: 'webp', options: { quality: 78 } } },
+      { name: 'hero', width: 1280, formatOptions: { format: 'webp', options: { quality: 80 } } },
+      { name: 'full', width: 1920, formatOptions: { format: 'webp', options: { quality: 80 } } },
+    ],
   },
   hooks: {
-    beforeValidate: [
-      ({ req }) => {
-        const size = req.file?.size ?? 0
-        if (size > MAX_UPLOAD_BYTES) {
-          throw new Error('Images must be 5 MB or smaller')
+    beforeOperation: [
+      ({ req, operation }) => {
+        if ((operation === 'create' || operation === 'update') && req.file) {
+          if (req.file.size > MAX_UPLOAD_BYTES) {
+            throw new APIError('Images must be 5 MB or smaller', 413)
+          }
         }
       },
     ],

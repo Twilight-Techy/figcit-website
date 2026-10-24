@@ -1,12 +1,21 @@
 import { z } from 'zod'
 
 // Validated once at start-up so a missing secret fails the boot, not a request.
-const schema = z.object({
-  DATABASE_URL: z.string().url(),
-  PAYLOAD_SECRET: z.string().min(32, 'PAYLOAD_SECRET must be at least 32 characters'),
-  NEXT_PUBLIC_SITE_URL: z.string().url().default('http://localhost:3000'),
-  NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
-})
+const schema = z
+  .object({
+    DATABASE_URL: z.string().url(),
+    PAYLOAD_SECRET: z.string().min(32, 'PAYLOAD_SECRET must be at least 32 characters'),
+    NEXT_PUBLIC_SITE_URL: z.string().url().default('http://localhost:3000'),
+    NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
+    // Vercel Blob store for media (create it in the London region). Without it, uploads
+    // go to local disk, which is only acceptable in development.
+    BLOB_READ_WRITE_TOKEN: z.string().min(1).optional(),
+    VERCEL: z.string().optional(),
+  })
+  .refine((e) => !e.VERCEL || e.BLOB_READ_WRITE_TOKEN, {
+    message: 'BLOB_READ_WRITE_TOKEN is required on Vercel (media must not go to local disk)',
+    path: ['BLOB_READ_WRITE_TOKEN'],
+  })
 
 export type Env = z.infer<typeof schema>
 
