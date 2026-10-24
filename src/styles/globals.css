@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* Expose semantic tokens as Tailwind colours: bg-bg, text-primary, bg-surface... */
+@theme inline {
+  --color-bg: var(--fc-bg);
+  --color-surface: var(--fc-surface);
+  --color-text: var(--fc-text);
+  --color-primary: var(--fc-primary);
+}
+
+html {
+  background: var(--fc-bg);
+  color: var(--fc-text);
+}
+
+body {
+  font-size: var(--fc-font-size-body);
+  line-height: var(--fc-line-height-body);
+}
+
+:focus-visible {
+  outline: 3px solid var(--fc-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

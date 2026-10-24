@@ -1,0 +1,36 @@
+/*
+ * Design tokens from the website brief, prefixed --fc-. T02 completes them from
+ * Figma (type scale, spacing, radii, shadows) and adds the low-stimulation set.
+ * Components use the semantic tokens (--fc-bg, --fc-text, ...), never raw hex.
+ */
+:root {
+  --fc-fig-purple: #5b3358;
+  --fc-citrus-orange: #e08830; /* large text and highlights only */
+  --fc-citrus-orange-text: #9a5712; /* small orange text */
+  --fc-rind-teal: #3e7a72;
+  --fc-terracotta-bloom: #a85d63;
+  --fc-fig-ink: #2a1e2e;
+  --fc-pith-cream: #f5eede;
+  --fc-white: #ffffff;
+
+  --fc-bg: var(--fc-pith-cream);
+  --fc-surface: var(--fc-white);
+  --fc-text: var(--fc-fig-ink);
+  --fc-primary: var(--fc-fig-purple);
+
+  --fc-font-size-body: 1.0625rem; /* 17px mobile */
+  --fc-line-height-body: 1.6;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --fc-font-size-body: 1.125rem; /* 18px desktop */
+  }
+}
+
+:root[data-theme='dark'] {
+  --fc-bg: #1c1420;
+  --fc-surface: #2a1e2e;
+  --fc-text: #f5eede;
+  --fc-primary: #c9a3c6;
+}
