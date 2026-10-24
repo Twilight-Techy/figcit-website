@@ -1,27 +1,124 @@
 @import 'tailwindcss';
 @import './tokens.css';
 
-/* Expose semantic tokens as Tailwind colours: bg-bg, text-primary, bg-surface... */
+/*
+ * Map the semantic tokens into Tailwind. `inline` keeps the var() references, so
+ * the dark and low-stimulation modes switch every utility without extra classes.
+ */
 @theme inline {
   --color-bg: var(--fc-bg);
   --color-surface: var(--fc-surface);
-  --color-text: var(--fc-text);
+  --color-surface-muted: var(--fc-surface-muted);
+  --color-ink: var(--fc-ink);
+  --color-ink-muted: var(--fc-ink-muted);
+  --color-line: var(--fc-border);
   --color-primary: var(--fc-primary);
+  --color-on-primary: var(--fc-on-primary);
+  --color-accent: var(--fc-accent);
+  --color-eyebrow: var(--fc-eyebrow);
+  --color-band: var(--fc-band);
+  --color-on-band: var(--fc-on-band);
+  --color-orange: var(--fc-citrus-orange);
+  --color-disc-teal: var(--fc-disc-teal);
+  --color-disc-terracotta: var(--fc-disc-terracotta);
+  --color-disc-purple: var(--fc-disc-purple);
+  --color-disc-ochre: var(--fc-disc-ochre);
+  --color-light-available: var(--fc-light-available);
+  --color-light-conditional: var(--fc-light-conditional);
+  --color-light-constrained: var(--fc-light-constrained);
+  --color-light-very-constrained: var(--fc-light-very-constrained);
+  --color-light-recovery: var(--fc-light-recovery);
+
+  --font-heading: var(--font-figtree), system-ui, sans-serif;
+  --font-body: var(--font-atkinson), system-ui, sans-serif;
+
+  --text-display: var(--fc-text-display);
+  --text-display--line-height: var(--fc-leading-display);
+  --text-display--letter-spacing: var(--fc-tracking-display);
+  --text-h2: var(--fc-text-h2);
+  --text-h2--line-height: var(--fc-leading-heading);
+  --text-h2--letter-spacing: var(--fc-tracking-heading);
+  --text-h3: var(--fc-text-h3);
+  --text-h3--line-height: 1.15;
+  --text-lead: var(--fc-text-lead);
+  --text-lead--line-height: var(--fc-leading-body);
+  --text-body: var(--fc-text-body);
+  --text-body--line-height: var(--fc-leading-body);
+  --text-small: var(--fc-text-small);
+  --text-small--line-height: 1.55;
+  --text-eyebrow: var(--fc-text-eyebrow);
+  --text-eyebrow--line-height: 1.15;
+  --text-eyebrow--letter-spacing: var(--fc-tracking-eyebrow);
+
+  --radius-pill: var(--fc-radius-pill);
+  --radius-card: var(--fc-radius-card);
+  --radius-tile: var(--fc-radius-tile);
+  --radius-control: var(--fc-radius-control);
+
+  --shadow-float: var(--fc-shadow-float);
+  --shadow-panel: var(--fc-shadow-panel);
+
+  --spacing-gutter: var(--fc-gutter);
+  --spacing-section: var(--fc-section-y);
+  --container-site: var(--fc-container);
 }
 
-html {
-  background: var(--fc-bg);
-  color: var(--fc-text);
+@layer base {
+  html {
+    background: var(--fc-bg);
+    color: var(--fc-ink);
+    font-family: var(--font-body);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-size: var(--fc-text-body);
+    line-height: var(--fc-leading-body);
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img {
+    filter: var(--fc-image-filter);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--fc-focus);
+    outline-offset: 3px;
+  }
 }
 
-body {
-  font-size: var(--fc-font-size-body);
-  line-height: var(--fc-line-height-body);
+@layer components {
+  /* Centred content column with the design's gutters. */
+  .container-site {
+    width: 100%;
+    max-width: calc(var(--fc-container) + 2 * var(--fc-gutter));
+    margin-inline: auto;
+    padding-inline: var(--fc-gutter);
+  }
+
+  /* Shapes and flourishes that low-stimulation mode removes. */
+  .decorative {
+    display: var(--fc-decoration);
+  }
 }
 
-:focus-visible {
-  outline: 3px solid var(--fc-primary);
-  outline-offset: 2px;
+@layer utilities {
+  .transition-calm {
+    transition-duration: var(--fc-duration);
+    transition-timing-function: ease-out;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -29,6 +126,7 @@ body {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }

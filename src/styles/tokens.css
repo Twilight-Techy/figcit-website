@@ -1,36 +1,149 @@
 /*
- * Design tokens from the website brief, prefixed --fc-. T02 completes them from
- * Figma (type scale, spacing, radii, shadows) and adds the low-stimulation set.
- * Components use the semantic tokens (--fc-bg, --fc-text, ...), never raw hex.
+ * Figcit design tokens, taken from the Figma file "FIGCIT Web Landing Page" and the
+ * website brief. Raw palette values (--fc-*) are only used here; components use the
+ * semantic tokens through Tailwind (bg-surface, text-ink, rounded-card, ...).
+ *
+ * Fluid sizes scale linearly between the 390px mobile frames and the 1440px desktop
+ * frames: clamp(mobile, intercept + slope·vw, desktop).
+ *
+ * Modes, set as attributes on <html> by the Comfort panel (T07):
+ *   data-theme="dark"         dark theme
+ *   data-comfort="low"        low-stimulation mode: muted colours, no decoration
+ *   data-text-size="sm|lg"    text size (default is the middle option)
  */
+
 :root {
+  /* Palette */
   --fc-fig-purple: #5b3358;
-  --fc-citrus-orange: #e08830; /* large text and highlights only */
-  --fc-citrus-orange-text: #9a5712; /* small orange text */
+  --fc-citrus-orange: #e08830; /* large text, shapes and highlights only */
+  --fc-citrus-orange-text: #9a5712; /* small orange text, 4.5:1 on cream and white */
   --fc-rind-teal: #3e7a72;
   --fc-terracotta-bloom: #a85d63;
   --fc-fig-ink: #2a1e2e;
   --fc-pith-cream: #f5eede;
+  --fc-paper: #fbf8f2;
+  --fc-line: #e4dccb;
   --fc-white: #ffffff;
 
+  /* Traffic lights (always shown with a text label) */
+  --fc-light-available: #5e8c61;
+  --fc-light-conditional: #d8b64c;
+  --fc-light-constrained: #d98a3d;
+  --fc-light-very-constrained: #b5574b;
+  --fc-light-recovery: #5b7fa6;
+
+  /* Semantic colours */
   --fc-bg: var(--fc-pith-cream);
   --fc-surface: var(--fc-white);
-  --fc-text: var(--fc-fig-ink);
+  --fc-surface-muted: var(--fc-pith-cream);
+  --fc-ink: var(--fc-fig-ink);
+  --fc-ink-muted: rgb(42 30 46 / 0.75);
+  --fc-border: rgb(42 30 46 / 0.2);
   --fc-primary: var(--fc-fig-purple);
+  --fc-on-primary: var(--fc-pith-cream);
+  --fc-accent: var(--fc-terracotta-bloom);
+  --fc-eyebrow: var(--fc-citrus-orange-text);
+  --fc-band: var(--fc-fig-purple);
+  --fc-on-band: var(--fc-pith-cream);
+  --fc-focus: var(--fc-fig-purple);
 
-  --fc-font-size-body: 1.0625rem; /* 17px mobile */
-  --fc-line-height-body: 1.6;
+  /* Icon discs on cards */
+  --fc-disc-teal: var(--fc-rind-teal);
+  --fc-disc-terracotta: var(--fc-terracotta-bloom);
+  --fc-disc-purple: var(--fc-fig-purple);
+  --fc-disc-ochre: var(--fc-citrus-orange-text);
+
+  /* Type */
+  --fc-text-display: clamp(2.5rem, 1.757rem + 3.048vw, 4.5rem); /* 40 → 72 */
+  --fc-text-h2: clamp(1.875rem, 1.364rem + 2.095vw, 3.25rem); /* 30 → 52 */
+  --fc-text-h3: clamp(1.25rem, 1.157rem + 0.381vw, 1.5rem); /* 20 → 24 */
+  --fc-text-lead: clamp(1.0625rem, 0.993rem + 0.286vw, 1.25rem); /* 17 → 20 */
+  --fc-text-body: clamp(1.0625rem, 1.039rem + 0.095vw, 1.125rem); /* 17 → 18 */
+  --fc-text-small: 0.9375rem; /* 15 */
+  --fc-text-eyebrow: clamp(0.8125rem, 0.789rem + 0.095vw, 0.875rem); /* 13 → 14 */
+  --fc-leading-display: 1.03;
+  --fc-leading-heading: 1.1;
+  --fc-leading-body: 1.6;
+  --fc-tracking-display: -0.03em;
+  --fc-tracking-heading: -0.02em;
+  --fc-tracking-eyebrow: 0.12em;
+
+  /* Layout */
+  --fc-container: 75rem; /* 1200: 1440 frame minus 120 gutters */
+  --fc-gutter: clamp(1.25rem, -1.071rem + 9.524vw, 7.5rem); /* 20 → 120 */
+  --fc-section-y: clamp(3.5rem, 2.2rem + 5.333vw, 7rem); /* 56 → 112 */
+
+  /* Shape and depth */
+  --fc-radius-pill: 999px;
+  --fc-radius-card: 1.5rem; /* 24 */
+  --fc-radius-tile: 1rem; /* 16 */
+  --fc-radius-control: 0.75rem; /* 12 */
+  --fc-shadow-float: 0 16px 40px rgb(41 31 46 / 0.14);
+  --fc-shadow-panel: 0 20px 48px rgb(41 31 46 / 0.16);
+
+  /* Motion: never decorative (brief), off in low-stimulation and reduced-motion */
+  --fc-duration: 150ms;
+  --fc-image-filter: none;
+  --fc-decoration: block;
 }
 
-@media (min-width: 768px) {
-  :root {
-    --fc-font-size-body: 1.125rem; /* 18px desktop */
-  }
-}
-
+/* Dark theme: same structure, colours tuned for 4.5:1 text contrast. */
 :root[data-theme='dark'] {
   --fc-bg: #1c1420;
-  --fc-surface: #2a1e2e;
-  --fc-text: #f5eede;
-  --fc-primary: #c9a3c6;
+  --fc-surface: #261b2a;
+  --fc-surface-muted: #2f2333;
+  --fc-ink: #f5eede;
+  --fc-ink-muted: rgb(245 238 222 / 0.78);
+  --fc-border: rgb(245 238 222 / 0.24);
+  --fc-primary: #d9b8d5;
+  --fc-on-primary: #1c1420;
+  --fc-accent: #e3a1a6;
+  --fc-eyebrow: #f0b26a;
+  --fc-band: #3a2638;
+  --fc-on-band: #f5eede;
+  --fc-focus: #f0b26a;
+  --fc-image-filter: brightness(0.92);
+}
+
+/* Low-stimulation mode (design state C): muted colours, no decorative shapes or
+ * motion, more space and larger text, photos at reduced saturation. */
+:root[data-comfort='low'] {
+  --fc-bg: var(--fc-paper);
+  --fc-surface: var(--fc-paper);
+  --fc-surface-muted: #f3eee4;
+  --fc-border: var(--fc-line);
+  --fc-primary: #4a3a4c;
+  --fc-on-primary: var(--fc-white);
+  --fc-accent: #4a3a4c;
+  --fc-eyebrow: var(--fc-rind-teal);
+  --fc-band: #4a3a4c;
+  --fc-disc-teal: #6b6370;
+  --fc-disc-terracotta: #6b6370;
+  --fc-disc-purple: #6b6370;
+  --fc-disc-ochre: #6b6370;
+  --fc-leading-body: 1.7;
+  --fc-section-y: clamp(4rem, 2.7rem + 5.333vw, 7.5rem);
+  --fc-duration: 0ms;
+  --fc-image-filter: saturate(0.55);
+  --fc-decoration: none;
+}
+
+:root[data-theme='dark'][data-comfort='low'] {
+  --fc-bg: #1f1a21;
+  --fc-surface: #1f1a21;
+  --fc-surface-muted: #2a242c;
+  --fc-border: rgb(245 238 222 / 0.2);
+  --fc-primary: #cfc4d0;
+  --fc-on-primary: #1f1a21;
+  --fc-accent: #cfc4d0;
+  --fc-eyebrow: #9fcfc6;
+  --fc-band: #2a242c;
+}
+
+/* Text size: the middle option is the default. */
+:root[data-text-size='sm'] {
+  font-size: 93.75%;
+}
+:root[data-text-size='lg'] {
+  font-size: 118.75%;
 }

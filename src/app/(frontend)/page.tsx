@@ -1,11 +1,11 @@
 // Placeholder until T13 builds the Home page from Payload blocks.
 export default function HomePage() {
   return (
-    <section className="mx-auto max-w-5xl px-4 py-24">
-      <h1 className="text-4xl font-bold text-primary">
+    <section className="container-site py-section">
+      <h1 className="font-heading text-display font-extrabold text-primary">
         Everyone has days when the world doesn’t fit.
       </h1>
-      <p className="mt-6 max-w-2xl">
+      <p className="mt-7 max-w-[38.75rem] text-lead">
         Figcit makes support part of everyday life for young people and adults with mental health
         conditions and neurodevelopmental differences.
       </p>
