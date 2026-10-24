@@ -150,9 +150,11 @@ export interface User {
 export interface Media {
   id: number;
   /**
-   * Describe the photo for screen readers. Leave empty only for decorative images.
+   * Describe the photo for screen readers, for example "A student resting on a sofa with a cup of tea".
    */
   alt: string;
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -294,6 +296,8 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

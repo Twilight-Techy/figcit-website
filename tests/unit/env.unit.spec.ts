@@ -21,3 +21,10 @@ describe('parseEnv', () => {
     expect(() => parseEnv({ PAYLOAD_SECRET: valid.PAYLOAD_SECRET })).toThrow(/DATABASE_URL/)
   })
 })
+
+describe('parseEnv on Vercel', () => {
+  it('requires a Blob token so media never lands on temporary disk', () => {
+    expect(() => parseEnv({ ...valid, VERCEL: '1' })).toThrow(/BLOB_READ_WRITE_TOKEN/)
+    expect(() => parseEnv({ ...valid, VERCEL: '1', BLOB_READ_WRITE_TOKEN: 'token' })).not.toThrow()
+  })
+})

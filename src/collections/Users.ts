@@ -1,6 +1,8 @@
 import { APIError, type CollectionConfig } from 'payload'
 
-const MIN_PASSWORD_LENGTH = 12
+import { authenticated } from '@/access'
+
+export const MIN_PASSWORD_LENGTH = 12
 
 // Admin accounts only; there are no public user accounts on the website.
 export const Users: CollectionConfig = {
@@ -18,10 +20,10 @@ export const Users: CollectionConfig = {
     },
   },
   access: {
-    read: ({ req }) => Boolean(req.user),
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: authenticated,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
   },
   hooks: {
     beforeValidate: [
