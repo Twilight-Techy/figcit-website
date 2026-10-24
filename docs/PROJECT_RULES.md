@@ -111,7 +111,7 @@ tests/                 unit (int) and end-to-end (e2e)
   - Validated on the server with Zod. Never trust client validation.
   - Rate limited per IP. Spam is stopped with a honeypot field and Cloudflare Turnstile, so there are no puzzles.
   - Never collect diagnosis, health details or date of birth.
-- **Rendering:** no `dangerouslySetInnerHTML`, except the Lexical rich-text serializer, which only outputs allowed tags.
+- **Rendering:** no `dangerouslySetInnerHTML`, except the JSON-LD component (inert data, with `<` escaped). Rich text is rendered by Payload's Lexical React components, never as raw HTML.
 - **Dependencies:** versions pinned in the lockfile; `pnpm audit --prod` runs in CI and high or critical issues block merging; Dependabot opens weekly updates.
 - Production deploys only from `main`, through CI. Nobody deploys from a laptop.
 
