@@ -30,13 +30,20 @@ How to set up the environments for www.figcit.co.uk (task T04). Someone with acc
 3. In **Settings → Git**, set production to deploy only from `main`. Every pull request then gets a preview URL.
 4. Set the **Ignored Build Step** so a deploy only happens when GitHub CI has passed, or require the `checks` status before merging (step 5).
 
-## 4. Domain (at launch, T30)
+## 4. Email, bot protection and analytics
+
+1. **Resend:** add and verify the `figcit.co.uk` domain (SPF and DKIM DNS records), then create an API key with send-only access. Choose the EU region if offered.
+2. **Cloudflare Turnstile:** create a widget for `www.figcit.co.uk` in "Managed" mode, which is usually invisible, so there are no puzzles.
+3. **Plausible:** add `www.figcit.co.uk`. Analytics only load after a visitor accepts the cookie banner.
+4. **Retention job:** `vercel.json` runs `/cron/retention` daily at 03:15. It deletes form submissions older than 12 months and needs `CRON_SECRET`.
+
+## 5. Domain (at launch, T30)
 
 1. Add `www.figcit.co.uk` and `figcit.co.uk` to the project, and set `figcit.co.uk` to redirect to `www`.
 2. Update the DNS records at the registrar as Vercel shows.
 3. Check that the printed QR codes still open `https://www.figcit.co.uk`.
 
-## 5. GitHub
+## 6. GitHub
 
 - Protect `main`: require a pull request and the `checks` status to pass before merging.
 - Add the Vercel GitHub app so pull requests show their preview link.

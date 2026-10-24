@@ -11,6 +11,14 @@ const schema = z
     // go to local disk, which is only acceptable in development.
     BLOB_READ_WRITE_TOKEN: z.string().min(1).optional(),
     VERCEL: z.string().optional(),
+    // Forms (T24). Without a Resend key, submissions are saved but no email is sent;
+    // without a Turnstile secret, the bot check is skipped (development only).
+    RESEND_API_KEY: z.string().min(1).optional(),
+    FORMS_NOTIFY_TO: z.string().email().default('admin@figcit.co.uk'),
+    FORMS_FROM: z.string().min(3).default('Figcit website <forms@figcit.co.uk>'),
+    TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
+    // Protects /cron/retention, which deletes form submissions older than 12 months.
+    CRON_SECRET: z.string().min(16).optional(),
   })
   .refine((e) => !e.VERCEL || e.BLOB_READ_WRITE_TOKEN, {
     message: 'BLOB_READ_WRITE_TOKEN is required on Vercel (media must not go to local disk)',

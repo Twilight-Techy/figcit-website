@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'form-submissions': FormSubmission;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -194,6 +196,53 @@ export interface Media {
   };
 }
 /**
+ * Messages sent through the website forms. Deleted automatically after 12 months.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
+export interface FormSubmission {
+  id: number;
+  status?: ('new' | 'replied' | 'closed') | null;
+  form: 'early-access' | 'book-conversation' | 'hub-interest' | 'partner';
+  firstName?: string | null;
+  name?: string | null;
+  email: string;
+  iAmA?: ('An individual' | 'A student' | 'An employer' | 'Other') | null;
+  ageConfirmed?: boolean | null;
+  organisation?: string | null;
+  role?: string | null;
+  sector?:
+    | (
+        | 'Health and social care'
+        | 'Employer or workplace'
+        | 'College or university'
+        | 'Council, NHS or public sector'
+        | 'Charity or community'
+        | 'Other'
+      )
+    | null;
+  topic?: string | null;
+  adjustments?: string | null;
+  townCity?: string | null;
+  hubUse?: string | null;
+  partnershipType?:
+    | (
+        | 'Programme licences'
+        | 'Training for frontline teams'
+        | 'Sponsored Hub places'
+        | 'Evaluation and evidence'
+        | 'Research partnership'
+        | 'Other'
+      )
+    | null;
+  message?: string | null;
+  consent: boolean;
+  ipHash?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -224,6 +273,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'form-submissions';
+        value: number | FormSubmission;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -343,6 +396,32 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions_select".
+ */
+export interface FormSubmissionsSelect<T extends boolean = true> {
+  status?: T;
+  form?: T;
+  firstName?: T;
+  name?: T;
+  email?: T;
+  iAmA?: T;
+  ageConfirmed?: T;
+  organisation?: T;
+  role?: T;
+  sector?: T;
+  topic?: T;
+  adjustments?: T;
+  townCity?: T;
+  hubUse?: T;
+  partnershipType?: T;
+  message?: T;
+  consent?: T;
+  ipHash?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

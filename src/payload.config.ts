@@ -6,6 +6,7 @@ import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
+import { FormSubmissions } from './collections/FormSubmissions'
 import { Media } from './collections/Media'
 import { Users } from './collections/Users'
 import { env } from './lib/env'
@@ -26,7 +27,7 @@ export default buildConfig({
       titleSuffix: ' · Figcit admin',
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, FormSubmissions],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET,
   // Smaller attack surface: we only use the Local API and REST (rules §6).
