@@ -1,0 +1,46 @@
+# Deployment
+
+How to set up the environments for www.figcit.co.uk (task T04). Someone with access to Figcit's Neon, Vercel and DNS accounts does this once.
+
+## 1. Database: Neon
+
+1. Create a Neon project called `figcit-website` in **AWS Europe (London) `eu-west-2`**, or Frankfurt if London isn't offered.
+2. Keep the default `main` branch for **production**.
+3. Create a `preview` branch from `main` for Vercel previews.
+4. Copy the **pooled** connection string for each branch (it contains `-pooler`).
+5. Set point-in-time restore to **7 days**. The Privacy Notice promises backups are deleted within 90 days, so keep it under that.
+
+## 2. Media: Vercel Blob
+
+1. In Vercel, go to **Storage → Create → Blob**, name it `figcit-media` and choose the **London (`lhr1`)** region.
+2. Connect it to the project. Vercel adds `BLOB_READ_WRITE_TOKEN` automatically.
+
+## 3. Vercel project
+
+1. Import `Figcit/figcit-website`. `vercel.json` already sets London functions (`lhr1`), pnpm, and runs migrations before each build.
+2. Add these environment variables:
+
+| Variable                | Production                 | Preview                            |
+| ----------------------- | -------------------------- | ---------------------------------- |
+| `DATABASE_URL`          | Neon `main` pooled URL     | Neon `preview` pooled URL          |
+| `PAYLOAD_SECRET`        | `openssl rand -hex 32`     | a different `openssl rand -hex 32` |
+| `NEXT_PUBLIC_SITE_URL`  | `https://www.figcit.co.uk` | the preview URL                    |
+| `BLOB_READ_WRITE_TOKEN` | set by the Blob store      | set by the Blob store              |
+
+3. In **Settings → Git**, set production to deploy only from `main`. Every pull request then gets a preview URL.
+4. Set the **Ignored Build Step** so a deploy only happens when GitHub CI has passed, or require the `checks` status before merging (step 5).
+
+## 4. Domain (at launch, T30)
+
+1. Add `www.figcit.co.uk` and `figcit.co.uk` to the project, and set `figcit.co.uk` to redirect to `www`.
+2. Update the DNS records at the registrar as Vercel shows.
+3. Check that the printed QR codes still open `https://www.figcit.co.uk`.
+
+## 5. GitHub
+
+- Protect `main`: require a pull request and the `checks` status to pass before merging.
+- Add the Vercel GitHub app so pull requests show their preview link.
+
+## First admin user
+
+After the first production deploy, open `https://www.figcit.co.uk/admin` and create the first admin account with a password of at least 12 characters. Later admins are invited from the Users screen.
