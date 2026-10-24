@@ -8,7 +8,7 @@ test.describe('Comfort panel', () => {
   test.use({ viewport: { width: 1440, height: 900 } })
 
   test('opens, applies every setting and has no accessibility violations', async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
     await comfortButton(page).click()
     const panel = page.getByRole('region', { name: 'Comfort settings' })
     await expect(panel).toBeVisible()
@@ -27,7 +27,7 @@ test.describe('Comfort panel', () => {
   })
 
   test('keeps settings after reload, applied before the page renders', async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
     await comfortButton(page).click()
     await page.getByRole('button', { name: 'Dark' }).click()
 
@@ -46,7 +46,7 @@ test.describe('Comfort panel', () => {
   })
 
   test('closes with Escape and returns focus to the button', async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
     const button = comfortButton(page)
     await button.focus()
     await page.keyboard.press('Enter')
@@ -61,7 +61,7 @@ test.describe('Comfort panel on mobile', () => {
   test.use({ viewport: { width: 390, height: 844 } })
 
   test('fits inside the screen', async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
     await comfortButton(page).click()
     const box = await page
       .getByRole('region', { name: 'Comfort settings' })

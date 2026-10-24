@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
+import { Analytics } from '@/components/layout/Analytics'
+import { CookieBanner } from '@/components/layout/CookieBanner'
 import { Header } from '@/components/layout/Header'
 import { SkipLink } from '@/components/layout/SkipLink'
 import { env } from '@/lib/env'
@@ -35,6 +37,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Header />
         {/* Footer with crisis notice (T06) goes here. */}
         <main id="main">{children}</main>
+        <CookieBanner />
+        <Analytics />
       </body>
     </html>
   )
