@@ -7,6 +7,7 @@ import {
   Team,
 } from '@/components/sections/About'
 import { CardGrid } from '@/components/sections/CardGrid'
+import { ContactForms } from '@/components/sections/ContactForms'
 import { ContentSection } from '@/components/sections/ContentSection'
 import { CtaBand } from '@/components/sections/CtaBand'
 import { FeatureSplit } from '@/components/sections/FeatureSplit'
@@ -64,6 +65,8 @@ export function RenderBlocks({ blocks }: { blocks: Page['layout'] }) {
         return <Team key={key} block={block} index={index} />
       case 'policyLinks':
         return <PolicyLinks key={key} block={block} index={index} />
+      case 'contactForms':
+        return <ContactForms key={key} block={block} />
     }
   })
 }

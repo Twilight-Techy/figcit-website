@@ -47,6 +47,7 @@
   --fc-promise: #366b64; /* Rind Teal, a shade deeper so cream body text keeps 4.5:1 */
   --fc-on-band: var(--fc-pith-cream);
   --fc-focus: var(--fc-fig-purple);
+  --fc-focus-halo: rgb(224 136 48 / 0.35); /* orange glow around focused fields (Figma 38:604) */
 
   /* Footer (Figma 30:89): Fig Ink in every mode, so it always reads as the page end */
   --fc-footer: var(--fc-fig-ink);

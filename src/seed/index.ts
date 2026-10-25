@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { getPayload, type Payload } from 'payload'
 
 import { aboutPage, teamPage } from './pages/about'
+import { contactPage } from './pages/contact'
 import { forEducationPage, forEmployersPage, forYouPage, partnersPage } from './pages/audiences'
 import { homePage } from './pages/home'
 import { servicesPage } from './pages/services'
@@ -53,6 +54,7 @@ async function main() {
     partnersPage,
     aboutPage,
     teamPage,
+    contactPage,
   ].map((build) => build(images))
 
   for (const page of pages) {
@@ -77,6 +79,7 @@ async function main() {
     data: {
       legalName: 'Figcit Ltd',
       email: 'admin@figcit.co.uk',
+      phone: '+447715897120',
       locality: 'Reading',
       region: 'Thames Valley',
     },
