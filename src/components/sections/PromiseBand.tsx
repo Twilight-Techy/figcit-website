@@ -8,7 +8,7 @@ export function PromiseBand({ block, index }: { block: PromiseBlock; index: numb
   return (
     <section
       aria-labelledby={headingId}
-      className="relative overflow-hidden bg-(--fc-promise) py-section text-[#f5eede]"
+      className="on-dark relative overflow-hidden bg-(--fc-promise) py-section text-[#f5eede]"
     >
       <span
         aria-hidden

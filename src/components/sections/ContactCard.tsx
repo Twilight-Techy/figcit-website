@@ -15,7 +15,7 @@ export async function ContactCard() {
     { icon: 'pin', label: 'Based in', value: place },
   ]
   return (
-    <ul className="order-1 flex w-full flex-col gap-5 rounded-card bg-band p-7 text-on-band lg:order-2 lg:max-w-[27.5rem] lg:p-8">
+    <ul className="on-dark order-1 flex w-full flex-col gap-5 rounded-card bg-band p-7 text-on-band lg:order-2 lg:max-w-[27.5rem] lg:p-8">
       {rows.map((r) => (
         <li key={r.label} className="flex items-center gap-4">
           <span

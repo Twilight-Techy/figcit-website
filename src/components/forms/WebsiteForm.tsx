@@ -81,7 +81,7 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
         ref={successRef}
         tabIndex={-1}
         role="status"
-        className="flex flex-col items-center gap-5 rounded-card bg-band px-8 py-12 text-center text-on-band focus:outline-none"
+        className="on-dark flex flex-col items-center gap-5 rounded-card bg-band px-8 py-12 text-center text-on-band focus:outline-none"
       >
         <span
           aria-hidden

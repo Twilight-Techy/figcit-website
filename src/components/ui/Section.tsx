@@ -5,7 +5,7 @@ export type SectionTone = 'cream' | 'white' | 'purple'
 const tones: Record<SectionTone, string> = {
   cream: 'bg-bg',
   white: 'bg-surface',
-  purple: 'bg-band text-on-band',
+  purple: 'bg-band text-on-band on-dark',
 }
 
 // Card colour that contrasts with each section background.

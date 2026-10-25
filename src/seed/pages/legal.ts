@@ -129,7 +129,9 @@ export const legalPages = (): PageData[] => [
       },
       {
         heading: '3. Known issues',
-        body: ['[List any known issues found in testing, or say there are none.]'],
+        body: [
+          'We check every page with automated accessibility tests in each Comfort mode, on desktop and phone screens, and by keyboard. These checks found no issues. [Confirm after testing with a screen reader and with disabled users.]',
+        ],
       },
       {
         heading: '4. Tell us about a problem',
