@@ -20,6 +20,9 @@ module.exports = {
         // GitHub runners have Chrome; elsewhere set CHROME_PATH (for example to
         // Playwright's Chromium). --no-sandbox is needed when running as root.
         chromeFlags: '--no-sandbox --headless=new',
+        // CI builds are noindex on purpose (see isProductionDeploy in src/lib/seo.ts, which
+        // the unit and e2e tests cover), so leave the crawlability audit out of the SEO score.
+        skipAudits: ['is-crawlable'],
         // Measure a real slowed-down load (4G network, 4x slower CPU) instead of
         // Lighthouse's estimate. The estimate charged every script that ran before the
         // hero text painted to LCP (2.2-3 s), while the measured LCP is under 1 s.
