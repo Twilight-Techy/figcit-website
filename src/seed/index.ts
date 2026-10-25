@@ -15,6 +15,10 @@ import { seedImages, type ImageKey, type ImageIds } from './images'
 // Loads the Website Copy v2.0 pages and photos into Payload. Safe to run again: pages
 // are matched by slug and images by file name, so it updates rather than duplicates.
 // Run with: pnpm seed
+//
+// Deploys run `pnpm seed:if-empty` after migrating. It only seeds a database with no
+// pages yet, so a new database gets the content and later edits in the admin are never
+// overwritten by a deploy.
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 const context = { disableRevalidate: true }
 
@@ -45,6 +49,13 @@ async function upsertImages(payload: Payload): Promise<ImageIds> {
 
 async function main() {
   const payload = await getPayload({ config })
+  if (process.env.SEED_IF_EMPTY === 'true') {
+    const { totalDocs } = await payload.count({ collection: 'pages' })
+    if (totalDocs > 0) {
+      payload.logger.info(`Seed skipped: the database already has ${totalDocs} pages`)
+      process.exit(0)
+    }
+  }
   const images = await upsertImages(payload)
 
   const pages = [

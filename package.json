@@ -19,6 +19,7 @@
     "format:check": "prettier --check .",
     "test:unit": "vitest run --config ./vitest.config.mts tests/unit",
     "seed": "payload run src/seed/index.ts",
+    "seed:if-empty": "cross-env SEED_IF_EMPTY=true payload run src/seed/index.ts",
     "test:perf": "lhci autorun --config=./lighthouserc.cjs"
   },
   "dependencies": {
