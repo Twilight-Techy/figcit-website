@@ -97,6 +97,7 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
           it.
         </p>
         <Link
+          prefetch={false}
           href="/"
           className="mt-1 rounded-pill bg-on-band px-7 py-4 font-heading leading-5 font-bold text-band hover:opacity-90"
         >

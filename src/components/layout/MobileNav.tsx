@@ -83,6 +83,7 @@ export function MobileNav({
                   return (
                     <li key={group.label} className="border-b border-line">
                       <Link
+                        prefetch={false}
                         href={group.href}
                         aria-current={pathname === group.href ? 'page' : undefined}
                         className="flex h-16 items-center rounded-control font-heading text-2xl leading-[1.12] font-bold"
@@ -117,6 +118,7 @@ export function MobileNav({
                       {group.items.map((item) => (
                         <li key={item.href}>
                           <Link
+                            prefetch={false}
                             href={item.href}
                             aria-current={pathname === item.href.split('#')[0] ? 'page' : undefined}
                             className="flex min-h-11 items-center rounded-control pl-3 font-heading text-[1.0625rem] leading-[1.2] font-semibold"
@@ -134,12 +136,14 @@ export function MobileNav({
 
           <div className="flex flex-col gap-3 px-5 pt-5 pb-8">
             <Link
+              prefetch={false}
               href={actions.primary.href}
               className="rounded-pill bg-primary px-6 py-4 text-center font-heading leading-[1.2] font-bold text-on-primary"
             >
               {actions.primary.label}
             </Link>
             <Link
+              prefetch={false}
               href={actions.secondary.href}
               className="rounded-pill border-[1.5px] border-primary px-6 py-4 text-center font-heading leading-[1.2] font-bold text-primary"
             >

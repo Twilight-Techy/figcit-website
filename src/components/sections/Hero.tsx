@@ -205,6 +205,7 @@ function Tiles({ tiles }: { tiles: NonNullable<HeroBlock['tiles']> }) {
           <li key={tile.id ?? tile.label}>
             {tile.href ? (
               <Link
+                prefetch={false}
                 href={tile.href}
                 className={`${cls} transition-calm transition-opacity hover:opacity-90`}
               >

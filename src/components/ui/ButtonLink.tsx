@@ -33,6 +33,7 @@ export function ButtonLink({
 }) {
   return (
     <Link
+      prefetch={false}
       href={href}
       className={`inline-flex items-center justify-center gap-2.5 rounded-pill px-7 py-4 text-center sm:py-[1.0625rem] font-heading text-base leading-5 font-bold transition-calm transition-[opacity,background-color] ${variants[variant]} ${className}`}
     >
@@ -60,6 +61,7 @@ export function ArrowLink({
 }) {
   return (
     <Link
+      prefetch={false}
       href={href}
       className={`inline-flex items-center gap-2 rounded-control font-heading text-base leading-5 font-bold underline-offset-4 hover:underline ${onDark ? 'text-on-band' : 'text-primary'} ${className}`}
     >

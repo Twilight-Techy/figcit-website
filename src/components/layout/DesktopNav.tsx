@@ -54,6 +54,7 @@ export function DesktopNav({ groups }: { groups: NavGroup[] }) {
           group.kind === 'link' ? (
             <li key={group.label}>
               <Link
+                prefetch={false}
                 href={group.href}
                 aria-current={isCurrent(pathname, group.href) ? 'page' : undefined}
                 className="rounded-control font-heading font-semibold underline-offset-8 hover:underline aria-[current=page]:underline"
@@ -124,6 +125,7 @@ function MegaPanel({ items, pathname }: { items: NavItem[]; pathname: string }) 
       {items.map((item) => (
         <li key={item.href} className="w-[13.75rem] shrink-0">
           <Link
+            prefetch={false}
             href={item.href}
             aria-current={isCurrent(pathname, item.href) ? 'page' : undefined}
             className="group flex h-full flex-col gap-2.5 rounded-tile p-[1.125rem] hover:bg-primary/8 focus-visible:bg-primary/8"
@@ -157,6 +159,7 @@ function DropdownPanel({ items, pathname }: { items: NavItem[]; pathname: string
       {items.map((item) => (
         <li key={item.href}>
           <Link
+            prefetch={false}
             href={item.href}
             aria-current={isCurrent(pathname, item.href) ? 'page' : undefined}
             className="flex items-center gap-3.5 rounded-control border-2 border-transparent px-3.5 py-3 font-heading text-[1.0625rem] leading-[1.15] font-bold hover:bg-surface-muted focus-visible:border-primary focus-visible:bg-surface-muted focus-visible:outline-none aria-[current=page]:bg-surface-muted"

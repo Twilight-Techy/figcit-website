@@ -32,6 +32,7 @@ export async function Legal({ block, path }: { block: LegalBlock; path: string }
             {legalNav.map((l) => (
               <li key={l.href}>
                 <Link
+                  prefetch={false}
                   href={l.href}
                   aria-current={l.href === path ? 'page' : undefined}
                   className="block rounded-control px-3.5 py-2.5 font-heading text-[1.0625rem] leading-5 font-semibold hover:bg-surface-muted aria-[current=page]:bg-primary/10 aria-[current=page]:text-primary"

@@ -143,6 +143,7 @@ function CardBody({
         (button ? (
           // Outline pill in the card colour (Figma 38:604, "Ways to get in touch").
           <Link
+            prefetch={false}
             href={card.link.href}
             className={`w-fit rounded-pill border-[1.5px] px-[1.125rem] py-3 font-heading text-[0.9375rem] leading-[1.15] font-bold transition-calm transition-colors hover:bg-surface ${toneBorder[t]} ${toneInk[t]}`}
           >
@@ -163,7 +164,7 @@ function MobileRow({ card, tone, large }: { card: Card; tone: SectionTone; large
 
   if (card.link?.href) {
     return (
-      <Link href={card.link.href} className={`${base} p-[1.125rem]`}>
+      <Link prefetch={false} href={card.link.href} className={`${base} p-[1.125rem]`}>
         {card.icon && large && <IconDisc icon={card.icon} tone={t} size="xs" />}
         <span className="flex min-w-0 flex-1 flex-col gap-1">
           <span className="font-heading text-[1.0625rem] leading-[1.15] font-bold">

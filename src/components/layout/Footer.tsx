@@ -48,7 +48,7 @@ export async function Footer() {
                 <ul className="flex flex-col gap-3.5 leading-[1.3] whitespace-nowrap">
                   {column.links.map((item) => (
                     <li key={item.href}>
-                      <Link href={item.href} className={linkClass}>
+                      <Link prefetch={false} href={item.href} className={linkClass}>
                         {item.label}
                       </Link>
                     </li>
@@ -70,7 +70,11 @@ export async function Footer() {
                   {column.links.map((item) => (
                     <li key={item.href}>
                       {/* Full-width rows keep touch targets well above 24px. */}
-                      <Link href={item.href} className={`${linkClass} block py-2.5`}>
+                      <Link
+                        prefetch={false}
+                        href={item.href}
+                        className={`${linkClass} block py-2.5`}
+                      >
                         {item.label}
                       </Link>
                     </li>
@@ -93,7 +97,7 @@ export async function Footer() {
           <ul aria-label="Legal" className="flex flex-wrap">
             {legalNav.map((item, i) => (
               <li key={item.href}>
-                <Link href={item.href} className="rounded-control hover:underline">
+                <Link prefetch={false} href={item.href} className="rounded-control hover:underline">
                   {item.label}
                 </Link>
                 {i < legalNav.length - 1 && (
