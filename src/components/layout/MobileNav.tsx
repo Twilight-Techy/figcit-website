@@ -2,15 +2,26 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 
-import { CloseIcon } from '@/components/icons'
-import { NavIcon } from '@/components/icons/NavIcon'
-import { discBg } from '@/components/layout/tones'
+import { ChevronIcon, CloseIcon } from '@/components/icons'
+import { ComfortPanel } from '@/components/layout/ComfortPanel'
+import { Logo } from '@/components/layout/Logo'
 import type { NavGroup, NavLink } from '@/content/navigation'
 
-// Mobile menu (Figma 14b). A native modal <dialog> gives focus trapping, Escape to close
-// and an inert page behind it without extra code.
+// Mobile menu (Figma 14b, 41:1111). A native modal <dialog> gives focus trapping, Escape
+// to close and an inert page behind it without extra code. The dialog repeats the header
+// row so the logo, Comfort and the close button stay where they were.
+const roundButton =
+  'flex size-[2.625rem] shrink-0 items-center justify-center rounded-pill bg-primary text-on-primary transition-calm transition-opacity hover:opacity-90'
+
+function initialGroup(groups: NavGroup[], pathname: string): string | null {
+  const current = groups.find(
+    (g) => g.kind !== 'link' && g.items.some((i) => i.href.split('#')[0] === pathname),
+  )
+  return (current ?? groups.find((g) => g.kind !== 'link'))?.label ?? null
+}
+
 export function MobileNav({
   groups,
   actions,
@@ -20,6 +31,8 @@ export function MobileNav({
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const pathname = usePathname()
+  const id = useId()
+  const [openGroup, setOpenGroup] = useState(() => initialGroup(groups, pathname))
 
   useEffect(() => dialogRef.current?.close(), [pathname])
 
@@ -28,18 +41,18 @@ export function MobileNav({
       <button
         type="button"
         aria-haspopup="dialog"
+        aria-label="Menu"
         onClick={() => dialogRef.current?.showModal()}
-        className="flex items-center gap-2 rounded-pill border border-line px-4 py-2.5 font-heading text-[0.9375rem] font-semibold"
+        className={roundButton}
       >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
           <path
-            d="M3 5h12M3 9h12M3 13h12"
+            d="M3.5 6h13M3.5 10h13M3.5 14h13"
             stroke="currentColor"
-            strokeWidth="1.5"
+            strokeWidth="1.6"
             strokeLinecap="round"
           />
         </svg>
-        Menu
       </button>
 
       <dialog
@@ -47,72 +60,88 @@ export function MobileNav({
         aria-label="Menu"
         className="m-0 h-dvh max-h-none w-full max-w-none bg-bg p-0 text-ink backdrop:bg-transparent"
       >
-        <div className="flex min-h-full flex-col gap-8 px-5 pt-4 pb-8">
-          <div className="flex justify-end">
-            <button
-              type="button"
-              onClick={() => dialogRef.current?.close()}
-              className="flex items-center gap-2 rounded-pill border border-line px-4 py-2.5 font-heading text-[0.9375rem] font-semibold"
-            >
-              <CloseIcon size={18} />
-              Close
-            </button>
+        <div className="flex min-h-full flex-col">
+          <div className="flex items-center justify-between gap-3 px-5 py-3.5">
+            <Logo />
+            <div className="flex items-center gap-2">
+              <ComfortPanel />
+              <button
+                type="button"
+                aria-label="Close menu"
+                onClick={() => dialogRef.current?.close()}
+                className={roundButton}
+              >
+                <CloseIcon size={20} />
+              </button>
+            </div>
           </div>
 
-          <nav aria-label="Main">
-            <ul className="flex flex-col gap-6">
-              {groups.map((group) =>
-                group.kind === 'link' ? (
+          <nav aria-label="Main" className="px-5 pt-3 pb-3">
+            <ul>
+              {groups.map((group, index) => {
+                if (group.kind === 'link') {
+                  return (
+                    <li key={group.label} className="border-b border-line">
+                      <Link
+                        href={group.href}
+                        aria-current={pathname === group.href ? 'page' : undefined}
+                        className="flex h-16 items-center rounded-control font-heading text-2xl leading-[1.12] font-bold"
+                      >
+                        {group.label}
+                      </Link>
+                    </li>
+                  )
+                }
+                const open = openGroup === group.label
+                const panelId = `${id}-group-${index}`
+                return (
                   <li key={group.label}>
-                    <Link
-                      href={group.href}
-                      className="font-heading text-[1.375rem] font-bold"
-                      aria-current={pathname === group.href ? 'page' : undefined}
-                    >
-                      {group.label}
-                    </Link>
-                  </li>
-                ) : (
-                  <li key={group.label}>
-                    <p className="mb-2 font-heading text-eyebrow font-bold text-eyebrow uppercase">
-                      {group.label}
-                    </p>
-                    <ul className="flex flex-col gap-1">
+                    <div className="border-b border-line">
+                      <button
+                        type="button"
+                        aria-expanded={open}
+                        aria-controls={panelId}
+                        onClick={() => setOpenGroup(open ? null : group.label)}
+                        className={`flex h-16 w-full items-center justify-between rounded-control text-left font-heading text-2xl leading-[1.12] font-bold ${
+                          open ? 'text-primary' : ''
+                        }`}
+                      >
+                        {group.label}
+                        <ChevronIcon
+                          size={20}
+                          className={`text-ink transition-calm transition-transform ${open ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+                    </div>
+                    <ul id={panelId} hidden={!open} className="pt-1 pb-3">
                       {group.items.map((item) => (
                         <li key={item.href}>
                           <Link
                             href={item.href}
                             aria-current={pathname === item.href.split('#')[0] ? 'page' : undefined}
-                            className="flex items-center gap-3 rounded-tile bg-surface px-4 py-3.5 font-heading text-[1.0625rem] font-bold"
+                            className="flex min-h-11 items-center rounded-control pl-3 font-heading text-[1.0625rem] leading-[1.2] font-semibold"
                           >
-                            {item.icon && (
-                              <span
-                                className={`flex size-8 shrink-0 items-center justify-center rounded-pill text-[#f5eede] ${discBg[item.tone ?? 'purple']}`}
-                              >
-                                <NavIcon name={item.icon} size={16} />
-                              </span>
-                            )}
                             {item.label}
                           </Link>
                         </li>
                       ))}
                     </ul>
                   </li>
-                ),
-              )}
+                )
+              })}
             </ul>
           </nav>
 
-          <div className="mt-auto flex flex-col gap-3">
+          <div className="flex flex-col gap-3 px-5 pt-5 pb-8">
             <Link
               href={actions.primary.href}
-              className="rounded-pill bg-primary px-6 py-4 text-center font-heading font-bold text-on-primary"
+              className="rounded-pill bg-primary px-6 py-4 text-center font-heading leading-[1.2] font-bold text-on-primary"
             >
               {actions.primary.label}
             </Link>
             <Link
               href={actions.secondary.href}
-              className="rounded-pill border-[1.5px] border-primary px-6 py-4 text-center font-heading font-bold text-primary"
+              className="rounded-pill border-[1.5px] border-primary px-6 py-4 text-center font-heading leading-[1.2] font-bold text-primary"
             >
               {actions.secondary.label}
             </Link>

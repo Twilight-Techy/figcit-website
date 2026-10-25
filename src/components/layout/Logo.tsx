@@ -2,21 +2,21 @@ import Link from 'next/link'
 
 // Logo/Primary from Figma: the mark plus the "figcit" wordmark. The purple shape follows
 // the theme (--fc-primary) so the logo stays legible in dark mode. `reversed` is
-// Logo/Reversed for dark backgrounds such as the footer: cream instead of purple, and
-// slightly smaller on mobile (Figma 41:1087).
+// Logo/Reversed for dark backgrounds such as the footer: cream instead of purple.
+// Phones use the smaller size from the mobile frames (Figma 41:937 and 41:1087).
 export function Logo({ reversed = false }: { reversed?: boolean }) {
   const fill = reversed ? 'var(--fc-on-footer)' : 'var(--fc-primary)'
   return (
     <Link
       href="/"
-      className={`inline-flex items-center rounded-control ${reversed ? 'gap-2 md:gap-2.5' : 'gap-2.5'}`}
+      className="inline-flex items-center gap-2 rounded-control md:gap-2.5"
       aria-label="Figcit home"
     >
       <svg
         width="43"
         height="36"
         viewBox="0 0 43.0588 36"
-        className={reversed ? 'h-[1.8rem] w-auto md:h-9' : undefined}
+        className="h-[1.8rem] w-auto md:h-9"
         fill="none"
         aria-hidden
         focusable="false"
@@ -37,8 +37,8 @@ export function Logo({ reversed = false }: { reversed?: boolean }) {
         />
       </svg>
       <span
-        className={`font-heading leading-none font-bold tracking-[-0.02em] ${
-          reversed ? 'text-2xl text-on-footer md:text-[1.875rem]' : 'text-[1.875rem] text-primary'
+        className={`font-heading text-2xl leading-none font-bold tracking-[-0.02em] md:text-[1.875rem] ${
+          reversed ? 'text-on-footer' : 'text-primary'
         }`}
       >
         figcit

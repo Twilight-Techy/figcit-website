@@ -79,11 +79,12 @@ export function ComfortPanel() {
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 rounded-pill border border-line px-4 py-[0.6875rem] font-heading text-[0.9375rem] leading-none font-semibold transition-calm transition-colors hover:bg-surface"
+        className="comfort-trigger flex items-center justify-center gap-2 rounded-pill border border-line font-heading text-[0.9375rem] leading-none font-semibold transition-calm transition-colors hover:bg-surface"
       >
         <LeafIcon size={18} className="text-disc-teal" />
-        {/* Icon-only on small phones; the accessible name is "Comfort" throughout. */}
-        <span className="sr-only sm:not-sr-only">Comfort</span>
+        {/* A round icon button in the mobile header (Figma 41:944); the accessible name is
+            "Comfort" throughout. */}
+        <span className="comfort-trigger-label">Comfort</span>
       </button>
 
       <section
