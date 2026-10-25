@@ -65,9 +65,11 @@ tests/                 unit (int) and end-to-end (e2e)
 | Largest Contentful Paint                                   | < 2.5 s (mobile, 4G) |
 | Interaction to Next Paint                                  | < 200 ms             |
 | Cumulative Layout Shift                                    | < 0.1                |
-| First-load JavaScript per page                             | ≤ 130 KB gzipped     |
+| First-load JavaScript per page                             | ≤ 180 KB gzipped     |
 | CSS per page                                               | ≤ 30 KB gzipped      |
 | Lighthouse Performance, Accessibility, Best Practices, SEO | ≥ 95 each            |
+
+**JavaScript budget:** the Next.js 16 and React 19 runtime alone is about 140 KB gzipped, so the budget leaves about 40 KB for the site's own code. Client components that only some pages use (the forms, the sticky menu, the copy button) are loaded on demand from `src/components/lazy.tsx`.
 
 **Rules:**
 
@@ -111,7 +113,7 @@ tests/                 unit (int) and end-to-end (e2e)
   - Validated on the server with Zod. Never trust client validation.
   - Rate limited per IP. Spam is stopped with a honeypot field and Cloudflare Turnstile, so there are no puzzles.
   - Never collect diagnosis, health details or date of birth.
-- **Rendering:** no `dangerouslySetInnerHTML`, except the JSON-LD component (inert data, with `<` escaped). Rich text is rendered by Payload's Lexical React components, never as raw HTML.
+- **Rendering:** no `dangerouslySetInnerHTML`, except the JSON-LD component (inert data, with `<` escaped) and `ComfortInit` (a fixed script from source code that applies Comfort settings before first paint). Rich text is rendered by Payload's Lexical React components, never as raw HTML.
 - **Dependencies:** versions pinned in the lockfile; `pnpm audit --prod` runs in CI and high or critical issues block merging; Dependabot opens weekly updates.
 - Production deploys only from `main`, through CI. Nobody deploys from a laptop.
 

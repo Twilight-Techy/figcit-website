@@ -1,13 +1,13 @@
-import { FormTabs } from '@/components/forms/FormTabs'
+import { LazyFormTabs } from '@/components/lazy'
 import type { ContactFormsBlock } from '@/payload-types'
-import type { FormType } from '@/lib/forms/schemas'
+import type { FormType } from '@/lib/forms/options'
 
 // Tabbed forms with the adjustment note beside them (Figma 38:604).
 export function ContactForms({ block }: { block: ContactFormsBlock }) {
   return (
     <section aria-label="Contact forms" className="bg-surface pb-section">
       <div className="container-site grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,49.5rem)_minmax(0,22.5rem)] lg:justify-between">
-        <FormTabs initial={(block.defaultForm ?? 'book-conversation') as FormType} />
+        <LazyFormTabs initial={(block.defaultForm ?? 'book-conversation') as FormType} />
         {block.asideText && (
           <aside
             aria-labelledby="adjustment-title"

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 import { Analytics } from '@/components/layout/Analytics'
+import { ComfortInit } from '@/components/layout/ComfortInit'
 import { CookieBanner } from '@/components/layout/CookieBanner'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
@@ -32,13 +33,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html
       lang="en-GB"
       className={`${figtree.variable} ${atkinson.variable}`}
-      // comfort-init.js sets Comfort attributes on <html> before React hydrates.
+      // ComfortInit sets Comfort attributes on <html> before React hydrates.
       suppressHydrationWarning
     >
       <head>
-        {/* Render-blocking on purpose: ~400 bytes that prevent a flash of the wrong theme. */}
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script src="/comfort-init.js" />
+        {/* Runs before first paint: ~400 bytes that prevent a flash of the wrong theme. */}
+        <ComfortInit />
       </head>
       <body>
         <SkipLink />

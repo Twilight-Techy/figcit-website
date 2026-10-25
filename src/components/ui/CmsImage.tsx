@@ -12,6 +12,8 @@ export function CmsImage({
 }: {
   media: Media | number | null | undefined
   sizes: string
+  // The page's LCP image: fetched early and at high priority (Next.js 16 deprecates
+  // `priority`; `loading="eager"` with `fetchPriority="high"` replaces it).
   priority?: boolean
   className?: string
 }) {
@@ -26,7 +28,8 @@ export function CmsImage({
       alt={media.alt}
       fill
       sizes={sizes}
-      priority={priority}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchPriority={priority ? 'high' : undefined}
       className={`object-cover ${className}`}
       style={position ? { objectPosition: position } : undefined}
     />

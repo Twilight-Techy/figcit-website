@@ -58,3 +58,6 @@ node_modules/
 /playwright-report
 /test-results
 /media
+
+# Lighthouse CI reports
+/.lighthouseci
