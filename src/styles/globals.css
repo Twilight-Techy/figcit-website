@@ -249,6 +249,12 @@
     margin-top: 0.5rem;
   }
 
+  /* Dark bands (Fig Purple, Rind Teal): the purple focus ring would vanish, so use the
+   * light orange from the footer (3:1 or more against both). */
+  .on-dark {
+    --fc-focus: var(--fc-footer-focus);
+  }
+
   /* Shapes and flourishes that low-stimulation mode removes. */
   .decorative {
     display: var(--fc-decoration);

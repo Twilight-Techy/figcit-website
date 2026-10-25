@@ -28,7 +28,7 @@ export function Faq({ block }: { block: FaqBlock }) {
             open
             className="group rounded-[1.25rem] border-[1.5px] border-transparent bg-surface transition-calm transition-colors has-[summary:focus-visible]:border-primary hover:border-line"
           >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-[1.25rem] px-6 pt-7 pb-7 group-open:pb-3 focus-visible:outline-none md:px-8 [&::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-[1.25rem] px-6 pt-7 pb-7 group-open:pb-3 focus-visible:outline-offset-[-3px] md:px-8 [&::-webkit-details-marker]:hidden">
               <h2 className="font-heading text-xl leading-[1.25] font-bold md:text-[1.375rem]">
                 {item.question}
               </h2>
@@ -49,7 +49,7 @@ export function Faq({ block }: { block: FaqBlock }) {
           </details>
         ))}
         {block.closing?.text && (
-          <div className="mt-2 flex flex-col items-start gap-5 rounded-card bg-band px-8 py-7 text-on-band md:flex-row md:items-center md:justify-between">
+          <div className="mt-2 flex flex-col items-start gap-5 on-dark rounded-card bg-band px-8 py-7 text-on-band md:flex-row md:items-center md:justify-between">
             <p className="font-heading text-xl leading-[1.3] font-bold">{block.closing.text}</p>
             {block.closing.href && block.closing.label && (
               <ButtonLink href={block.closing.href} variant="cream" arrow className="shrink-0">

@@ -11,7 +11,7 @@ export function CtaBand({ block, index }: { block: CtaBandBlock; index: number }
       className={`md:pb-section ${block.background === 'cream' ? 'bg-bg' : 'bg-surface'}`}
     >
       <div className="container-site max-md:px-0">
-        <div className="relative overflow-hidden bg-band px-5 py-14 text-on-band md:rounded-[2rem] md:px-18 md:py-18">
+        <div className="on-dark relative overflow-hidden bg-band px-5 py-14 text-on-band md:rounded-[2rem] md:px-18 md:py-18">
           <span
             aria-hidden
             className="decorative absolute -top-[7.5rem] -right-10 hidden size-[22rem] rounded-pill bg-orange md:block"

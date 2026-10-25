@@ -51,7 +51,7 @@ export function StickyMenu({ block }: { block: StickyMenuBlock }) {
                 <a
                   href={`#${item.anchor}`}
                   aria-current={current ? 'location' : undefined}
-                  className={`block rounded-pill border px-[1.125rem] py-2.5 font-heading text-[0.9375rem] leading-[1.15] font-bold whitespace-nowrap transition-calm transition-colors ${
+                  className={`block rounded-pill border px-[1.125rem] py-2.5 font-heading text-[0.9375rem] leading-[1.15] font-bold whitespace-nowrap ${
                     current
                       ? 'border-primary bg-primary text-on-primary'
                       : 'border-line hover:bg-surface-muted'

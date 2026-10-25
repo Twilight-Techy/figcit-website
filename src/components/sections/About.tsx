@@ -69,7 +69,7 @@ function Portrait({
         <div
           role="img"
           aria-label="Portrait to follow"
-          className="flex h-full items-center justify-center bg-[#e9dfcc] font-heading text-[5rem] font-extrabold text-primary/75"
+          className="flex h-full items-center justify-center bg-[#e9dfcc] font-heading text-[5rem] font-extrabold text-[#5b3358]/80"
         >
           {initials}
         </div>
@@ -82,7 +82,7 @@ function Portrait({
 export function Story({ block, index }: { block: StoryBlock; index: number }) {
   const headingId = `section-${index}`
   return (
-    <section aria-labelledby={headingId} className="bg-band py-section text-on-band">
+    <section aria-labelledby={headingId} className="on-dark bg-band py-section text-on-band">
       <div className="container-site grid items-center gap-12 lg:grid-cols-[minmax(0,26.25rem)_minmax(0,43.75rem)] lg:justify-between">
         <div className="relative w-full max-w-[26.25rem] pt-5 pr-5">
           <span
@@ -219,7 +219,7 @@ export function Profile({ block, index }: { block: ProfileBlock; index: number }
           <h2 id={headingId} className="mt-5 text-h2 font-bold">
             {block.name}
           </h2>
-          <p className="mt-6 w-fit rounded-pill bg-accent px-3.5 py-2 font-heading text-sm leading-[1.15] font-bold text-white">
+          <p className="mt-6 w-fit rounded-pill bg-disc-terracotta px-3.5 py-2 font-heading text-sm leading-[1.15] font-bold text-white">
             {block.role}
           </p>
           <div className="mt-7 flex flex-col gap-5 text-body leading-[1.7]">
@@ -321,7 +321,10 @@ export function Team({ block, index }: { block: TeamBlock; index: number }) {
 export function PolicyLinks({ block, index }: { block: PolicyLinksBlock; index: number }) {
   const headingId = `section-${index}`
   return (
-    <section aria-labelledby={headingId} className="bg-(--fc-promise) py-section text-[#f5eede]">
+    <section
+      aria-labelledby={headingId}
+      className="on-dark bg-(--fc-promise) py-section text-[#f5eede]"
+    >
       <div className="container-site grid gap-8 lg:grid-cols-[minmax(0,25rem)_minmax(0,40.5rem)] lg:items-center lg:justify-between">
         <div className="flex flex-col gap-6">
           <h2 id={headingId}>
