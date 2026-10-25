@@ -1,5 +1,5 @@
-// Organisation details from the website copy. [Bracketed] items in the copy, such as
-// the company number, move into the Payload SiteSettings global in T11.
+// Organisation details from the website copy. Editable values (company number, email,
+// phone, address) live in the Payload Site settings global; these are the fallbacks.
 export const site = {
   name: 'Figcit',
   legalName: 'Figcit Ltd',
@@ -14,23 +14,3 @@ export const site = {
   region: 'Thames Valley',
   country: 'GB',
 } as const
-
-// Public routes for the sitemap, with their launch phase. Pages move to Payload in T11.
-export const publicRoutes = [
-  '/',
-  '/services',
-  '/for-you',
-  '/for-employers',
-  '/for-education',
-  '/partners',
-  '/about',
-  '/about/team',
-  '/contact',
-  '/faqs',
-  '/privacy',
-  '/cookies',
-  '/accessibility',
-  '/terms',
-  '/safeguarding',
-  '/complaints',
-] as const

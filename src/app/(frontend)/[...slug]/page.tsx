@@ -29,5 +29,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const page = await load(params)
   if (!page) notFound()
-  return <RenderBlocks blocks={page.layout} />
+  return <RenderBlocks blocks={page.layout} path={`/${page.slug}`} />
 }

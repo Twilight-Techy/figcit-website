@@ -20,7 +20,7 @@ export function Hero({ block }: { block: HeroBlock }) {
       <div
         className={`container-site grid items-center gap-5 pt-6 pb-14 lg:gap-15 lg:pt-12 lg:pb-28 ${
           art === 'none'
-            ? 'lg:pt-20 lg:pb-10'
+            ? 'pb-10 lg:pt-20 lg:pb-14'
             : 'lg:grid-cols-[minmax(0,38.75rem)_minmax(0,31.75rem)] lg:justify-between'
         }`}
       >
@@ -30,13 +30,13 @@ export function Hero({ block }: { block: HeroBlock }) {
           }`}
         >
           {block.eyebrow && <Eyebrow>{block.eyebrow}</Eyebrow>}
-          {/* 72px on the home page and text-only heroes, 64px beside art (Figma 31:87,
-              33:152, 37:535). */}
+          {/* 72px on the home page, 96px on Contact, 64px elsewhere (Figma 31:87, 38:604,
+              33:152, 38:826). */}
           <h1
             className={`font-heading text-display font-extrabold text-primary ${
               art === 'contact'
                 ? 'lg:text-[6rem] lg:leading-none'
-                : art === 'checkIn' || art === 'none'
+                : art === 'checkIn'
                   ? ''
                   : 'lg:text-[4rem]'
             }`}
@@ -44,6 +44,9 @@ export function Hero({ block }: { block: HeroBlock }) {
             <Highlight text={block.headline} highlight={block.highlight} />
           </h1>
           {block.lead && <p className="text-lead">{block.lead}</p>}
+          {block.subline && (
+            <p className="-mt-2 text-[1.0625rem] text-ink-muted lg:-mt-4">{block.subline}</p>
+          )}
           <Actions block={block} />
           <Figures block={block} />
         </div>

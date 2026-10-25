@@ -13,5 +13,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   const page = await getPage('home')
   if (!page) notFound()
-  return <RenderBlocks blocks={page.layout} />
+  return <RenderBlocks blocks={page.layout} path="/" />
 }

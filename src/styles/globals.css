@@ -213,6 +213,42 @@
     }
   }
 
+  /* Rich text on legal pages: readable lists, links and spacing. */
+  .legal-text .payload-richtext {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .legal-text p,
+  .legal-text li {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  .legal-text ul,
+  .legal-text ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding-left: 1.5rem;
+  }
+  .legal-text ul {
+    list-style: disc;
+  }
+  .legal-text ol {
+    list-style: decimal;
+  }
+  .legal-text a {
+    color: var(--fc-primary);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .legal-text h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+  }
+
   /* Shapes and flourishes that low-stimulation mode removes. */
   .decorative {
     display: var(--fc-decoration);

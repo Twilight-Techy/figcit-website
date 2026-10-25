@@ -29,9 +29,9 @@ Tasks are picked up one at a time, in order. Each task is one pull request that 
 
 | ID  | Task                                                                                                                                                                                           | Done when                                                | Status                                                                                                          |
 | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| T10 | Blocks: Hero, Section intro, Card grid, Path buttons, Story timeline, Stats, Quote, Call-to-action band, Sticky in-page menu, Accordion, Legal text, Team member; each with its React renderer | Every Figma section can be built from blocks             | 🔄 Home blocks done; each page task adds the blocks it needs                                                    |
+| T10 | Blocks: Hero, Section intro, Card grid, Path buttons, Story timeline, Stats, Quote, Call-to-action band, Sticky in-page menu, Accordion, Legal text, Team member; each with its React renderer | Every Figma section can be built from blocks             | ✅                                                                                                              |
 | T11 | Pages collection and globals (Header nav, Footer, SiteSettings), with drafts, live preview and revalidation on publish                                                                         | Publishing a change updates the live page within seconds | ✅ Header and footer links stay in code because they mirror the menu design; SiteSettings holds company details |
-| T12 | Seed script that loads all Website Copy v2.0 text into Payload                                                                                                                                 | A fresh database seeds every page                        | 🔄 Home seeded; each page task adds its page                                                                    |
+| T12 | Seed script that loads all Website Copy v2.0 text into Payload                                                                                                                                 | A fresh database seeds every page                        | ✅                                                                                                              |
 
 ## Phase 3: Pages
 
@@ -46,8 +46,8 @@ Tasks are picked up one at a time, in order. Each task is one pull request that 
 | T19 | About us                               | `/about`                                                                           | ✅                                                               |
 | T20 | Our team                               | `/about/team`                                                                      | ✅ Founder portrait shows a monogram until the photo is supplied |
 | T21 | Contact                                | `/contact`                                                                         | ✅                                                               |
-| T22 | Questions (accordion)                  | `/faqs`                                                                            | ⬜                                                               |
-| T23 | Legal pages from one template          | `/privacy`, `/cookies`, `/accessibility`, `/terms`, `/safeguarding`, `/complaints` | ⬜                                                               |
+| T22 | Questions (accordion)                  | `/faqs`                                                                            | ✅                                                               |
+| T23 | Legal pages from one template          | `/privacy`, `/cookies`, `/accessibility`, `/terms`, `/safeguarding`, `/complaints` | ✅ Draft text in place; final text from Figcit in T29            |
 
 Each page is done when it matches Figma at 1440 px and 390 px, matches the copy document, and passes the axe checks.
 

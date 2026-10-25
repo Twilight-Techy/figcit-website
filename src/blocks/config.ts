@@ -11,6 +11,7 @@ import {
   toneField,
 } from './fields'
 import { aboutBlocks } from './about'
+import { FaqBlock, LegalBlock } from './text'
 import { SectionBlock, StickyMenuBlock, anyIconField } from './section'
 
 // Page sections, one block per section type in the Figma file. Each block has a React
@@ -29,6 +30,13 @@ export const HeroBlock: Block = {
       admin: { description: 'Words at the end of the headline shown in Terracotta Bloom.' },
     },
     { name: 'lead', type: 'textarea' },
+    {
+      name: 'subline',
+      type: 'text',
+      admin: {
+        description: 'Small line under the headline, for example "Last updated: 1 December 2026".',
+      },
+    },
     actionsField(2),
     {
       name: 'art',
@@ -412,4 +420,6 @@ export const pageBlocks: Block[] = [
   StatementBlock,
   ...aboutBlocks,
   ContactFormsBlock,
+  FaqBlock,
+  LegalBlock,
 ]
