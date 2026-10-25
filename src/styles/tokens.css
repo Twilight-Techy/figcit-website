@@ -47,6 +47,15 @@
   --fc-on-band: var(--fc-pith-cream);
   --fc-focus: var(--fc-fig-purple);
 
+  /* Footer (Figma 30:89): Fig Ink in every mode, so it always reads as the page end */
+  --fc-footer: var(--fc-fig-ink);
+  --fc-on-footer: var(--fc-pith-cream);
+  --fc-on-footer-muted: rgb(245 238 222 / 0.75);
+  --fc-footer-heading: var(--fc-citrus-orange);
+  --fc-footer-line: rgb(245 238 222 / 0.15);
+  --fc-footer-card: rgb(245 238 222 / 0.06);
+  --fc-footer-focus: #f0b26a;
+
   /* Icon discs on cards */
   --fc-disc-teal: var(--fc-rind-teal);
   --fc-disc-terracotta: var(--fc-terracotta-bloom);
@@ -117,6 +126,8 @@
   --fc-accent: #4a3a4c;
   --fc-eyebrow: var(--fc-rind-teal);
   --fc-band: #4a3a4c;
+  --fc-footer: #2f2a31;
+  --fc-footer-heading: #9fcfc6;
   --fc-disc-teal: #6b6370;
   --fc-disc-terracotta: #6b6370;
   --fc-disc-purple: #6b6370;
@@ -138,6 +149,7 @@
   --fc-accent: #cfc4d0;
   --fc-eyebrow: #9fcfc6;
   --fc-band: #2a242c;
+  --fc-footer: #2a242c;
 }
 
 /* Text size: the middle option is the default. */

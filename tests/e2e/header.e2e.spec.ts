@@ -13,7 +13,9 @@ test.describe('Header on desktop', () => {
     await page.keyboard.press('Enter')
 
     await expect(trigger).toHaveAttribute('aria-expanded', 'true')
-    await expect(page.getByRole('link', { name: /The Figcit app/ })).toBeVisible()
+    await expect(
+      page.getByRole('banner').getByRole('link', { name: /The Figcit app/ }),
+    ).toBeVisible()
     expect((await axe(page).analyze()).violations).toEqual([])
 
     await page.keyboard.press('Escape')
@@ -30,10 +32,12 @@ test.describe('Header on desktop', () => {
       'aria-expanded',
       'false',
     )
-    await expect(page.getByRole('link', { name: 'For employers' })).toBeVisible()
+    await expect(
+      page.getByRole('banner').getByRole('link', { name: 'For employers' }),
+    ).toBeVisible()
 
     await page.mouse.click(1300, 700)
-    await expect(page.getByRole('link', { name: 'For employers' })).toBeHidden()
+    await expect(page.getByRole('banner').getByRole('link', { name: 'For employers' })).toBeHidden()
   })
 
   test('shows both call-to-action buttons', async ({ page }) => {

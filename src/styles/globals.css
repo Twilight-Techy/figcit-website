@@ -19,6 +19,12 @@
   --color-band: var(--fc-band);
   --color-on-band: var(--fc-on-band);
   --color-orange: var(--fc-citrus-orange);
+  --color-footer: var(--fc-footer);
+  --color-on-footer: var(--fc-on-footer);
+  --color-on-footer-muted: var(--fc-on-footer-muted);
+  --color-footer-heading: var(--fc-footer-heading);
+  --color-footer-line: var(--fc-footer-line);
+  --color-footer-card: var(--fc-footer-card);
   --color-disc-teal: var(--fc-disc-teal);
   --color-disc-terracotta: var(--fc-disc-terracotta);
   --color-disc-purple: var(--fc-disc-purple);

@@ -83,6 +83,10 @@ const pairs: [string, string, number][] = [
   ['--fc-eyebrow', '--fc-surface', 4.5],
   ['--fc-on-band', '--fc-band', 4.5],
   ['--fc-accent', '--fc-bg', 3],
+  ['--fc-on-footer', '--fc-footer', 4.5],
+  ['--fc-on-footer-muted', '--fc-footer', 4.5],
+  ['--fc-footer-heading', '--fc-footer', 4.5],
+  ['--fc-footer-focus', '--fc-footer', 3],
 ]
 
 describe.each(Object.entries(modes))('%s mode', (_mode, vars) => {

@@ -1,18 +1,22 @@
 import Link from 'next/link'
 
 // Logo/Primary from Figma: the mark plus the "figcit" wordmark. The purple shape follows
-// the theme (--fc-primary) so the logo stays legible in dark mode (Logo/Reversed).
-export function Logo() {
+// the theme (--fc-primary) so the logo stays legible in dark mode. `reversed` is
+// Logo/Reversed for dark backgrounds such as the footer: cream instead of purple, and
+// slightly smaller on mobile (Figma 41:1087).
+export function Logo({ reversed = false }: { reversed?: boolean }) {
+  const fill = reversed ? 'var(--fc-on-footer)' : 'var(--fc-primary)'
   return (
     <Link
       href="/"
-      className="inline-flex items-center gap-2.5 rounded-control"
+      className={`inline-flex items-center rounded-control ${reversed ? 'gap-2 md:gap-2.5' : 'gap-2.5'}`}
       aria-label="Figcit home"
     >
       <svg
         width="43"
         height="36"
         viewBox="0 0 43.0588 36"
+        className={reversed ? 'h-[1.8rem] w-auto md:h-9' : undefined}
         fill="none"
         aria-hidden
         focusable="false"
@@ -20,7 +24,7 @@ export function Logo() {
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          fill="var(--fc-primary)"
+          fill={fill}
           d="M24.0706 0H3.63529L3.19412 0.0529412L2.75294 0.158824L2.24118 0.352941L1.90588 0.529412L1.53529 0.776471L1.18235 1.07647L0.829412 1.46471L0.582353 1.81765L0.335294 2.27647L0.158824 2.75294L0.0529412 3.19412L0 3.61765V32.3647L0.0529412 32.7882L0.158824 33.2294L0.335294 33.7059L0.529412 34.0765L0.776471 34.4471L1.07647 34.8L1.35882 35.0647L1.81765 35.4L2.54118 35.7529L3.3 35.9471L4.11176 35.9824L4.55294 35.9294L4.99412 35.8235L5.47059 35.6471L5.84118 35.4529L6.14118 35.2588L6.54706 34.9235L7.02353 34.3765L7.28824 33.9529L7.46471 33.5824L7.65882 32.9647L7.74706 32.3471L7.76471 21.8647H18.2294L18.8471 21.7765L19.3765 21.6176L19.8353 21.4059L20.2588 21.1412L20.6647 20.8059L21.0882 20.3294L21.4059 19.8353L21.5824 19.4647L21.7765 18.8471L21.8647 18.2294L21.8471 17.5412L21.7059 16.8706L21.4059 16.1471L20.9471 15.4765L20.5059 15.0353L19.9588 14.6471L19.3765 14.3647L18.8471 14.2059L18.2294 14.1176H7.76471L7.74706 7.76471L10.5176 7.74706L10.8176 7.04118L11.1706 6.51177L11.9471 5.62941L13.0941 4.51765L13.8706 3.86471L14.8765 3.12353L15.9353 2.45294L17.2235 1.76471L18.7059 1.12941L19.6765 0.794118L20.6118 0.529412L21.7412 0.282353L22.4824 0.158824L24.0706 0Z"
         />
         <path
@@ -32,7 +36,11 @@ export function Logo() {
           d="M28.8 2.85882L28.6235 2.34706L28.4294 1.95882L28.2176 1.62353L27.9353 1.27059L27.5294 0.882353L27.0882 0.564706L26.5765 0.3L26.1353 0.141176L25.3765 0H24.5118L23.5765 0.0529412L21.9353 0.264706L20.3471 0.617647L18.7059 1.14706L17.2235 1.78235L15.6706 2.62941L14.3824 3.49412L13.0941 4.53529L11.7529 5.85882L11.2588 6.42353L10.9412 6.86471L10.6941 7.32353L10.5529 7.74706H25.3588L26.1353 7.60588L26.5765 7.44706L27 7.23529L27.4412 6.93529L27.9353 6.47647L28.2176 6.12353L28.4294 5.78823L28.6941 5.22353L28.8529 4.67647L28.9059 4.35882L28.9235 3.56471L28.8 2.85882Z"
         />
       </svg>
-      <span className="font-heading text-[1.875rem] leading-none font-bold tracking-[-0.02em] text-primary">
+      <span
+        className={`font-heading leading-none font-bold tracking-[-0.02em] ${
+          reversed ? 'text-2xl text-on-footer md:text-[1.875rem]' : 'text-[1.875rem] text-primary'
+        }`}
+      >
         figcit
       </span>
     </Link>

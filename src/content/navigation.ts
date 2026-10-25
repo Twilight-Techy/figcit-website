@@ -90,3 +90,34 @@ export const headerActions = {
   secondary: { label: 'Book a conversation', href: '/contact#book-a-conversation' },
   primary: { label: 'Get early access', href: '/contact#get-early-access' },
 } satisfies Record<string, NavLink>
+
+// Footer columns (Figma 30:89). Services and Who we help reuse the header menu links.
+function groupItems(label: string): NavLink[] {
+  const group = mainNav.find((g) => g.label === label)
+  return group && group.kind !== 'link'
+    ? group.items.map(({ label, href }) => ({ label, href }))
+    : []
+}
+
+export const footerNav: { heading: string; links: NavLink[] }[] = [
+  { heading: 'Services', links: groupItems('Services') },
+  { heading: 'Who we help', links: groupItems('Who we help') },
+  {
+    heading: 'Figcit',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Team', href: '/about/team' },
+      { label: 'Questions', href: '/faqs' },
+      { label: 'Contact', href: '/contact' },
+    ],
+  },
+]
+
+export const legalNav: NavLink[] = [
+  { label: 'Privacy', href: '/privacy' },
+  { label: 'Cookies', href: '/cookies' },
+  { label: 'Accessibility', href: '/accessibility' },
+  { label: 'Terms', href: '/terms' },
+  { label: 'Safeguarding', href: '/safeguarding' },
+  { label: 'Complaints', href: '/complaints' },
+]
