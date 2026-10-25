@@ -9,7 +9,7 @@ import { formTypes, validate, type FieldErrors, type FormType } from '@/lib/form
 export type SubmitResult =
   | { status: 'idle' }
   | { status: 'success' }
-  | { status: 'error'; message: string; errors?: FieldErrors }
+  | { status: 'error'; message: string; errors?: FieldErrors; values?: Record<string, string> }
 
 export const HONEYPOT_FIELD = 'website'
 
@@ -53,6 +53,10 @@ export async function handleSubmission(
       status: 'error',
       message: 'There’s a problem with your answers. Check the fields marked below.',
       errors: result.errors,
+      // Sent back so the form can show what the person typed instead of clearing it.
+      values: Object.fromEntries(
+        Object.entries(raw).filter(([k]) => k !== HONEYPOT_FIELD && k !== 'cf-turnstile-response'),
+      ) as Record<string, string>,
     }
   }
 

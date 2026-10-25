@@ -39,6 +39,7 @@ export const HeroBlock: Block = {
         { label: 'Photo', value: 'photo' },
         { label: 'Service tiles', value: 'tiles' },
         { label: 'Centred with circles', value: 'centred' },
+        { label: 'Contact details card', value: 'contact' },
         { label: 'None', value: 'none' },
       ],
     },
@@ -131,6 +132,15 @@ export const CardGridBlock: Block = {
       ],
     },
     linkFields('action'),
+    {
+      name: 'cardLinkStyle',
+      type: 'select',
+      defaultValue: 'arrow',
+      options: [
+        { label: 'Text link with arrow', value: 'arrow' },
+        { label: 'Outline button in the card colour', value: 'button' },
+      ],
+    },
   ],
 }
 
@@ -365,6 +375,27 @@ export const StatementBlock: Block = {
   ],
 }
 
+export const ContactFormsBlock: Block = {
+  slug: 'contactForms',
+  interfaceName: 'ContactFormsBlock',
+  labels: { singular: 'Contact forms', plural: 'Contact forms' },
+  fields: [
+    {
+      name: 'defaultForm',
+      type: 'select',
+      defaultValue: 'book-conversation',
+      options: [
+        { label: 'Book a conversation', value: 'book-conversation' },
+        { label: 'Partner with us', value: 'partner' },
+        { label: 'Get early access', value: 'early-access' },
+        { label: 'Hub interest', value: 'hub-interest' },
+      ],
+    },
+    { name: 'asideTitle', type: 'text', defaultValue: 'Need an adjustment?' },
+    { name: 'asideText', type: 'textarea' },
+  ],
+}
+
 export const pageBlocks: Block[] = [
   HeroBlock,
   CardGridBlock,
@@ -380,4 +411,5 @@ export const pageBlocks: Block[] = [
   NoteBandBlock,
   StatementBlock,
   ...aboutBlocks,
+  ContactFormsBlock,
 ]

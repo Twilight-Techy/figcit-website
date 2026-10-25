@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { LeafIcon } from '@/components/icons'
 import { NavIcon } from '@/components/icons/NavIcon'
 import { discBg } from '@/components/layout/tones'
+import { ContactCard } from '@/components/sections/ContactCard'
 import { ButtonLink } from '@/components/ui/ButtonLink'
 import { CmsImage } from '@/components/ui/CmsImage'
 import { Eyebrow } from '@/components/ui/Eyebrow'
@@ -33,7 +34,11 @@ export function Hero({ block }: { block: HeroBlock }) {
               33:152, 37:535). */}
           <h1
             className={`font-heading text-display font-extrabold text-primary ${
-              art === 'checkIn' || art === 'none' ? '' : 'lg:text-[4rem]'
+              art === 'contact'
+                ? 'lg:text-[6rem] lg:leading-none'
+                : art === 'checkIn' || art === 'none'
+                  ? ''
+                  : 'lg:text-[4rem]'
             }`}
           >
             <Highlight text={block.headline} highlight={block.highlight} />
@@ -45,6 +50,7 @@ export function Hero({ block }: { block: HeroBlock }) {
 
         {(art === 'photo' || art === 'checkIn') && <PhotoArt block={block} />}
         {art === 'tiles' && <Tiles tiles={block.tiles ?? []} />}
+        {art === 'contact' && <ContactCard />}
       </div>
     </section>
   )

@@ -166,6 +166,7 @@ export interface Page {
     | ProfileBlock
     | TeamBlock
     | PolicyLinksBlock
+    | ContactFormsBlock
   )[];
   updatedAt: string;
   createdAt: string;
@@ -192,7 +193,7 @@ export interface HeroBlock {
         id?: string | null;
       }[]
     | null;
-  art?: ('checkIn' | 'photo' | 'tiles' | 'centred' | 'none') | null;
+  art?: ('checkIn' | 'photo' | 'tiles' | 'centred' | 'contact' | 'none') | null;
   image?: (number | null) | Media;
   accent?: ('orange' | 'teal' | 'terracotta') | null;
   figures?:
@@ -356,6 +357,7 @@ export interface CardGridBlock {
     label?: string | null;
     href?: string | null;
   };
+  cardLinkStyle?: ('arrow' | 'button') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'cardGrid';
@@ -981,6 +983,18 @@ export interface PolicyLinksBlock {
   blockType: 'policyLinks';
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormsBlock".
+ */
+export interface ContactFormsBlock {
+  defaultForm?: ('book-conversation' | 'partner' | 'early-access' | 'hub-interest') | null;
+  asideTitle?: string | null;
+  asideText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactForms';
+}
+/**
  * Messages sent through the website forms. Deleted automatically after 12 months.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1170,6 +1184,7 @@ export interface PagesSelect<T extends boolean = true> {
         profile?: T | ProfileBlockSelect<T>;
         team?: T | TeamBlockSelect<T>;
         policyLinks?: T | PolicyLinksBlockSelect<T>;
+        contactForms?: T | ContactFormsBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1263,6 +1278,7 @@ export interface CardGridBlockSelect<T extends boolean = true> {
         label?: T;
         href?: T;
       };
+  cardLinkStyle?: T;
   id?: T;
   blockName?: T;
 }
@@ -1753,6 +1769,17 @@ export interface PolicyLinksBlockSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormsBlock_select".
+ */
+export interface ContactFormsBlockSelect<T extends boolean = true> {
+  defaultForm?: T;
+  asideTitle?: T;
+  asideText?: T;
   id?: T;
   blockName?: T;
 }

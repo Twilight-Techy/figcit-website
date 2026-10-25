@@ -21,6 +21,15 @@ const dotBg: Record<Tone, string> = {
   blue: 'bg-disc-blue',
 }
 
+const toneBorder: Record<Tone, string> = {
+  purple: 'border-tone-purple',
+  terracotta: 'border-tone-terracotta',
+  teal: 'border-tone-teal',
+  ochre: 'border-tone-ochre',
+  green: 'border-tone-green',
+  blue: 'border-tone-blue',
+}
+
 const badgeBg: Record<Tone, string> = {
   purple: 'bg-disc-purple/10',
   terracotta: 'bg-disc-terracotta/12',
@@ -40,6 +49,7 @@ export function CardGrid({ block, index }: { block: CardGridBlock; index: number
   const headingId = `section-${index}`
   // Four plain cards use the smaller title from the audience pages (Figma 35:328).
   const hasLinks = cards.some((c) => c.link?.href)
+  const buttons = block.cardLinkStyle === 'button'
 
   return (
     <Section tone={tone} id={block.anchor ?? undefined} labelledBy={headingId}>
@@ -69,7 +79,13 @@ export function CardGrid({ block, index }: { block: CardGridBlock; index: number
                 <CmsImage media={card.image} sizes="(min-width: 64rem) 384px, 50vw" />
               </div>
             ) : (
-              <CardBody card={card} tone={tone} large={four} compact={four && !hasLinks} />
+              <CardBody
+                card={card}
+                tone={tone}
+                large={four}
+                compact={four && (!hasLinks || buttons)}
+                button={buttons}
+              />
             )}
           </li>
         ))}
@@ -89,11 +105,13 @@ function CardBody({
   tone,
   large,
   compact,
+  button,
 }: {
   card: Card
   tone: SectionTone
   large: boolean
   compact: boolean
+  button: boolean
 }) {
   const t = card.tone ?? 'purple'
   return (
@@ -120,11 +138,21 @@ function CardBody({
           </p>
         )}
       </div>
-      {card.link?.href && card.link.label && (
-        <ArrowLink href={card.link.href} context={card.title ?? undefined}>
-          {card.link.label}
-        </ArrowLink>
-      )}
+      {card.link?.href &&
+        card.link.label &&
+        (button ? (
+          // Outline pill in the card colour (Figma 38:604, "Ways to get in touch").
+          <Link
+            href={card.link.href}
+            className={`w-fit rounded-pill border-[1.5px] px-[1.125rem] py-3 font-heading text-[0.9375rem] leading-[1.15] font-bold transition-calm transition-colors hover:bg-surface ${toneBorder[t]} ${toneInk[t]}`}
+          >
+            {card.link.label}
+          </Link>
+        ) : (
+          <ArrowLink href={card.link.href} context={card.title ?? undefined}>
+            {card.link.label}
+          </ArrowLink>
+        ))}
     </div>
   )
 }
