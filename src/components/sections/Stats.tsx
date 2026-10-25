@@ -9,6 +9,8 @@ const barBg: Record<Tone, string> = {
   terracotta: 'bg-accent',
   teal: 'bg-disc-teal',
   ochre: 'bg-disc-ochre',
+  green: 'bg-disc-green',
+  blue: 'bg-disc-blue',
 }
 
 // "Why now" figures with their sources (Figma 31:317, mobile 41:1063).

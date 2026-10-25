@@ -10,6 +10,7 @@ import {
   sectionToneField,
   toneField,
 } from './fields'
+import { SectionBlock, StickyMenuBlock } from './section'
 
 // Page sections, one block per section type in the Figma file. Each block has a React
 // renderer in src/components/sections; RenderBlocks maps slugs to components.
@@ -233,4 +234,6 @@ export const pageBlocks: Block[] = [
   FeatureSplitBlock,
   ValuesBlock,
   CtaBandBlock,
+  SectionBlock,
+  StickyMenuBlock,
 ]

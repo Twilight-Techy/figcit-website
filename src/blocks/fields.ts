@@ -19,7 +19,14 @@ const iconNames = [
   'wave',
 ] as const satisfies readonly IconName[]
 
-const toneNames = ['purple', 'terracotta', 'teal', 'ochre'] as const satisfies readonly Tone[]
+const toneNames = [
+  'purple',
+  'terracotta',
+  'teal',
+  'ochre',
+  'green',
+  'blue',
+] as const satisfies readonly Tone[]
 
 // Internal paths ("/services#app"), mail and phone links, or https:// URLs only.
 export const validateHref: TextFieldSingleValidation = (value) => {

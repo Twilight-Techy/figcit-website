@@ -6,6 +6,8 @@ export const discBg: Record<Tone, string> = {
   terracotta: 'bg-disc-terracotta',
   teal: 'bg-disc-teal',
   ochre: 'bg-disc-ochre',
+  green: 'bg-disc-green',
+  blue: 'bg-disc-blue',
 }
 
 export const toneText: Record<Tone, string> = {
@@ -13,6 +15,8 @@ export const toneText: Record<Tone, string> = {
   terracotta: 'text-disc-terracotta',
   teal: 'text-disc-teal',
   ochre: 'text-disc-ochre',
+  green: 'text-disc-green',
+  blue: 'text-disc-blue',
 }
 
 // Small coloured text (badges, labels) and figures; 4.5:1 on cards in every mode.
@@ -21,4 +25,6 @@ export const toneInk: Record<Tone, string> = {
   terracotta: 'text-tone-terracotta',
   teal: 'text-tone-teal',
   ochre: 'text-tone-ochre',
+  green: 'text-tone-green',
+  blue: 'text-tone-blue',
 }

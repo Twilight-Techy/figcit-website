@@ -155,6 +155,8 @@ export interface Page {
     | FeatureSplitBlock
     | ValuesBlock
     | CtaBandBlock
+    | SectionBlock
+    | StickyMenuBlock
   )[];
   updatedAt: string;
   createdAt: string;
@@ -204,7 +206,7 @@ export interface HeroBlock {
           | 'leaf'
           | 'heart'
           | 'wave';
-        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre') | null;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
         id?: string | null;
       }[]
     | null;
@@ -297,7 +299,7 @@ export interface CardGridBlock {
               | 'wave'
             )
           | null;
-        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre') | null;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
         title?: string | null;
         body?: string | null;
         badge?: string | null;
@@ -393,7 +395,7 @@ export interface StatsBlock {
         value: string;
         label: string;
         source?: string | null;
-        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre') | null;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
         id?: string | null;
       }[]
     | null;
@@ -440,7 +442,7 @@ export interface ValuesBlock {
   values?:
     | {
         label: string;
-        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre') | null;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
         id?: string | null;
       }[]
     | null;
@@ -466,6 +468,267 @@ export interface CtaBandBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'ctaBand';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionBlock".
+ */
+export interface SectionBlock {
+  /**
+   * Optional id for in-page links, for example "app" for /services#app.
+   */
+  anchor?: string | null;
+  background?: ('white' | 'cream') | null;
+  intro: {
+    eyebrow?: string | null;
+    heading: string;
+    badge?: string | null;
+    lead?: string | null;
+    layout?: ('stacked' | 'split') | null;
+  };
+  aside?: ('none' | 'app' | 'photo') | null;
+  image?: (number | null) | Media;
+  accent?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
+  /**
+   * How many parts sit beside the illustration on wide screens.
+   */
+  besideCount?: number | null;
+  parts?:
+    (SubheadingPart | StepsPart | CardsPart | PricesPart | NotePart | ActionsPart | TextPart | ListPanelsPart)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SubheadingPart".
+ */
+export interface SubheadingPart {
+  text: string;
+  size?: ('large' | 'small' | 'hidden') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'subheading';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsPart".
+ */
+export interface StepsPart {
+  layout?: ('stacked' | 'flow') | null;
+  steps?:
+    | {
+        title: string;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'steps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardsPart".
+ */
+export interface CardsPart {
+  columns?: ('2' | '3' | '4') | null;
+  cards?:
+    | {
+        icon?:
+          | (
+              | 'phone'
+              | 'people'
+              | 'home'
+              | 'chart'
+              | 'user'
+              | 'briefcase'
+              | 'graduation'
+              | 'bank'
+              | 'leaf'
+              | 'heart'
+              | 'wave'
+              | 'moon'
+              | 'cloud'
+              | 'message'
+              | 'shield'
+              | 'cup'
+              | 'desk'
+              | 'search'
+              | 'file'
+              | 'calendar'
+              | 'hand'
+              | 'mail'
+              | 'pin'
+              | 'target'
+              | 'eye'
+              | 'copy'
+              | 'check'
+              | 'plus'
+              | 'minus'
+              | 'alert'
+            )
+          | null;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
+        /**
+         * Shown as a coloured label above the title.
+         */
+        price?: string | null;
+        title: string;
+        body?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricesPart".
+ */
+export interface PricesPart {
+  /**
+   * Colour of the prices.
+   */
+  tone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
+  prices?:
+    | {
+        name: string;
+        price: string;
+        unit?: string | null;
+        note?: string | null;
+        featured?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'prices';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NotePart".
+ */
+export interface NotePart {
+  style?: ('tinted' | 'outlined') | null;
+  icon?:
+    | (
+        | 'phone'
+        | 'people'
+        | 'home'
+        | 'chart'
+        | 'user'
+        | 'briefcase'
+        | 'graduation'
+        | 'bank'
+        | 'leaf'
+        | 'heart'
+        | 'wave'
+        | 'moon'
+        | 'cloud'
+        | 'message'
+        | 'shield'
+        | 'cup'
+        | 'desk'
+        | 'search'
+        | 'file'
+        | 'calendar'
+        | 'hand'
+        | 'mail'
+        | 'pin'
+        | 'target'
+        | 'eye'
+        | 'copy'
+        | 'check'
+        | 'plus'
+        | 'minus'
+        | 'alert'
+      )
+    | null;
+  /**
+   * Wrap words in **double asterisks** to make them bold.
+   */
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'note';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ActionsPart".
+ */
+export interface ActionsPart {
+  actions?:
+    | {
+        label: string;
+        href: string;
+        variant?: ('primary' | 'outline') | null;
+        arrow?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Teal buttons are used for Hub actions.
+   */
+  buttonTone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
+  note?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'actions';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextPart".
+ */
+export interface TextPart {
+  style?: ('body' | 'small' | 'emphasis') | null;
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'text';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ListPanelsPart".
+ */
+export interface ListPanelsPart {
+  panels?:
+    | {
+        title: string;
+        style?: ('checks' | 'documents') | null;
+        items?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'listPanels';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StickyMenuBlock".
+ */
+export interface StickyMenuBlock {
+  label?: string | null;
+  items?:
+    | {
+        label: string;
+        /**
+         * The anchor of a section on this page, for example "app".
+         */
+        anchor: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stickyMenu';
 }
 /**
  * Messages sent through the website forms. Deleted automatically after 12 months.
@@ -646,6 +909,8 @@ export interface PagesSelect<T extends boolean = true> {
         featureSplit?: T | FeatureSplitBlockSelect<T>;
         values?: T | ValuesBlockSelect<T>;
         ctaBand?: T | CtaBandBlockSelect<T>;
+        section?: T | SectionBlockSelect<T>;
+        stickyMenu?: T | StickyMenuBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -871,6 +1136,182 @@ export interface CtaBandBlockSelect<T extends boolean = true> {
         href?: T;
         variant?: T;
         arrow?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SectionBlock_select".
+ */
+export interface SectionBlockSelect<T extends boolean = true> {
+  anchor?: T;
+  background?: T;
+  intro?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        badge?: T;
+        lead?: T;
+        layout?: T;
+      };
+  aside?: T;
+  image?: T;
+  accent?: T;
+  besideCount?: T;
+  parts?:
+    | T
+    | {
+        subheading?: T | SubheadingPartSelect<T>;
+        steps?: T | StepsPartSelect<T>;
+        cards?: T | CardsPartSelect<T>;
+        prices?: T | PricesPartSelect<T>;
+        note?: T | NotePartSelect<T>;
+        actions?: T | ActionsPartSelect<T>;
+        text?: T | TextPartSelect<T>;
+        listPanels?: T | ListPanelsPartSelect<T>;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SubheadingPart_select".
+ */
+export interface SubheadingPartSelect<T extends boolean = true> {
+  text?: T;
+  size?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsPart_select".
+ */
+export interface StepsPartSelect<T extends boolean = true> {
+  layout?: T;
+  steps?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardsPart_select".
+ */
+export interface CardsPartSelect<T extends boolean = true> {
+  columns?: T;
+  cards?:
+    | T
+    | {
+        icon?: T;
+        tone?: T;
+        price?: T;
+        title?: T;
+        body?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PricesPart_select".
+ */
+export interface PricesPartSelect<T extends boolean = true> {
+  tone?: T;
+  prices?:
+    | T
+    | {
+        name?: T;
+        price?: T;
+        unit?: T;
+        note?: T;
+        featured?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NotePart_select".
+ */
+export interface NotePartSelect<T extends boolean = true> {
+  style?: T;
+  icon?: T;
+  text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ActionsPart_select".
+ */
+export interface ActionsPartSelect<T extends boolean = true> {
+  actions?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        arrow?: T;
+        id?: T;
+      };
+  buttonTone?: T;
+  note?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextPart_select".
+ */
+export interface TextPartSelect<T extends boolean = true> {
+  style?: T;
+  text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ListPanelsPart_select".
+ */
+export interface ListPanelsPartSelect<T extends boolean = true> {
+  panels?:
+    | T
+    | {
+        title?: T;
+        style?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StickyMenuBlock_select".
+ */
+export interface StickyMenuBlockSelect<T extends boolean = true> {
+  label?: T;
+  items?:
+    | T
+    | {
+        label?: T;
+        anchor?: T;
         id?: T;
       };
   id?: T;

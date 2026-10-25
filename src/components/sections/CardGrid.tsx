@@ -17,6 +17,8 @@ const dotBg: Record<Tone, string> = {
   terracotta: 'bg-disc-terracotta',
   teal: 'bg-disc-teal',
   ochre: 'bg-disc-ochre',
+  green: 'bg-disc-green',
+  blue: 'bg-disc-blue',
 }
 
 const badgeBg: Record<Tone, string> = {
@@ -24,6 +26,8 @@ const badgeBg: Record<Tone, string> = {
   terracotta: 'bg-disc-terracotta/12',
   teal: 'bg-disc-teal/12',
   ochre: 'bg-disc-ochre/12',
+  green: 'bg-disc-green/12',
+  blue: 'bg-disc-blue/12',
 }
 
 // Grids of outcome or service cards (Figma 31:109 and 31:154). Phones get the compact
