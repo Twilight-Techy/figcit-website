@@ -20,20 +20,20 @@ export function Stats({ block, index }: { block: StatsBlock; index: number }) {
   return (
     <Section tone={tone} labelledBy={headingId}>
       <SectionIntro {...(block.intro ?? {})} headingId={headingId} />
-      <ul className="mt-3.5 grid gap-3.5 md:mt-14 md:grid-cols-3 md:gap-6">
+      <ul className="mt-3.5 grid gap-3.5 md:mt-14 md:gap-6 lg:grid-cols-3">
         {(block.stats ?? []).map((stat) => {
           const t = stat.tone ?? 'purple'
           return (
             <li
               key={stat.id ?? stat.value}
-              className={`flex flex-col rounded-card p-5 md:min-h-[20.25rem] md:p-8 ${cardOn[tone]}`}
+              className={`@container flex flex-col rounded-card p-5 md:p-8 lg:min-h-[20.25rem] ${cardOn[tone]}`}
             >
               <span
                 aria-hidden
                 className={`decorative mb-5 hidden h-[5px] w-12 rounded-pill md:block ${barBg[t]}`}
               />
               <p
-                className={`font-heading text-[1.875rem] leading-[1.12] font-extrabold tracking-[-0.02em] md:text-5xl md:leading-[1.05] ${toneInk[t]}`}
+                className={`font-heading text-[1.875rem] leading-[1.12] font-extrabold tracking-[-0.02em] md:text-[clamp(1.5rem,15cqi,3rem)] md:leading-[1.05] ${toneInk[t]}`}
               >
                 {stat.value}
               </p>
