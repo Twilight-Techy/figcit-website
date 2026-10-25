@@ -48,16 +48,20 @@ export function FeatureSplit({ block, index }: { block: FeatureSplitBlock; index
             </p>
           ))}
           {block.figures && block.figures.length > 0 && (
-            <ul className="mt-7 grid grid-cols-3 gap-2.5 sm:gap-4">
+            // Three across where they fit, two on the narrowest phones; figures scale with
+            // their card so "4.25–4.55" never spills (responsive sweep).
+            <ul className="mt-7 grid grid-cols-[repeat(auto-fit,minmax(5.5rem,1fr))] gap-2.5 sm:gap-4">
               {block.figures.map((f) => (
                 <li
                   key={f.id ?? f.value}
-                  className={`rounded-tile px-3 py-4 sm:p-5 ${cardOn[tone]}`}
+                  className={`@container rounded-tile px-3 py-4 sm:p-5 ${cardOn[tone]}`}
                 >
-                  <p className="font-heading text-xl leading-[1.15] font-bold tracking-[-0.01em] whitespace-nowrap text-accent sm:text-[2rem]">
+                  <p className="font-heading text-[clamp(1rem,21cqi,2rem)] leading-[1.15] font-bold tracking-[-0.01em] whitespace-nowrap text-accent">
                     {f.value}
                   </p>
-                  <p className="mt-2 text-[0.8125rem] leading-[1.4] sm:text-sm">{f.label}</p>
+                  <p className="mt-2 text-[0.8125rem] leading-[1.4] [overflow-wrap:anywhere] sm:text-sm">
+                    {f.label}
+                  </p>
                 </li>
               ))}
             </ul>

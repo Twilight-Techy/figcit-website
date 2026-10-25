@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 
 import { buildMetadata, organizationJsonLd, serializeJsonLd } from '@/lib/seo'
 
@@ -22,5 +22,26 @@ describe('JSON-LD', () => {
 
   it('escapes "<" so data can never close the script tag', () => {
     expect(serializeJsonLd({ x: '</script><script>alert(1)</script>' })).not.toContain('<')
+  })
+})
+
+describe('isProductionDeploy', () => {
+  const saved = { ...process.env }
+  afterEach(() => {
+    process.env = { ...saved }
+  })
+
+  it('indexes only the live deployment', async () => {
+    const { isProductionDeploy } = await import('@/lib/seo')
+    delete process.env.VERCEL_ENV
+    delete process.env.SITE_INDEXABLE
+    expect(isProductionDeploy()).toBe(false)
+    process.env.VERCEL_ENV = 'preview'
+    expect(isProductionDeploy()).toBe(false)
+    process.env.VERCEL_ENV = 'production'
+    expect(isProductionDeploy()).toBe(true)
+    delete process.env.VERCEL_ENV
+    process.env.SITE_INDEXABLE = 'true'
+    expect(isProductionDeploy()).toBe(true)
   })
 })

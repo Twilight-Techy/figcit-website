@@ -140,9 +140,9 @@ function Steps({ part, tone }: { part: StepsPart; tone: SectionTone }) {
   const steps = part.steps ?? []
   if (part.layout === 'flow') {
     return (
-      <ol className="grid gap-3 sm:grid-cols-2 lg:flex lg:items-stretch lg:gap-0">
+      <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:flex xl:items-stretch xl:gap-0">
         {steps.map((step, i) => (
-          <li key={step.id ?? i} className="flex items-center lg:flex-1">
+          <li key={step.id ?? i} className="flex items-center xl:flex-1">
             <div
               className={`flex h-full w-full flex-col gap-3 rounded-tile p-[1.125rem] ${cardOn[tone]}`}
             >
@@ -154,7 +154,7 @@ function Steps({ part, tone }: { part: StepsPart; tone: SectionTone }) {
               </span>
             </div>
             {i < steps.length - 1 && (
-              <ArrowIcon aria-hidden className="mx-3 hidden shrink-0 text-orange lg:block" />
+              <ArrowIcon aria-hidden className="mx-3 hidden shrink-0 text-orange xl:block" />
             )}
           </li>
         ))}
@@ -311,7 +311,7 @@ function Text({ part }: { part: TextPart }) {
 
 function ListPanels({ part, tone }: { part: ListPanelsPart; tone: SectionTone }) {
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
+    <div className="grid gap-6 xl:grid-cols-2">
       {(part.panels ?? []).map((panel, i) => {
         const docs = panel.style === 'documents'
         return (

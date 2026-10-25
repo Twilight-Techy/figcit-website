@@ -194,7 +194,7 @@ export function Profile({ block, index }: { block: ProfileBlock; index: number }
   return (
     <Section tone="cream" labelledBy={headingId} className="lg:pt-6">
       <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,27.5rem)_minmax(0,43rem)] lg:justify-between">
-        <div className="flex flex-col gap-4">
+        <div className="mx-auto flex w-full max-w-[27.5rem] flex-col gap-4 lg:mx-0">
           <div className="relative pt-5 pr-5">
             <span
               aria-hidden

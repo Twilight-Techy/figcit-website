@@ -47,6 +47,8 @@ for (const path of pages) {
           for (const k of ['data-theme', 'data-comfort', 'data-text-size']) root.removeAttribute(k)
           for (const [k, v] of Object.entries(a)) root.setAttribute(k, v)
         }, attrs)
+        // Colours fade for 150ms when the mode changes; check the settled colours.
+        await page.waitForTimeout(250)
         const { violations } = await new AxeBuilder({ page })
           .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
           .analyze()

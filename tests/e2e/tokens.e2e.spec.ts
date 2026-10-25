@@ -10,6 +10,9 @@ const modes: Record<string, Record<string, string>> = {
 }
 
 test.describe('Design tokens (dev page)', () => {
+  // /dev/tokens only exists in development; CI runs the production build, where token
+  // contrast is covered by tests/unit/contrast.unit.spec.ts.
+  test.skip(Boolean(process.env.CI), 'Development-only page')
   for (const [name, attrs] of Object.entries(modes)) {
     test(`has no accessibility violations in ${name} mode`, async ({ page }) => {
       await page.goto('/dev/tokens')

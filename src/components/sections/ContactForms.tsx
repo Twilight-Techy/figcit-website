@@ -6,12 +6,12 @@ import type { FormType } from '@/lib/forms/options'
 export function ContactForms({ block }: { block: ContactFormsBlock }) {
   return (
     <section aria-label="Contact forms" className="bg-surface pb-section">
-      <div className="container-site grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,49.5rem)_minmax(0,22.5rem)] lg:justify-between">
+      <div className="container-site grid grid-cols-1 items-start gap-6 xl:grid-cols-[minmax(0,49.5rem)_minmax(0,22.5rem)] xl:justify-between">
         <LazyFormTabs initial={(block.defaultForm ?? 'book-conversation') as FormType} />
         {block.asideText && (
           <aside
             aria-labelledby="adjustment-title"
-            className="rounded-card bg-(--fc-promise) p-7 text-[#f5eede] lg:sticky lg:top-6"
+            className="rounded-card bg-(--fc-promise) p-7 text-[#f5eede] xl:sticky xl:top-6"
           >
             <h2
               id="adjustment-title"

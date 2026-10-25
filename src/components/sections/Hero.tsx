@@ -21,7 +21,8 @@ export function Hero({ block }: { block: HeroBlock }) {
         className={`container-site grid items-center gap-5 pt-6 pb-14 lg:gap-15 lg:pt-12 lg:pb-28 ${
           art === 'none'
             ? 'pb-10 lg:pt-20 lg:pb-14'
-            : 'lg:grid-cols-[minmax(0,38.75rem)_minmax(0,31.75rem)] lg:justify-between'
+            : // Narrower art on small laptops (1024-1279px) so the text column keeps room.
+              'lg:grid-cols-[minmax(0,1fr)_minmax(0,23rem)] lg:justify-between xl:grid-cols-[minmax(0,38.75rem)_minmax(0,31.75rem)]'
         }`}
       >
         <div
@@ -102,23 +103,24 @@ function CentredHero({ block }: { block: HeroBlock }) {
     <section className="relative overflow-hidden bg-bg">
       <span
         aria-hidden
-        className="decorative absolute top-[9.4rem] -left-45 size-75 rounded-pill bg-orange"
+        className="decorative absolute hidden lg:block top-[9.4rem] -left-45 size-75 rounded-pill bg-orange"
       />
       <span
         aria-hidden
-        className="decorative absolute top-80 -left-15 size-45 rounded-pill bg-accent/90"
+        className="decorative absolute hidden lg:block top-80 -left-15 size-45 rounded-pill bg-accent/90"
       />
       <span
         aria-hidden
-        className="decorative absolute -top-[5.6rem] -right-17 size-60 rounded-pill bg-primary"
+        className="decorative absolute hidden lg:block -top-[5.6rem] -right-17 size-60 rounded-pill bg-primary"
       />
       <span
         aria-hidden
-        className="decorative absolute top-[11.9rem] right-5 size-30 rounded-pill bg-disc-teal"
+        className="decorative absolute hidden lg:block top-[11.9rem] right-5 size-30 rounded-pill bg-disc-teal"
       />
       <div className="container-site relative flex flex-col items-center gap-8 py-20 text-center lg:gap-12 lg:pt-26 lg:pb-28">
         {block.eyebrow && <Eyebrow>{block.eyebrow}</Eyebrow>}
-        <h1 className="max-w-[62.5rem] font-heading text-display font-extrabold text-primary lg:text-[5rem] lg:leading-[1.075]">
+        {/* Narrower until 1440px so the headline clears the circles at the edges. */}
+        <h1 className="max-w-[62.5rem] font-heading text-display font-extrabold text-primary lg:max-w-[36rem] lg:text-[5rem] lg:leading-[1.075] min-[90rem]:max-w-[62.5rem]">
           <Highlight text={block.headline} highlight={block.highlight} />
         </h1>
         {block.lead && <p className="max-w-[40rem] text-lead">{block.lead}</p>}
@@ -186,7 +188,7 @@ function PhotoArt({ block }: { block: HeroBlock }) {
 // Four coloured service tiles (Our Services hero, Figma 32:121).
 function Tiles({ tiles }: { tiles: NonNullable<HeroBlock['tiles']> }) {
   return (
-    <ul className="order-1 grid grid-cols-2 gap-3 lg:order-2 lg:gap-6">
+    <ul className="order-1 mx-auto grid w-full max-w-[32rem] grid-cols-2 gap-3 lg:order-2 lg:max-w-none lg:gap-6">
       {tiles.map((tile, i) => {
         const inner = (
           <>

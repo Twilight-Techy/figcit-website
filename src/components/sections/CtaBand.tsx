@@ -2,7 +2,8 @@ import { ButtonLink } from '@/components/ui/ButtonLink'
 import type { CtaBandBlock } from '@/payload-types'
 
 // Closing call to action: purple card with circles (Figma 31:390, mobile full width).
-// It follows a padded section, so it adds space below only.
+// It follows a padded section, so it adds space below only. Below 1280px the circles
+// shrink into the corners so they never sit behind the text.
 export function CtaBand({ block, index }: { block: CtaBandBlock; index: number }) {
   const headingId = `section-${index}`
   return (
@@ -14,15 +15,15 @@ export function CtaBand({ block, index }: { block: CtaBandBlock; index: number }
         <div className="on-dark relative overflow-hidden bg-band px-5 py-14 text-on-band md:rounded-[2rem] md:px-18 md:py-18">
           <span
             aria-hidden
-            className="decorative absolute -top-[7.5rem] -right-10 hidden size-[22rem] rounded-pill bg-orange md:block"
+            className="decorative absolute -top-20 -right-20 hidden size-48 rounded-pill bg-orange md:block xl:-top-[7.5rem] xl:-right-10 xl:size-[22rem]"
           />
           <span
             aria-hidden
-            className="decorative absolute -right-12 -bottom-[7.5rem] hidden size-[17.5rem] rounded-pill bg-accent/90 md:block"
+            className="decorative absolute -right-16 -bottom-20 hidden size-40 rounded-pill bg-accent/90 md:block xl:-right-12 xl:-bottom-[7.5rem] xl:size-[17.5rem]"
           />
           <span
             aria-hidden
-            className="decorative absolute right-[17.5rem] bottom-2.5 hidden size-30 rounded-pill bg-on-band/20 lg:block"
+            className="decorative absolute right-[17.5rem] bottom-2.5 hidden size-30 rounded-pill bg-on-band/20 xl:block"
           />
           <div className="relative flex max-w-[40rem] flex-col gap-5 md:gap-8">
             <h2
