@@ -139,6 +139,49 @@
     }
   }
 
+  /* Comfort button: round and icon-only in the mobile header, a labelled pill with the
+   * full menu. Same breakpoints as the header switch above. */
+  .comfort-trigger {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .comfort-trigger-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  @media (min-width: 80rem) {
+    :root:not([data-text-size='lg']) .comfort-trigger {
+      width: auto;
+      height: auto;
+      padding: 0.6875rem 1rem;
+    }
+    :root:not([data-text-size='lg']) .comfort-trigger-label {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip-path: none;
+    }
+  }
+  @media (min-width: 100rem) {
+    .comfort-trigger {
+      width: auto;
+      height: auto;
+      padding: 0.6875rem 1rem;
+    }
+    .comfort-trigger-label {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip-path: none;
+    }
+  }
+
   /* Comfort panel: pinned to the viewport on small screens, anchored to its button
    * once the desktop header shows. */
   .comfort-panel {

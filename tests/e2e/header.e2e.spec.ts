@@ -57,11 +57,28 @@ test.describe('Header on mobile', () => {
 
     const dialog = page.getByRole('dialog', { name: 'Menu' })
     await expect(dialog).toBeVisible()
+    // Services starts open (14b); opening another group closes it.
+    await expect(dialog.getByRole('link', { name: 'The Figcit app' })).toBeVisible()
+    await dialog.getByRole('button', { name: 'Who we help' }).click()
+    await expect(dialog.getByRole('button', { name: 'Who we help' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
     await expect(dialog.getByRole('link', { name: 'For colleges and universities' })).toBeVisible()
+    await expect(dialog.getByRole('link', { name: 'The Figcit app' })).toBeHidden()
     expect((await axe(page).analyze()).violations).toEqual([])
 
     await page.keyboard.press('Escape')
     await expect(dialog).toBeHidden()
+  })
+
+  test('opens Comfort from inside the menu', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' })
+    await page.getByRole('button', { name: 'Menu' }).click()
+    const dialog = page.getByRole('dialog', { name: 'Menu' })
+    await dialog.getByRole('button', { name: 'Comfort' }).click()
+    await dialog.getByRole('switch').click()
+    await expect(page.locator('html')).toHaveAttribute('data-comfort', 'low')
   })
 
   test('has no horizontal scroll at 320px', async ({ page }) => {

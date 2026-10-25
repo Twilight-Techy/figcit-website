@@ -13,7 +13,7 @@ import { headerActions, mainNav } from '@/content/navigation'
 export function Header() {
   return (
     <header className="bg-bg">
-      <div className="relative mx-auto flex max-w-[90rem] items-center justify-between gap-3 px-5 py-4 xl:px-20 xl:py-5">
+      <div className="relative mx-auto flex max-w-[90rem] items-center justify-between gap-3 px-5 py-3.5 xl:px-20 xl:py-5">
         <Logo />
 
         <div className="header-desktop">
