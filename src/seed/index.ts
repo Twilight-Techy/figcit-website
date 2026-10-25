@@ -21,7 +21,9 @@ import { seedImages, type ImageKey, type ImageIds } from './images'
 // overwritten by a deploy. It also re-uploads any seeded photo whose file is missing
 // from the Blob store.
 const dirname = path.dirname(fileURLToPath(import.meta.url))
-const context = { disableRevalidate: true }
+// A new object for every call: the storage plugin keeps the uploaded file on the request
+// context, so a shared object made every upload after the first resend the first file.
+const context = () => ({ disableRevalidate: true })
 
 // Public address of a file in the Vercel Blob store, worked out from the token the same
 // way the storage plugin does. Null when files are stored on disk (local development).
@@ -30,7 +32,10 @@ function blobUrl(filename: string): string | null {
     /^vercel_blob_rw_([a-z\d]+)_[a-z\d]+$/i,
   )?.[1]
   if (!storeId) return null
-  return `https://${storeId.toLowerCase()}.public.blob.vercel-storage.com/${encodeURIComponent(filename)}`
+  const base =
+    process.env.STORAGE_VERCEL_BLOB_BASE_URL ??
+    `https://${storeId.toLowerCase()}.public.blob.vercel-storage.com`
+  return `${base}/${encodeURIComponent(filename)}`
 }
 
 async function fileMissing(filename: string | null | undefined): Promise<boolean> {
@@ -58,7 +63,7 @@ async function repairImages(payload: Payload) {
       id: doc.id,
       data: {},
       filePath: path.join(dirname, 'images', `${key}.webp`),
-      context,
+      context: context(),
     })
     payload.logger.info(`Re-uploaded the missing file for ${key}`)
   }
@@ -75,14 +80,14 @@ async function upsertImages(payload: Payload): Promise<ImageIds> {
     })
     if (existing.docs[0]) {
       ids[key] = existing.docs[0].id
-      await payload.update({ collection: 'media', id: ids[key], data: { alt }, context })
+      await payload.update({ collection: 'media', id: ids[key], data: { alt }, context: context() })
       continue
     }
     const doc = await payload.create({
       collection: 'media',
       data: { alt },
       filePath: path.join(dirname, 'images', `${key}.webp`),
-      context,
+      context: context(),
     })
     ids[key] = doc.id
   }
@@ -126,9 +131,14 @@ async function main() {
     })
     const data = { ...page, _status: 'published' as const }
     if (existing.docs[0]) {
-      await payload.update({ collection: 'pages', id: existing.docs[0].id, data, context })
+      await payload.update({
+        collection: 'pages',
+        id: existing.docs[0].id,
+        data,
+        context: context(),
+      })
     } else {
-      await payload.create({ collection: 'pages', data, context })
+      await payload.create({ collection: 'pages', data, context: context() })
     }
     payload.logger.info(`Seeded /${page.slug === 'home' ? '' : page.slug}`)
   }
@@ -142,7 +152,7 @@ async function main() {
       locality: 'Reading',
       region: 'Thames Valley',
     },
-    context,
+    context: context(),
   })
   process.exit(0)
 }
