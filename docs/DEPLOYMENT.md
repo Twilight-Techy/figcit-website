@@ -17,7 +17,7 @@ How to set up the environments for www.figcit.co.uk (task T04). Someone with acc
 
 ## 3. Vercel project
 
-1. Import `Figcit/figcit-website`. `vercel.json` already sets London functions (`lhr1`), pnpm, and runs migrations before each build.
+1. Import `Figcit/figcit-website`. `vercel.json` already sets London functions (`lhr1`), pnpm, and runs migrations and the first-content seed before each build.
 2. Add these environment variables:
 
 | Variable                | Production                 | Preview                            |
@@ -61,7 +61,9 @@ Later admins are invited from the Users screen by a signed-in admin.
 
 ## First content
 
-Pages are stored in Payload and published from the admin. To load the Website Copy v2.0 pages and placeholder photos into a new database, run the seed once with the production environment variables:
+Pages are stored in Payload and published from the admin. Each deploy runs `pnpm seed:if-empty` after the migrations. On a database with no pages yet, it loads the Website Copy v2.0 pages and placeholder photos (into the Blob store), so the first deploy goes live with content. Once any page exists it does nothing, so deploys never overwrite edits made in the admin.
+
+To reload the copy by hand, run the full seed with the production environment variables:
 
 ```bash
 DATABASE_URL=... PAYLOAD_SECRET=... BLOB_READ_WRITE_TOKEN=... NEXT_PUBLIC_SITE_URL=https://www.figcit.co.uk pnpm seed

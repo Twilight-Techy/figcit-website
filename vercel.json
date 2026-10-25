@@ -3,7 +3,7 @@
   "framework": "nextjs",
   "regions": ["lhr1"],
   "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm payload migrate && pnpm build",
+  "buildCommand": "pnpm payload migrate && pnpm seed:if-empty && pnpm build",
   "crons": [
     {
       "path": "/cron/retention",
