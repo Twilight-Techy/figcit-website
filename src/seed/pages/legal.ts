@@ -73,7 +73,7 @@ export const legalPages = (): PageData[] => [
       {
         heading: '4. Where we store it',
         body: [
-          'Data is stored in the UK or EU. Form messages are kept in our database in London (Neon) and sent to our inbox by Resend [confirm region]. The website is hosted by Vercel with servers in London.',
+          'Data is stored in the UK or EU. Form messages are kept in our database in London (Neon) and sent to our inbox by Resend from its EU region (Ireland). The website is hosted by Vercel with servers in London.',
           'We delete form messages automatically 12 months after they arrive.',
         ],
       },
@@ -193,7 +193,7 @@ export const legalPages = (): PageData[] => [
     {
       heading: '3. If you are still unhappy',
       body: [
-        'For complaints about how we use your information, you can contact the Information Commissioner’s Office at ico.org.uk. [Other routes to supply.]',
+        'For complaints about how we use your information, you can contact the Information Commissioner’s Office at ico.org.uk or on 0303 123 1113. [Other routes to supply.]',
       ],
     },
   ]),
