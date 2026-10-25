@@ -9,8 +9,6 @@ export const site = {
   defaultDescription:
     'Figcit makes support part of everyday life for young people and adults with mental health conditions and neurodevelopmental differences.',
   email: 'admin@figcit.co.uk',
-  // Still to supply (copy document); the footer leaves it out until it is set.
-  companyNumber: null as string | null,
   phone: '+447715897120',
   locality: 'Reading',
   region: 'Thames Valley',

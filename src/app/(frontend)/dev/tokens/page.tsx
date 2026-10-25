@@ -35,7 +35,7 @@ export default function TokensPage() {
   return (
     <div className="container-site space-y-16 py-section">
       <header className="space-y-5">
-        <p className="flex items-center gap-2.5 font-heading text-eyebrow font-bold text-eyebrow uppercase">
+        <p className="flex items-center gap-2.5 font-heading text-(length:--fc-text-eyebrow) font-bold tracking-(--fc-tracking-eyebrow) text-eyebrow uppercase">
           <span aria-hidden className="decorative size-2.5 rounded-full bg-orange" />
           Design tokens
         </p>

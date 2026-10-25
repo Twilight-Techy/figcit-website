@@ -14,3 +14,11 @@ export const toneText: Record<Tone, string> = {
   teal: 'text-disc-teal',
   ochre: 'text-disc-ochre',
 }
+
+// Small coloured text (badges, labels) and figures; 4.5:1 on cards in every mode.
+export const toneInk: Record<Tone, string> = {
+  purple: 'text-tone-purple',
+  terracotta: 'text-tone-terracotta',
+  teal: 'text-tone-teal',
+  ochre: 'text-tone-ochre',
+}

@@ -27,17 +27,17 @@ Tasks are picked up one at a time, in order. Each task is one pull request that 
 
 ## Phase 2: Content model
 
-| ID  | Task                                                                                                                                                                                           | Done when                                                | Status |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------ |
-| T10 | Blocks: Hero, Section intro, Card grid, Path buttons, Story timeline, Stats, Quote, Call-to-action band, Sticky in-page menu, Accordion, Legal text, Team member; each with its React renderer | Every Figma section can be built from blocks             | ⬜     |
-| T11 | Pages collection and globals (Header nav, Footer, SiteSettings), with drafts, live preview and revalidation on publish                                                                         | Publishing a change updates the live page within seconds | ⬜     |
-| T12 | Seed script that loads all Website Copy v2.0 text into Payload                                                                                                                                 | A fresh database seeds every page                        | ⬜     |
+| ID  | Task                                                                                                                                                                                           | Done when                                                | Status                                                                                                          |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| T10 | Blocks: Hero, Section intro, Card grid, Path buttons, Story timeline, Stats, Quote, Call-to-action band, Sticky in-page menu, Accordion, Legal text, Team member; each with its React renderer | Every Figma section can be built from blocks             | 🔄 Home blocks done; each page task adds the blocks it needs                                                    |
+| T11 | Pages collection and globals (Header nav, Footer, SiteSettings), with drafts, live preview and revalidation on publish                                                                         | Publishing a change updates the live page within seconds | ✅ Header and footer links stay in code because they mirror the menu design; SiteSettings holds company details |
+| T12 | Seed script that loads all Website Copy v2.0 text into Payload                                                                                                                                 | A fresh database seeds every page                        | 🔄 Home seeded; each page task adds its page                                                                    |
 
 ## Phase 3: Pages
 
 | ID  | Task                                   | Route                                                                              | Status |
 | --- | -------------------------------------- | ---------------------------------------------------------------------------------- | ------ |
-| T13 | Home                                   | `/`                                                                                | ⬜     |
+| T13 | Home                                   | `/`                                                                                | ✅     |
 | T14 | Our Services, with sticky in-page menu | `/services`                                                                        | ⬜     |
 | T15 | For you                                | `/for-you`                                                                         | ⬜     |
 | T16 | For employers                          | `/for-employers`                                                                   | ⬜     |

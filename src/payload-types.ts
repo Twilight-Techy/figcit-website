@@ -67,9 +67,10 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
+    pages: Page;
     media: Media;
     'form-submissions': FormSubmission;
+    users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -77,9 +78,10 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -89,8 +91,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -121,29 +127,90 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "pages".
  */
-export interface User {
+export interface Page {
   id: number;
+  title: string;
+  /**
+   * "home" for the home page; otherwise the URL path, for example about/team.
+   */
+  slug: string;
+  meta?: {
+    /**
+     * Browser and search title.
+     */
+    title?: string | null;
+    /**
+     * Search result summary, up to 160 characters.
+     */
+    description?: string | null;
+  };
+  layout: (
+    | HeroBlock
+    | CardGridBlock
+    | PathCardsBlock
+    | StoryTimelineBlock
+    | StatsBlock
+    | FeatureSplitBlock
+    | ValuesBlock
+    | CtaBandBlock
+  )[];
   updatedAt: string;
   createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  resetPasswordRequestedAt?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock".
+ */
+export interface HeroBlock {
+  eyebrow?: string | null;
+  headline: string;
+  /**
+   * Words at the end of the headline shown in Terracotta Bloom.
+   */
+  highlight?: string | null;
+  lead?: string | null;
+  actions?:
     | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
+        label: string;
+        href: string;
+        variant?: ('primary' | 'outline') | null;
+        arrow?: boolean | null;
+        id?: string | null;
       }[]
     | null;
-  password?: string | null;
-  collection: 'users';
+  art?: ('checkIn' | 'photo' | 'tiles' | 'none') | null;
+  image?: (number | null) | Media;
+  checkIn?: {
+    label?: string | null;
+    status?: string | null;
+    hint?: string | null;
+  };
+  tiles?:
+    | {
+        label: string;
+        href?: string | null;
+        icon:
+          | 'phone'
+          | 'people'
+          | 'home'
+          | 'chart'
+          | 'user'
+          | 'briefcase'
+          | 'graduation'
+          | 'bank'
+          | 'leaf'
+          | 'heart'
+          | 'wave';
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -196,6 +263,211 @@ export interface Media {
   };
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGridBlock".
+ */
+export interface CardGridBlock {
+  /**
+   * Optional id for in-page links, for example "app" for /services#app.
+   */
+  anchor?: string | null;
+  background?: ('white' | 'cream') | null;
+  intro: {
+    eyebrow?: string | null;
+    heading: string;
+    lead?: string | null;
+    layout?: ('stacked' | 'split' | 'centred') | null;
+  };
+  columns?: ('3' | '4') | null;
+  cards?:
+    | {
+        kind?: ('card' | 'photo') | null;
+        icon?:
+          | (
+              | 'phone'
+              | 'people'
+              | 'home'
+              | 'chart'
+              | 'user'
+              | 'briefcase'
+              | 'graduation'
+              | 'bank'
+              | 'leaf'
+              | 'heart'
+              | 'wave'
+            )
+          | null;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre') | null;
+        title?: string | null;
+        body?: string | null;
+        badge?: string | null;
+        link?: {
+          label?: string | null;
+          href?: string | null;
+        };
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  action?: {
+    label?: string | null;
+    href?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cardGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PathCardsBlock".
+ */
+export interface PathCardsBlock {
+  intro: {
+    eyebrow?: string | null;
+    heading: string;
+    lead?: string | null;
+    layout?: ('stacked' | 'split' | 'centred') | null;
+  };
+  paths?:
+    | {
+        icon:
+          | 'phone'
+          | 'people'
+          | 'home'
+          | 'chart'
+          | 'user'
+          | 'briefcase'
+          | 'graduation'
+          | 'bank'
+          | 'leaf'
+          | 'heart'
+          | 'wave';
+        title: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pathCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryTimelineBlock".
+ */
+export interface StoryTimelineBlock {
+  intro: {
+    eyebrow?: string | null;
+    heading: string;
+    lead?: string | null;
+    layout?: ('stacked' | 'split' | 'centred') | null;
+  };
+  image: number | Media;
+  imageBadge?: string | null;
+  moments?:
+    | {
+        time: string;
+        text: string;
+        dot?: ('yellow' | 'orange' | 'green' | 'purple') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'storyTimeline';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock".
+ */
+export interface StatsBlock {
+  background?: ('white' | 'cream') | null;
+  intro: {
+    eyebrow?: string | null;
+    heading: string;
+    lead?: string | null;
+    layout?: ('stacked' | 'split' | 'centred') | null;
+  };
+  stats?:
+    | {
+        value: string;
+        label: string;
+        source?: string | null;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureSplitBlock".
+ */
+export interface FeatureSplitBlock {
+  background?: ('white' | 'cream') | null;
+  intro: {
+    eyebrow?: string | null;
+    heading: string;
+    lead?: string | null;
+    layout?: ('stacked' | 'split' | 'centred') | null;
+  };
+  figures?:
+    | {
+        value: string;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  link?: {
+    label?: string | null;
+    href?: string | null;
+  };
+  image: number | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureSplit';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ValuesBlock".
+ */
+export interface ValuesBlock {
+  eyebrow?: string | null;
+  headline: string;
+  highlight?: string | null;
+  values?:
+    | {
+        label: string;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'values';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBandBlock".
+ */
+export interface CtaBandBlock {
+  heading: string;
+  actions?:
+    | {
+        label: string;
+        href: string;
+        variant?: ('primary' | 'outline') | null;
+        arrow?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ctaBand';
+}
+/**
  * Messages sent through the website forms. Deleted automatically after 12 months.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -244,6 +516,32 @@ export interface FormSubmission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -267,8 +565,8 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'pages';
+        value: number | Page;
       } | null)
     | ({
         relationTo: 'media';
@@ -277,6 +575,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'form-submissions';
         value: number | FormSubmission;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -322,26 +624,257 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
+ * via the `definition` "pages_select".
  */
-export interface UsersSelect<T extends boolean = true> {
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  resetPasswordRequestedAt?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  meta?:
     | T
     | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
+        title?: T;
+        description?: T;
       };
+  layout?:
+    | T
+    | {
+        hero?: T | HeroBlockSelect<T>;
+        cardGrid?: T | CardGridBlockSelect<T>;
+        pathCards?: T | PathCardsBlockSelect<T>;
+        storyTimeline?: T | StoryTimelineBlockSelect<T>;
+        stats?: T | StatsBlockSelect<T>;
+        featureSplit?: T | FeatureSplitBlockSelect<T>;
+        values?: T | ValuesBlockSelect<T>;
+        ctaBand?: T | CtaBandBlockSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock_select".
+ */
+export interface HeroBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  headline?: T;
+  highlight?: T;
+  lead?: T;
+  actions?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        arrow?: T;
+        id?: T;
+      };
+  art?: T;
+  image?: T;
+  checkIn?:
+    | T
+    | {
+        label?: T;
+        status?: T;
+        hint?: T;
+      };
+  tiles?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        icon?: T;
+        tone?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGridBlock_select".
+ */
+export interface CardGridBlockSelect<T extends boolean = true> {
+  anchor?: T;
+  background?: T;
+  intro?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        lead?: T;
+        layout?: T;
+      };
+  columns?: T;
+  cards?:
+    | T
+    | {
+        kind?: T;
+        icon?: T;
+        tone?: T;
+        title?: T;
+        body?: T;
+        badge?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        image?: T;
+        id?: T;
+      };
+  action?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PathCardsBlock_select".
+ */
+export interface PathCardsBlockSelect<T extends boolean = true> {
+  intro?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        lead?: T;
+        layout?: T;
+      };
+  paths?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryTimelineBlock_select".
+ */
+export interface StoryTimelineBlockSelect<T extends boolean = true> {
+  intro?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        lead?: T;
+        layout?: T;
+      };
+  image?: T;
+  imageBadge?: T;
+  moments?:
+    | T
+    | {
+        time?: T;
+        text?: T;
+        dot?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock_select".
+ */
+export interface StatsBlockSelect<T extends boolean = true> {
+  background?: T;
+  intro?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        lead?: T;
+        layout?: T;
+      };
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        source?: T;
+        tone?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureSplitBlock_select".
+ */
+export interface FeatureSplitBlockSelect<T extends boolean = true> {
+  background?: T;
+  intro?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        lead?: T;
+        layout?: T;
+      };
+  figures?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  link?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ValuesBlock_select".
+ */
+export interface ValuesBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  headline?: T;
+  highlight?: T;
+  values?:
+    | T
+    | {
+        label?: T;
+        tone?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBandBlock_select".
+ */
+export interface CtaBandBlockSelect<T extends boolean = true> {
+  heading?: T;
+  actions?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        arrow?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -425,6 +958,29 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  resetPasswordRequestedAt?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -462,6 +1018,39 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  legalName: string;
+  /**
+   * Shown in the footer once entered.
+   */
+  companyNumber?: string | null;
+  email: string;
+  phone?: string | null;
+  locality?: string | null;
+  region?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  legalName?: T;
+  companyNumber?: T;
+  email?: T;
+  phone?: T;
+  locality?: T;
+  region?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -18,6 +18,7 @@ cp .env.example .env              # then set PAYLOAD_SECRET: openssl rand -hex 3
 docker compose up -d              # local Postgres
 pnpm install
 pnpm payload migrate              # create the database tables
+pnpm seed                         # load the pages and photos from the copy document
 pnpm dev                          # http://localhost:3000, admin at /admin
 ```
 
@@ -33,6 +34,7 @@ Create the first admin user at `/admin` on first run.
 | `pnpm test:unit`                                     | Unit tests, no database needed                    |
 | `pnpm test:int`                                      | Integration tests against the database            |
 | `pnpm test:e2e`                                      | Playwright end-to-end and axe accessibility tests |
+| `pnpm seed`                                          | Load or refresh the seeded pages and photos       |
 | `pnpm payload migrate:create <name>`                 | Create a migration after changing collections     |
 | `pnpm generate:types`                                | Regenerate `src/payload-types.ts`                 |
 

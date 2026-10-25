@@ -8,7 +8,9 @@ import { fileURLToPath } from 'url'
 
 import { FormSubmissions } from './collections/FormSubmissions'
 import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
 import { Users } from './collections/Users'
+import { SiteSettings } from './globals/SiteSettings'
 import { env } from './lib/env'
 
 const filename = fileURLToPath(import.meta.url)
@@ -27,7 +29,8 @@ export default buildConfig({
       titleSuffix: ' · Figcit admin',
     },
   },
-  collections: [Users, Media, FormSubmissions],
+  collections: [Pages, Media, FormSubmissions, Users],
+  globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET,
   // Smaller attack surface: we only use the Local API and REST (rules §6).

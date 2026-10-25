@@ -51,3 +51,13 @@ How to set up the environments for www.figcit.co.uk (task T04). Someone with acc
 ## First admin user
 
 After the first production deploy, open `https://www.figcit.co.uk/admin` and create the first admin account with a password of at least 12 characters. Later admins are invited from the Users screen.
+
+## First content
+
+Pages are stored in Payload and published from the admin. To load the Website Copy v2.0 pages and placeholder photos into a new database, run the seed once with the production environment variables:
+
+```bash
+DATABASE_URL=... PAYLOAD_SECRET=... BLOB_READ_WRITE_TOKEN=... NEXT_PUBLIC_SITE_URL=https://www.figcit.co.uk pnpm seed
+```
+
+The seed updates pages by slug, so running it again overwrites edits made in the admin. After launch, edit content in the admin instead.
