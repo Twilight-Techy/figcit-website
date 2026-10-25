@@ -6,6 +6,7 @@ import * as migration_20261025_015005_services_sections from './20261025_015005_
 import * as migration_20261025_020045_audience_blocks from './20261025_020045_audience_blocks';
 import * as migration_20261025_021751_about_team_blocks from './20261025_021751_about_team_blocks';
 import * as migration_20261025_023043_contact_forms from './20261025_023043_contact_forms';
+import * as migration_20261025_024415_faq_legal from './20261025_024415_faq_legal';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20261025_023043_contact_forms.up,
     down: migration_20261025_023043_contact_forms.down,
-    name: '20261025_023043_contact_forms'
+    name: '20261025_023043_contact_forms',
+  },
+  {
+    up: migration_20261025_024415_faq_legal.up,
+    down: migration_20261025_024415_faq_legal.down,
+    name: '20261025_024415_faq_legal'
   },
 ];

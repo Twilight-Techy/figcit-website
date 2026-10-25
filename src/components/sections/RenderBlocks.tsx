@@ -10,8 +10,10 @@ import { CardGrid } from '@/components/sections/CardGrid'
 import { ContactForms } from '@/components/sections/ContactForms'
 import { ContentSection } from '@/components/sections/ContentSection'
 import { CtaBand } from '@/components/sections/CtaBand'
+import { Faq } from '@/components/sections/Faq'
 import { FeatureSplit } from '@/components/sections/FeatureSplit'
 import { Hero } from '@/components/sections/Hero'
+import { Legal } from '@/components/sections/Legal'
 import { NoteBand } from '@/components/sections/NoteBand'
 import { PathCards } from '@/components/sections/PathCards'
 import { PromiseBand } from '@/components/sections/PromiseBand'
@@ -23,7 +25,7 @@ import { Values } from '@/components/sections/Values'
 import type { Page } from '@/payload-types'
 
 // Maps each Payload block to its section component, in page order.
-export function RenderBlocks({ blocks }: { blocks: Page['layout'] }) {
+export function RenderBlocks({ blocks, path }: { blocks: Page['layout']; path: string }) {
   return blocks.map((block, index) => {
     const key = block.id ?? index
     switch (block.blockType) {
@@ -67,6 +69,10 @@ export function RenderBlocks({ blocks }: { blocks: Page['layout'] }) {
         return <PolicyLinks key={key} block={block} index={index} />
       case 'contactForms':
         return <ContactForms key={key} block={block} />
+      case 'faq':
+        return <Faq key={key} block={block} />
+      case 'legal':
+        return <Legal key={key} block={block} path={path} />
     }
   })
 }

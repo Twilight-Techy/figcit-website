@@ -167,6 +167,8 @@ export interface Page {
     | TeamBlock
     | PolicyLinksBlock
     | ContactFormsBlock
+    | FaqBlock
+    | LegalBlock
   )[];
   updatedAt: string;
   createdAt: string;
@@ -184,6 +186,10 @@ export interface HeroBlock {
    */
   highlight?: string | null;
   lead?: string | null;
+  /**
+   * Small line under the headline, for example "Last updated: 1 December 2026".
+   */
+  subline?: string | null;
   actions?:
     | {
         label: string;
@@ -995,6 +1001,69 @@ export interface ContactFormsBlock {
   blockType: 'contactForms';
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlock".
+ */
+export interface FaqBlock {
+  items?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  closing?: {
+    text?: string | null;
+    label?: string | null;
+    href?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LegalBlock".
+ */
+export interface LegalBlock {
+  /**
+   * Shown in an orange box above the text. Remove once the final text is in.
+   */
+  notice?: string | null;
+  sections?:
+    | {
+        heading: string;
+        body: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Adds the controls for changing the analytics choice (Cookies page).
+   */
+  showCookieSettings?: boolean | null;
+  /**
+   * Ends the page with the company contact details from Site settings.
+   */
+  showContactDetails?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'legal';
+}
+/**
  * Messages sent through the website forms. Deleted automatically after 12 months.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1185,6 +1254,8 @@ export interface PagesSelect<T extends boolean = true> {
         team?: T | TeamBlockSelect<T>;
         policyLinks?: T | PolicyLinksBlockSelect<T>;
         contactForms?: T | ContactFormsBlockSelect<T>;
+        faq?: T | FaqBlockSelect<T>;
+        legal?: T | LegalBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1199,6 +1270,7 @@ export interface HeroBlockSelect<T extends boolean = true> {
   headline?: T;
   highlight?: T;
   lead?: T;
+  subline?: T;
   actions?:
     | T
     | {
@@ -1780,6 +1852,46 @@ export interface ContactFormsBlockSelect<T extends boolean = true> {
   defaultForm?: T;
   asideTitle?: T;
   asideText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlock_select".
+ */
+export interface FaqBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  closing?:
+    | T
+    | {
+        text?: T;
+        label?: T;
+        href?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LegalBlock_select".
+ */
+export interface LegalBlockSelect<T extends boolean = true> {
+  notice?: T;
+  sections?:
+    | T
+    | {
+        heading?: T;
+        body?: T;
+        id?: T;
+      };
+  showCookieSettings?: T;
+  showContactDetails?: T;
   id?: T;
   blockName?: T;
 }
