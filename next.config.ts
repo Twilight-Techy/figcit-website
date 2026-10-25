@@ -7,31 +7,44 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const isDev = process.env.NODE_ENV !== 'production'
+// Only on Vercel: a local `pnpm start` runs over plain http, which this would break.
+const isHosted = Boolean(process.env.VERCEL)
 
-// Tightened per page type in T28; 'unsafe-inline' styles are needed by Next.js and the Payload admin.
+// Security pass (T28). 'unsafe-inline' scripts are needed for the inline data Next.js
+// streams into statically built pages (a nonce would force every page to render on
+// demand) and for ComfortInit; styles for Next.js and the Payload admin. Everything
+// else is limited to this site, Plausible (after consent) and Cloudflare Turnstile.
+// Violations are reported to /csp-report.
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://plausible.io https://challenges.cloudflare.com`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
-  "connect-src 'self' https://plausible.io",
+  "connect-src 'self' https://plausible.io https://challenges.cloudflare.com",
   'frame-src https://challenges.cloudflare.com',
+  "worker-src 'self' blob:",
+  "manifest-src 'self'",
   "frame-ancestors 'none'",
   "form-action 'self'",
   "base-uri 'self'",
   "object-src 'none'",
+  ...(isHosted ? ['upgrade-insecure-requests'] : []),
+  'report-uri /csp-report',
+  'report-to csp',
 ].join('; ')
 
 const securityHeaders = [
   { key: 'Content-Security-Policy', value: contentSecurityPolicy },
+  { key: 'Reporting-Endpoints', value: 'csp="/csp-report"' },
   { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   {
     key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+    value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()',
   },
+  { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
   { key: 'X-Frame-Options', value: 'DENY' },
 ]
 

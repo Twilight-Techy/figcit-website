@@ -8,6 +8,7 @@ export function Logo({ reversed = false }: { reversed?: boolean }) {
   const fill = reversed ? 'var(--fc-on-footer)' : 'var(--fc-primary)'
   return (
     <Link
+      prefetch={false}
       href="/"
       className="inline-flex items-center gap-2 rounded-control md:gap-2.5"
       aria-label="Figcit home"

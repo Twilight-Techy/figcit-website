@@ -17,6 +17,7 @@ export function PathCards({ block, index }: { block: PathCardsBlock; index: numb
         {(block.paths ?? []).map((path) => (
           <li key={path.id ?? path.href} className="flex">
             <Link
+              prefetch={false}
               href={path.href}
               className="group flex w-full items-center justify-between gap-4 rounded-tile bg-bg p-5 text-ink md:min-h-[15.125rem] md:flex-col md:items-start md:rounded-card md:px-8 md:pt-9 md:pb-9"
             >

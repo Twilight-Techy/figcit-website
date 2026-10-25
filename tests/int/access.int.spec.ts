@@ -48,3 +48,36 @@ describe('Access rules', () => {
     ).rejects.toThrow(/not allowed/i)
   })
 })
+
+describe('First admin registration', () => {
+  const email = 'first-admin-test@figcit.co.uk'
+
+  afterAll(async () => {
+    const payload = await getPayload({ config })
+    await payload.delete({ collection: 'users', where: { email: { equals: email } } })
+  })
+
+  it('is blocked from the web unless ALLOW_FIRST_ADMIN is set', async () => {
+    const payload = await getPayload({ config })
+    const req = { payloadAPI: 'REST' as const }
+    await expect(
+      payload.create({
+        collection: 'users',
+        data: { email, password: 'a-long-enough-password' },
+        req,
+      }),
+    ).rejects.toThrow(/not allowed/i)
+
+    process.env.ALLOW_FIRST_ADMIN = 'true'
+    try {
+      const user = await payload.create({
+        collection: 'users',
+        data: { email, password: 'a-long-enough-password' },
+        req,
+      })
+      expect(user.email).toBe(email)
+    } finally {
+      delete process.env.ALLOW_FIRST_ADMIN
+    }
+  })
+})

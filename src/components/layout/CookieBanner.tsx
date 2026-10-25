@@ -84,6 +84,7 @@ export function CookieBanner() {
             </button>
           </div>
           <Link
+            prefetch={false}
             href="/cookies"
             className="self-center font-heading text-[0.875rem] font-bold text-primary underline underline-offset-4"
           >
