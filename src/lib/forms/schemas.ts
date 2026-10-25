@@ -3,26 +3,9 @@ import { z } from 'zod'
 // The four forms from the website copy (Part B, Forms). Never ask for a diagnosis,
 // health details or date of birth (rules §7): there are no fields for them here.
 
-export const formTypes = ['early-access', 'book-conversation', 'hub-interest', 'partner'] as const
-export type FormType = (typeof formTypes)[number]
+import { formTypes, iAmOptions, partnershipOptions, sectorOptions, type FormType } from './options'
 
-export const iAmOptions = ['An individual', 'A student', 'An employer', 'Other'] as const
-export const sectorOptions = [
-  'Health and social care',
-  'Employer or workplace',
-  'College or university',
-  'Council, NHS or public sector',
-  'Charity or community',
-  'Other',
-] as const
-export const partnershipOptions = [
-  'Programme licences',
-  'Training for frontline teams',
-  'Sponsored Hub places',
-  'Evaluation and evidence',
-  'Research partnership',
-  'Other',
-] as const
+export { formTypes, iAmOptions, partnershipOptions, sectorOptions, type FormType }
 
 const trimmed = (label: string, max: number) =>
   z

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 
 import { WebsiteForm, formMeta } from '@/components/forms/WebsiteForm'
-import { formTypes, type FormType } from '@/lib/forms/schemas'
+import { formTypes, type FormType } from '@/lib/forms/options'
 
 // Tabbed forms on Contact (Figma 38:604). Each tab has an address, such as
 // /contact#get-early-access, so header buttons and cards open the right form.
@@ -107,7 +107,7 @@ export function FormTabs({ initial = 'book-conversation' }: { initial?: FormType
               aria-controls={`panel-${t}`}
               tabIndex={selected ? 0 : -1}
               onClick={() => choose(t)}
-              className={`shrink-0 rounded-pill px-[1.125rem] py-2.5 font-heading text-[0.9375rem] leading-[1.15] font-bold whitespace-nowrap transition-calm transition-colors ${
+              className={`shrink-0 rounded-pill px-[1.125rem] py-2.5 font-heading text-[0.9375rem] leading-[1.15] font-bold whitespace-nowrap ${
                 selected ? 'bg-primary text-on-primary' : 'hover:bg-surface-muted'
               }`}
             >

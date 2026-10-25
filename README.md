@@ -34,6 +34,7 @@ Create the first admin user at `/admin` on first run.
 | `pnpm test:unit`                                     | Unit tests, no database needed                    |
 | `pnpm test:int`                                      | Integration tests against the database            |
 | `pnpm test:e2e`                                      | Playwright end-to-end and axe accessibility tests |
+| `pnpm test:perf`                                     | Lighthouse budgets on a production build          |
 | `pnpm seed`                                          | Load or refresh the seeded pages and photos       |
 | `pnpm payload migrate:create <name>`                 | Create a migration after changing collections     |
 | `pnpm generate:types`                                | Regenerate `src/payload-types.ts`                 |

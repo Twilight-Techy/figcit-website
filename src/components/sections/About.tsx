@@ -1,6 +1,6 @@
 import { LineIcon } from '@/components/icons/line'
+import { LazyCopyButton } from '@/components/lazy'
 import { discBg } from '@/components/layout/tones'
-import { CopyButton } from '@/components/sections/CopyButton'
 import { ArrowLink } from '@/components/ui/ButtonLink'
 import { CmsImage } from '@/components/ui/CmsImage'
 import { Eyebrow } from '@/components/ui/Eyebrow'
@@ -233,7 +233,7 @@ export function Profile({ block, index }: { block: ProfileBlock; index: number }
                 <h3 className="font-heading text-[0.9375rem] leading-[1.3] font-bold text-tone-ochre">
                   {block.shortBio.label}
                 </h3>
-                <CopyButton text={block.shortBio.text} label="Copy short bio" />
+                <LazyCopyButton text={block.shortBio.text} label="Copy short bio" />
               </div>
               <p className="mt-4 text-base leading-[1.65]">{block.shortBio.text}</p>
             </div>

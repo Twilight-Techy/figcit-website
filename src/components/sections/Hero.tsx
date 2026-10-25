@@ -151,7 +151,7 @@ function PhotoArt({ block }: { block: HeroBlock }) {
             : 'lg:top-[3.7%] lg:h-[96.3%] lg:w-[87.5%]'
         }`}
       >
-        <CmsImage media={block.image} sizes="(min-width: 64rem) 430px, 90vw" priority />
+        <CmsImage media={block.image} sizes="(min-width: 64rem) 430px, 78vw" priority />
       </div>
       <span
         aria-hidden

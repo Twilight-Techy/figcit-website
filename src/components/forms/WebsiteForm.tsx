@@ -8,7 +8,7 @@ import { ArrowIcon } from '@/components/icons'
 import { LineIcon } from '@/components/icons/line'
 import { Checkbox, RadioPills, Select, TextArea, TextField } from '@/components/forms/Fields'
 import { Turnstile } from '@/components/forms/Turnstile'
-import { iAmOptions, partnershipOptions, sectorOptions, type FormType } from '@/lib/forms/schemas'
+import { iAmOptions, partnershipOptions, sectorOptions, type FormType } from '@/lib/forms/options'
 import type { SubmitResult } from '@/lib/forms/submit'
 
 // The four website forms (copy Part B, Forms; Figma 39:742 and 38:604). Fields match the

@@ -43,3 +43,31 @@ describe('Comfort settings', () => {
     expect(readSettings().textSize).toBe('sm')
   })
 })
+
+describe('comfortInitScript (runs before first paint)', () => {
+  it('applies saved settings to <html>', async () => {
+    const { comfortInitScript } = await import('@/lib/comfortInit')
+    const root = document.documentElement
+    for (const a of ['data-comfort', 'data-text-size', 'data-theme']) root.removeAttribute(a)
+    localStorage.setItem(
+      'figcit-comfort',
+      JSON.stringify({ lowStim: true, textSize: 'lg', theme: 'dark' }),
+    )
+    new Function(comfortInitScript)()
+    expect(root.getAttribute('data-comfort')).toBe('low')
+    expect(root.getAttribute('data-text-size')).toBe('lg')
+    expect(root.getAttribute('data-theme')).toBe('dark')
+  })
+
+  it('ignores broken or unknown values', async () => {
+    const { comfortInitScript } = await import('@/lib/comfortInit')
+    const root = document.documentElement
+    for (const a of ['data-comfort', 'data-text-size', 'data-theme']) root.removeAttribute(a)
+    localStorage.setItem('figcit-comfort', '{not json')
+    expect(() => new Function(comfortInitScript)()).not.toThrow()
+    localStorage.setItem('figcit-comfort', JSON.stringify({ textSize: 'huge', theme: 'neon' }))
+    new Function(comfortInitScript)()
+    expect(root.hasAttribute('data-text-size')).toBe(false)
+    expect(root.hasAttribute('data-theme')).toBe(false)
+  })
+})

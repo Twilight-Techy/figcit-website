@@ -6,6 +6,7 @@ import {
   Story,
   Team,
 } from '@/components/sections/About'
+import { LazyStickyMenu } from '@/components/lazy'
 import { CardGrid } from '@/components/sections/CardGrid'
 import { ContactForms } from '@/components/sections/ContactForms'
 import { ContentSection } from '@/components/sections/ContentSection'
@@ -19,7 +20,6 @@ import { PathCards } from '@/components/sections/PathCards'
 import { PromiseBand } from '@/components/sections/PromiseBand'
 import { Statement } from '@/components/sections/Statement'
 import { Stats } from '@/components/sections/Stats'
-import { StickyMenu } from '@/components/sections/StickyMenu'
 import { StoryTimeline } from '@/components/sections/StoryTimeline'
 import { Values } from '@/components/sections/Values'
 import type { Page } from '@/payload-types'
@@ -48,7 +48,7 @@ export function RenderBlocks({ blocks, path }: { blocks: Page['layout']; path: s
       case 'section':
         return <ContentSection key={key} block={block} index={index} />
       case 'stickyMenu':
-        return <StickyMenu key={key} block={block} />
+        return <LazyStickyMenu key={key} block={block} />
       case 'promise':
         return <PromiseBand key={key} block={block} index={index} />
       case 'noteBand':
