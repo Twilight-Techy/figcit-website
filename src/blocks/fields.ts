@@ -106,7 +106,11 @@ export const introField: Field = {
   type: 'group',
   fields: [
     { name: 'eyebrow', type: 'text' },
-    { name: 'heading', type: 'text', required: true },
+    {
+      name: 'heading',
+      type: 'text',
+      admin: { description: 'Leave empty to use the eyebrow as the section heading.' },
+    },
     { name: 'lead', type: 'textarea' },
     {
       name: 'layout',

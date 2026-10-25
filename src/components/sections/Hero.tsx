@@ -13,61 +13,106 @@ import type { HeroBlock } from '@/payload-types'
 // phones the art comes first, as in the mobile frame.
 export function Hero({ block }: { block: HeroBlock }) {
   const art = block.art ?? 'none'
+  if (art === 'centred') return <CentredHero block={block} />
   return (
     <section className="relative overflow-hidden bg-bg">
       <div
         className={`container-site grid items-center gap-5 pt-6 pb-14 lg:gap-15 lg:pt-12 lg:pb-28 ${
           art === 'none'
-            ? ''
+            ? 'lg:pt-20 lg:pb-10'
             : 'lg:grid-cols-[minmax(0,38.75rem)_minmax(0,31.75rem)] lg:justify-between'
         }`}
       >
-        <div className="order-2 flex flex-col gap-5 lg:order-1 lg:gap-7">
+        <div
+          className={`order-2 flex flex-col gap-5 lg:order-1 lg:gap-7 ${
+            art === 'none' ? 'max-w-[56.25rem]' : ''
+          }`}
+        >
           {block.eyebrow && <Eyebrow>{block.eyebrow}</Eyebrow>}
-          {/* 72px on the home page, 64px on inner pages (Figma 31:87 and 33:152). */}
+          {/* 72px on the home page and text-only heroes, 64px beside art (Figma 31:87,
+              33:152, 37:535). */}
           <h1
             className={`font-heading text-display font-extrabold text-primary ${
-              art === 'checkIn' ? '' : 'lg:text-[4rem]'
+              art === 'checkIn' || art === 'none' ? '' : 'lg:text-[4rem]'
             }`}
           >
             <Highlight text={block.headline} highlight={block.highlight} />
           </h1>
           {block.lead && <p className="text-lead">{block.lead}</p>}
-          {block.actions && block.actions.length > 0 && (
-            <div className="flex flex-col gap-5 pt-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5">
-              {block.actions.map((a) => (
-                <ButtonLink
-                  key={a.id ?? a.href}
-                  href={a.href}
-                  variant={a.variant === 'outline' ? 'outline' : 'primary'}
-                  arrow={Boolean(a.arrow)}
-                >
-                  {a.label}
-                </ButtonLink>
-              ))}
-            </div>
-          )}
-          {block.figures && block.figures.length > 0 && (
-            <div className="flex flex-col gap-3">
-              <ul className="grid max-w-[32rem] grid-cols-2 gap-3 pt-1">
-                {block.figures.map((f) => (
-                  <li key={f.id ?? f.value} className="rounded-tile bg-surface p-5">
-                    <p className="font-heading text-[2rem] leading-[1.2] font-bold text-accent">
-                      {f.value}
-                    </p>
-                    <p className="mt-1 text-sm leading-[1.45]">{f.label}</p>
-                  </li>
-                ))}
-              </ul>
-              {block.figuresSource && (
-                <p className="text-sm text-ink-muted">{block.figuresSource}</p>
-              )}
-            </div>
-          )}
+          <Actions block={block} />
+          <Figures block={block} />
         </div>
 
         {(art === 'photo' || art === 'checkIn') && <PhotoArt block={block} />}
         {art === 'tiles' && <Tiles tiles={block.tiles ?? []} />}
+      </div>
+    </section>
+  )
+}
+
+function Actions({ block }: { block: HeroBlock }) {
+  if (!block.actions || block.actions.length === 0) return null
+  return (
+    <div className="flex flex-col gap-5 pt-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5">
+      {block.actions.map((a) => (
+        <ButtonLink
+          key={a.id ?? a.href}
+          href={a.href}
+          variant={a.variant === 'outline' ? 'outline' : 'primary'}
+          arrow={Boolean(a.arrow)}
+        >
+          {a.label}
+        </ButtonLink>
+      ))}
+    </div>
+  )
+}
+
+function Figures({ block }: { block: HeroBlock }) {
+  if (!block.figures || block.figures.length === 0) return null
+  return (
+    <div className="flex flex-col gap-3">
+      <ul className="grid max-w-[32rem] grid-cols-2 gap-3 pt-1">
+        {block.figures.map((f) => (
+          <li key={f.id ?? f.value} className="rounded-tile bg-surface p-5">
+            <p className="font-heading text-[2rem] leading-[1.2] font-bold text-accent">
+              {f.value}
+            </p>
+            <p className="mt-1 text-sm leading-[1.45]">{f.label}</p>
+          </li>
+        ))}
+      </ul>
+      {block.figuresSource && <p className="text-sm text-ink-muted">{block.figuresSource}</p>}
+    </div>
+  )
+}
+
+// About hero (Figma 36:466): centred motto between soft circles.
+function CentredHero({ block }: { block: HeroBlock }) {
+  return (
+    <section className="relative overflow-hidden bg-bg">
+      <span
+        aria-hidden
+        className="decorative absolute top-[9.4rem] -left-45 size-75 rounded-pill bg-orange"
+      />
+      <span
+        aria-hidden
+        className="decorative absolute top-80 -left-15 size-45 rounded-pill bg-accent/90"
+      />
+      <span
+        aria-hidden
+        className="decorative absolute -top-[5.6rem] -right-17 size-60 rounded-pill bg-primary"
+      />
+      <span
+        aria-hidden
+        className="decorative absolute top-[11.9rem] right-5 size-30 rounded-pill bg-disc-teal"
+      />
+      <div className="container-site relative flex flex-col items-center gap-8 py-20 text-center lg:gap-12 lg:pt-26 lg:pb-28">
+        {block.eyebrow && <Eyebrow>{block.eyebrow}</Eyebrow>}
+        <h1 className="max-w-[62.5rem] font-heading text-display font-extrabold text-primary lg:text-[5rem] lg:leading-[1.075]">
+          <Highlight text={block.headline} highlight={block.highlight} />
+        </h1>
+        {block.lead && <p className="max-w-[40rem] text-lead">{block.lead}</p>}
       </div>
     </section>
   )

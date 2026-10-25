@@ -12,7 +12,7 @@ export function PathCards({ block, index }: { block: PathCardsBlock; index: numb
   const headingId = `section-${index}`
   return (
     <Section tone="purple" labelledBy={headingId}>
-      <SectionIntro {...block.intro} onDark headingId={headingId} />
+      <SectionIntro {...(block.intro ?? {})} onDark headingId={headingId} />
       <ul className="mt-3 grid gap-3 sm:grid-cols-2 md:mt-14 md:gap-6 xl:grid-cols-4">
         {(block.paths ?? []).map((path) => (
           <li key={path.id ?? path.href} className="flex">

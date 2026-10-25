@@ -19,7 +19,7 @@ export function Stats({ block, index }: { block: StatsBlock; index: number }) {
   const headingId = `section-${index}`
   return (
     <Section tone={tone} labelledBy={headingId}>
-      <SectionIntro {...block.intro} headingId={headingId} />
+      <SectionIntro {...(block.intro ?? {})} headingId={headingId} />
       <ul className="mt-3.5 grid gap-3.5 md:mt-14 md:grid-cols-3 md:gap-6">
         {(block.stats ?? []).map((stat) => {
           const t = stat.tone ?? 'purple'

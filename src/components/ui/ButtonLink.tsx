@@ -49,17 +49,19 @@ export function ArrowLink({
   href,
   children,
   context,
+  onDark = false,
   className = '',
 }: {
   href: string
   children: React.ReactNode
   context?: string
+  onDark?: boolean
   className?: string
 }) {
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-2 rounded-control font-heading text-base leading-5 font-bold text-primary underline-offset-4 hover:underline ${className}`}
+      className={`inline-flex items-center gap-2 rounded-control font-heading text-base leading-5 font-bold underline-offset-4 hover:underline ${onDark ? 'text-on-band' : 'text-primary'} ${className}`}
     >
       <span>
         {children}

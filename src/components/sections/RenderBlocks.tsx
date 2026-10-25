@@ -1,3 +1,11 @@
+import {
+  Approach,
+  MissionVision,
+  PolicyLinks,
+  Profile,
+  Story,
+  Team,
+} from '@/components/sections/About'
 import { CardGrid } from '@/components/sections/CardGrid'
 import { ContentSection } from '@/components/sections/ContentSection'
 import { CtaBand } from '@/components/sections/CtaBand'
@@ -44,6 +52,18 @@ export function RenderBlocks({ blocks }: { blocks: Page['layout'] }) {
         return <NoteBand key={key} block={block} />
       case 'statement':
         return <Statement key={key} block={block} index={index} />
+      case 'missionVision':
+        return <MissionVision key={key} block={block} index={index} />
+      case 'story':
+        return <Story key={key} block={block} index={index} />
+      case 'approach':
+        return <Approach key={key} block={block} index={index} />
+      case 'profile':
+        return <Profile key={key} block={block} index={index} />
+      case 'team':
+        return <Team key={key} block={block} index={index} />
+      case 'policyLinks':
+        return <PolicyLinks key={key} block={block} index={index} />
     }
   })
 }

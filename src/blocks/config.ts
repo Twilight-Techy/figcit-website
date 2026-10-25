@@ -10,6 +10,7 @@ import {
   sectionToneField,
   toneField,
 } from './fields'
+import { aboutBlocks } from './about'
 import { SectionBlock, StickyMenuBlock, anyIconField } from './section'
 
 // Page sections, one block per section type in the Figma file. Each block has a React
@@ -37,6 +38,7 @@ export const HeroBlock: Block = {
         { label: 'Photo with check-in card', value: 'checkIn' },
         { label: 'Photo', value: 'photo' },
         { label: 'Service tiles', value: 'tiles' },
+        { label: 'Centred with circles', value: 'centred' },
         { label: 'None', value: 'none' },
       ],
     },
@@ -219,6 +221,20 @@ export const FeatureSplitBlock: Block = {
         { name: 'label', type: 'text', required: true },
       ],
     },
+    {
+      name: 'headingStyle',
+      type: 'select',
+      defaultValue: 'heading',
+      options: [
+        { label: 'Heading', value: 'heading' },
+        { label: 'Statement (smaller, for a long sentence)', value: 'statement' },
+      ],
+    },
+    {
+      name: 'body',
+      type: 'textarea',
+      admin: { description: 'Extra paragraphs after the lead. Leave a blank line between them.' },
+    },
     linkFields('link'),
     {
       name: 'linkStyle',
@@ -230,6 +246,15 @@ export const FeatureSplitBlock: Block = {
       ],
     },
     imageField('image', true),
+    {
+      name: 'imageShape',
+      type: 'select',
+      defaultValue: 'rounded',
+      options: [
+        { label: 'Rounded', value: 'rounded' },
+        { label: 'Arch', value: 'arch' },
+      ],
+    },
     {
       name: 'imageSide',
       type: 'select',
@@ -308,7 +333,25 @@ export const NoteBandBlock: Block = {
   slug: 'noteBand',
   interfaceName: 'NoteBandBlock',
   labels: { singular: 'Highlighted note', plural: 'Highlighted notes' },
-  fields: [sectionToneField, { name: 'text', type: 'textarea', required: true }],
+  fields: [
+    sectionToneField,
+    {
+      name: 'style',
+      type: 'select',
+      defaultValue: 'crisis',
+      options: [
+        { label: 'Crisis reminder (heart)', value: 'crisis' },
+        { label: 'Quiet aside (dashed)', value: 'dashed' },
+      ],
+    },
+    { name: 'label', type: 'text' },
+    {
+      name: 'text',
+      type: 'textarea',
+      required: true,
+      admin: { description: 'Blank line between paragraphs; **double asterisks** for bold.' },
+    },
+  ],
 }
 
 export const StatementBlock: Block = {
@@ -336,4 +379,5 @@ export const pageBlocks: Block[] = [
   PromiseBlock,
   NoteBandBlock,
   StatementBlock,
+  ...aboutBlocks,
 ]

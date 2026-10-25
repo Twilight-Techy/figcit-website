@@ -8,6 +8,7 @@ import { AppPreview } from '@/components/sections/AppPreview'
 import { ButtonLink } from '@/components/ui/ButtonLink'
 import { CmsImage } from '@/components/ui/CmsImage'
 import { Eyebrow } from '@/components/ui/Eyebrow'
+import { Rich } from '@/components/ui/Rich'
 import { Section, cardOn, type SectionTone } from '@/components/ui/Section'
 import type { Tone } from '@/content/navigation'
 import type {
@@ -87,7 +88,7 @@ function ArchedPhoto({ block }: { block: SectionBlock }) {
     <div className="relative mx-auto w-full max-w-[32.5rem] pr-5 pb-5">
       <span
         aria-hidden
-        className={`decorative absolute right-0 bottom-0 aspect-square w-[46%] rounded-br-[4rem] rounded-tl-full ${discBg[block.accent ?? 'teal']}`}
+        className={`decorative absolute right-0 bottom-0 aspect-square w-[46%] rounded-pill ${discBg[block.accent ?? 'teal']}`}
       />
       <div className="relative aspect-[500/540] overflow-hidden rounded-t-full rounded-b-card bg-surface-muted">
         <CmsImage media={block.image} sizes="(min-width: 64rem) 500px, 90vw" />
@@ -133,19 +134,6 @@ function renderPart(part: Part, tone: SectionTone) {
     case 'listPanels':
       return <ListPanels part={part} tone={tone} />
   }
-}
-
-// "**Bold** rest" → <strong>Bold</strong> rest
-function Rich({ text }: { text: string }) {
-  return text.split(/(\*\*[^*]+\*\*)/).map((chunk, i) =>
-    chunk.startsWith('**') && chunk.endsWith('**') ? (
-      <strong key={i} className="font-bold">
-        {chunk.slice(2, -2)}
-      </strong>
-    ) : (
-      <Fragment key={i}>{chunk}</Fragment>
-    ),
-  )
 }
 
 function Steps({ part, tone }: { part: StepsPart; tone: SectionTone }) {
