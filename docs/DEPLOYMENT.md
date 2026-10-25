@@ -36,6 +36,7 @@ How to set up the environments for www.figcit.co.uk (task T04). Someone with acc
 2. **Cloudflare Turnstile:** create a widget for `www.figcit.co.uk` in "Managed" mode, which is usually invisible, so there are no puzzles.
 3. **Plausible:** add `www.figcit.co.uk`. Analytics only load after a visitor accepts the cookie banner.
 4. **Retention job:** `vercel.json` runs `/cron/retention` daily at 03:15. It deletes form submissions older than 12 months and needs `CRON_SECRET`.
+5. **Search indexing:** only the Vercel production deployment is indexed; previews stay hidden from search. If the site is ever hosted somewhere other than Vercel, set `SITE_INDEXABLE=true` on the live host only.
 
 ## 5. Domain (at launch, T30)
 

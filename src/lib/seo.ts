@@ -54,8 +54,9 @@ export function serializeJsonLd(data: unknown): string {
   return JSON.stringify(data).replace(/</g, '\\u003c')
 }
 
+// Only the live site is indexed: Vercel's production deployment, or a host that sets
+// SITE_INDEXABLE=true. Previews, CI and local production builds stay noindex, so a
+// staging copy never shows up in search results (rules §9).
 export function isProductionDeploy(): boolean {
-  return process.env.VERCEL_ENV
-    ? process.env.VERCEL_ENV === 'production'
-    : process.env.NODE_ENV === 'production'
+  return process.env.VERCEL_ENV === 'production' || process.env.SITE_INDEXABLE === 'true'
 }
