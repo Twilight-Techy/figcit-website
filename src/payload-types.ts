@@ -142,7 +142,7 @@ export interface Page {
      */
     title?: string | null;
     /**
-     * Search result summary, up to 160 characters.
+     * Search result summary. Aim for about 160 characters; longer text is cut off.
      */
     description?: string | null;
   };
@@ -157,6 +157,9 @@ export interface Page {
     | CtaBandBlock
     | SectionBlock
     | StickyMenuBlock
+    | PromiseBlock
+    | NoteBandBlock
+    | StatementBlock
   )[];
   updatedAt: string;
   createdAt: string;
@@ -185,6 +188,15 @@ export interface HeroBlock {
     | null;
   art?: ('checkIn' | 'photo' | 'tiles' | 'none') | null;
   image?: (number | null) | Media;
+  accent?: ('orange' | 'teal' | 'terracotta') | null;
+  figures?:
+    | {
+        value: string;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  figuresSource?: string | null;
   checkIn?: {
     label?: string | null;
     status?: string | null;
@@ -280,7 +292,7 @@ export interface CardGridBlock {
     lead?: string | null;
     layout?: ('stacked' | 'split' | 'centred') | null;
   };
-  columns?: ('3' | '4') | null;
+  columns?: ('2' | '3' | '4') | null;
   cards?:
     | {
         kind?: ('card' | 'photo') | null;
@@ -297,6 +309,25 @@ export interface CardGridBlock {
               | 'leaf'
               | 'heart'
               | 'wave'
+              | 'moon'
+              | 'cloud'
+              | 'message'
+              | 'shield'
+              | 'cup'
+              | 'desk'
+              | 'search'
+              | 'file'
+              | 'calendar'
+              | 'hand'
+              | 'mail'
+              | 'pin'
+              | 'target'
+              | 'eye'
+              | 'copy'
+              | 'check'
+              | 'plus'
+              | 'minus'
+              | 'alert'
             )
           | null;
         tone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
@@ -426,7 +457,10 @@ export interface FeatureSplitBlock {
     label?: string | null;
     href?: string | null;
   };
+  linkStyle?: ('arrow' | 'button') | null;
   image: number | Media;
+  imageSide?: ('right' | 'left') | null;
+  accent?: ('orange' | 'teal') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'featureSplit';
@@ -455,7 +489,9 @@ export interface ValuesBlock {
  * via the `definition` "CtaBandBlock".
  */
 export interface CtaBandBlock {
+  background?: ('white' | 'cream') | null;
   heading: string;
+  body?: string | null;
   actions?:
     | {
         label: string;
@@ -731,6 +767,53 @@ export interface StickyMenuBlock {
   blockType: 'stickyMenu';
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromiseBlock".
+ */
+export interface PromiseBlock {
+  eyebrow?: string | null;
+  /**
+   * Each line on its own line, for example "No diagnosis."
+   */
+  headline: string;
+  body?: string | null;
+  actions?:
+    | {
+        label: string;
+        href: string;
+        variant?: ('primary' | 'outline') | null;
+        arrow?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'promise';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NoteBandBlock".
+ */
+export interface NoteBandBlock {
+  background?: ('white' | 'cream') | null;
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'noteBand';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatementBlock".
+ */
+export interface StatementBlock {
+  background?: ('white' | 'cream') | null;
+  eyebrow: string;
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'statement';
+}
+/**
  * Messages sent through the website forms. Deleted automatically after 12 months.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -911,6 +994,9 @@ export interface PagesSelect<T extends boolean = true> {
         ctaBand?: T | CtaBandBlockSelect<T>;
         section?: T | SectionBlockSelect<T>;
         stickyMenu?: T | StickyMenuBlockSelect<T>;
+        promise?: T | PromiseBlockSelect<T>;
+        noteBand?: T | NoteBandBlockSelect<T>;
+        statement?: T | StatementBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -936,6 +1022,15 @@ export interface HeroBlockSelect<T extends boolean = true> {
       };
   art?: T;
   image?: T;
+  accent?: T;
+  figures?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  figuresSource?: T;
   checkIn?:
     | T
     | {
@@ -1101,7 +1196,10 @@ export interface FeatureSplitBlockSelect<T extends boolean = true> {
         label?: T;
         href?: T;
       };
+  linkStyle?: T;
   image?: T;
+  imageSide?: T;
+  accent?: T;
   id?: T;
   blockName?: T;
 }
@@ -1128,7 +1226,9 @@ export interface ValuesBlockSelect<T extends boolean = true> {
  * via the `definition` "CtaBandBlock_select".
  */
 export interface CtaBandBlockSelect<T extends boolean = true> {
+  background?: T;
   heading?: T;
+  body?: T;
   actions?:
     | T
     | {
@@ -1314,6 +1414,47 @@ export interface StickyMenuBlockSelect<T extends boolean = true> {
         anchor?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromiseBlock_select".
+ */
+export interface PromiseBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  headline?: T;
+  body?: T;
+  actions?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        arrow?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NoteBandBlock_select".
+ */
+export interface NoteBandBlockSelect<T extends boolean = true> {
+  background?: T;
+  text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatementBlock_select".
+ */
+export interface StatementBlockSelect<T extends boolean = true> {
+  background?: T;
+  eyebrow?: T;
+  text?: T;
   id?: T;
   blockName?: T;
 }

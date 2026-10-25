@@ -39,10 +39,10 @@ Tasks are picked up one at a time, in order. Each task is one pull request that 
 | --- | -------------------------------------- | ---------------------------------------------------------------------------------- | ------ |
 | T13 | Home                                   | `/`                                                                                | ✅     |
 | T14 | Our Services, with sticky in-page menu | `/services`                                                                        | ✅     |
-| T15 | For you                                | `/for-you`                                                                         | ⬜     |
-| T16 | For employers                          | `/for-employers`                                                                   | ⬜     |
-| T17 | For colleges and universities          | `/for-education`                                                                   | ⬜     |
-| T18 | For government, NHS and funders        | `/partners`                                                                        | ⬜     |
+| T15 | For you                                | `/for-you`                                                                         | ✅     |
+| T16 | For employers                          | `/for-employers`                                                                   | ✅     |
+| T17 | For colleges and universities          | `/for-education`                                                                   | ✅     |
+| T18 | For government, NHS and funders        | `/partners`                                                                        | ✅     |
 | T19 | About us                               | `/about`                                                                           | ⬜     |
 | T20 | Our team                               | `/about/team`                                                                      | ⬜     |
 | T21 | Contact                                | `/contact`                                                                         | ⬜     |

@@ -24,7 +24,12 @@ export function Hero({ block }: { block: HeroBlock }) {
       >
         <div className="order-2 flex flex-col gap-5 lg:order-1 lg:gap-7">
           {block.eyebrow && <Eyebrow>{block.eyebrow}</Eyebrow>}
-          <h1 className="font-heading text-display font-extrabold text-primary">
+          {/* 72px on the home page, 64px on inner pages (Figma 31:87 and 33:152). */}
+          <h1
+            className={`font-heading text-display font-extrabold text-primary ${
+              art === 'checkIn' ? '' : 'lg:text-[4rem]'
+            }`}
+          >
             <Highlight text={block.headline} highlight={block.highlight} />
           </h1>
           {block.lead && <p className="text-lead">{block.lead}</p>}
@@ -42,6 +47,23 @@ export function Hero({ block }: { block: HeroBlock }) {
               ))}
             </div>
           )}
+          {block.figures && block.figures.length > 0 && (
+            <div className="flex flex-col gap-3">
+              <ul className="grid max-w-[32rem] grid-cols-2 gap-3 pt-1">
+                {block.figures.map((f) => (
+                  <li key={f.id ?? f.value} className="rounded-tile bg-surface p-5">
+                    <p className="font-heading text-[2rem] leading-[1.2] font-bold text-accent">
+                      {f.value}
+                    </p>
+                    <p className="mt-1 text-sm leading-[1.45]">{f.label}</p>
+                  </li>
+                ))}
+              </ul>
+              {block.figuresSource && (
+                <p className="text-sm text-ink-muted">{block.figuresSource}</p>
+              )}
+            </div>
+          )}
         </div>
 
         {(art === 'photo' || art === 'checkIn') && <PhotoArt block={block} />}
@@ -51,36 +73,57 @@ export function Hero({ block }: { block: HeroBlock }) {
   )
 }
 
-// Arched photo with the orange circle, plus the leaf disc and check-in card on desktop.
+const accents = {
+  orange: 'bg-orange',
+  teal: 'bg-disc-teal',
+  terracotta: 'bg-accent',
+} as const
+
+// Arched photo with a coloured circle and a purple disc. The home hero (Figma 31:96)
+// adds the leaf and the check-in card; audience pages (33:152 and others) use a
+// slightly narrower arch.
 function PhotoArt({ block }: { block: HeroBlock }) {
+  const home = block.art === 'checkIn'
   return (
-    <div className="relative order-1 mx-auto aspect-[350/300] w-full max-w-[31.75rem] lg:order-2 lg:aspect-[508/600]">
-      <div className="absolute top-0 right-0 h-full w-[85.7%] overflow-hidden rounded-t-full rounded-b-card bg-surface-muted lg:top-[1.67%] lg:h-[96.7%] lg:w-[84.6%]">
+    <div
+      className={`relative order-1 mx-auto aspect-[350/300] w-full max-w-[31.75rem] lg:order-2 ${
+        home ? 'lg:aspect-[508/600]' : 'lg:aspect-[480/540] lg:max-w-[30rem]'
+      }`}
+    >
+      <div
+        className={`absolute top-0 right-0 h-full w-[85.7%] overflow-hidden rounded-t-full rounded-b-card bg-surface-muted ${
+          home
+            ? 'lg:top-[1.67%] lg:h-[96.7%] lg:w-[84.6%]'
+            : 'lg:top-[3.7%] lg:h-[96.3%] lg:w-[87.5%]'
+        }`}
+      >
         <CmsImage media={block.image} sizes="(min-width: 64rem) 430px, 90vw" priority />
       </div>
       <span
         aria-hidden
-        className="decorative absolute top-[70%] left-0 aspect-square w-[25.7%] rounded-pill bg-orange lg:top-[76.7%] lg:w-[27.6%]"
+        className={`decorative absolute top-[70%] left-0 aspect-square w-[25.7%] rounded-pill ${
+          accents[block.accent ?? 'orange']
+        } ${home ? 'lg:top-[76.7%] lg:w-[27.6%]' : 'lg:top-[72.2%] lg:w-[27.1%]'}`}
       />
-      {block.art === 'checkIn' && (
-        <>
-          <span
-            aria-hidden
-            className="decorative absolute top-[6%] left-[84.6%] hidden aspect-square w-[17.3%] items-center justify-center rounded-pill bg-primary text-on-primary lg:flex"
-          >
-            <LeafIcon size={34} />
-          </span>
-          <div className="absolute top-[20%] left-0 hidden w-[13.6875rem] rounded-[1.25rem] bg-surface px-5 pt-[1.125rem] pb-[1.125rem] shadow-float lg:block">
-            <p className="font-heading text-[0.8125rem] leading-[1.15] font-bold tracking-[0.1em] text-ink-muted uppercase">
-              {block.checkIn?.label}
-            </p>
-            <p className="mt-2.5 flex items-center gap-2 font-heading text-[1.0625rem] leading-5 font-bold">
-              <span aria-hidden className="size-3.5 rounded-pill bg-light-conditional" />
-              {block.checkIn?.status}
-            </p>
-            <p className="mt-2.5 text-[0.875rem] leading-6">{block.checkIn?.hint}</p>
-          </div>
-        </>
+      <span
+        aria-hidden
+        className={`decorative absolute hidden aspect-square items-center justify-center rounded-pill bg-primary text-on-primary lg:flex ${
+          home ? 'top-[6%] left-[84.6%] w-[17.3%]' : 'top-0 left-[85.4%] w-[16.7%]'
+        }`}
+      >
+        {home && <LeafIcon size={34} />}
+      </span>
+      {home && (
+        <div className="absolute top-[20%] left-0 hidden w-[13.6875rem] rounded-[1.25rem] bg-surface px-5 pt-[1.125rem] pb-[1.125rem] shadow-float lg:block">
+          <p className="font-heading text-[0.8125rem] leading-[1.15] font-bold tracking-[0.1em] text-ink-muted uppercase">
+            {block.checkIn?.label}
+          </p>
+          <p className="mt-2.5 flex items-center gap-2 font-heading text-[1.0625rem] leading-5 font-bold">
+            <span aria-hidden className="size-3.5 rounded-pill bg-light-conditional" />
+            {block.checkIn?.status}
+          </p>
+          <p className="mt-2.5 text-[0.875rem] leading-6">{block.checkIn?.hint}</p>
+        </div>
       )}
     </div>
   )

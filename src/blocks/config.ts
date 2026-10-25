@@ -10,7 +10,7 @@ import {
   sectionToneField,
   toneField,
 } from './fields'
-import { SectionBlock, StickyMenuBlock } from './section'
+import { SectionBlock, StickyMenuBlock, anyIconField } from './section'
 
 // Page sections, one block per section type in the Figma file. Each block has a React
 // renderer in src/components/sections; RenderBlocks maps slugs to components.
@@ -41,6 +41,27 @@ export const HeroBlock: Block = {
       ],
     },
     imageField('image'),
+    {
+      name: 'accent',
+      type: 'select',
+      defaultValue: 'orange',
+      admin: { condition: (_, s) => s?.art === 'photo' || s?.art === 'checkIn' },
+      options: [
+        { label: 'Citrus Orange', value: 'orange' },
+        { label: 'Rind Teal', value: 'teal' },
+        { label: 'Terracotta Bloom', value: 'terracotta' },
+      ],
+    },
+    {
+      name: 'figures',
+      type: 'array',
+      maxRows: 2,
+      fields: [
+        { name: 'value', type: 'text', required: true },
+        { name: 'label', type: 'text', required: true },
+      ],
+    },
+    { name: 'figuresSource', type: 'text' },
     {
       name: 'checkIn',
       type: 'group',
@@ -79,6 +100,7 @@ export const CardGridBlock: Block = {
       type: 'select',
       defaultValue: '3',
       options: [
+        { label: '2 columns', value: '2' },
         { label: '3 columns', value: '3' },
         { label: '4 columns', value: '4' },
       ],
@@ -97,7 +119,7 @@ export const CardGridBlock: Block = {
             { label: 'Photo tile', value: 'photo' },
           ],
         },
-        iconField(),
+        anyIconField(),
         toneField(),
         { name: 'title', type: 'text' },
         { name: 'body', type: 'textarea' },
@@ -198,7 +220,34 @@ export const FeatureSplitBlock: Block = {
       ],
     },
     linkFields('link'),
+    {
+      name: 'linkStyle',
+      type: 'select',
+      defaultValue: 'arrow',
+      options: [
+        { label: 'Text link with arrow', value: 'arrow' },
+        { label: 'Button', value: 'button' },
+      ],
+    },
     imageField('image', true),
+    {
+      name: 'imageSide',
+      type: 'select',
+      defaultValue: 'right',
+      options: [
+        { label: 'Right', value: 'right' },
+        { label: 'Left', value: 'left' },
+      ],
+    },
+    {
+      name: 'accent',
+      type: 'select',
+      defaultValue: 'orange',
+      options: [
+        { label: 'Citrus Orange', value: 'orange' },
+        { label: 'Rind Teal', value: 'teal' },
+      ],
+    },
   ],
 }
 
@@ -222,7 +271,55 @@ export const CtaBandBlock: Block = {
   slug: 'ctaBand',
   interfaceName: 'CtaBandBlock',
   labels: { singular: 'Call to action', plural: 'Calls to action' },
-  fields: [{ name: 'heading', type: 'text', required: true }, actionsField(2)],
+  fields: [
+    {
+      name: 'background',
+      type: 'select',
+      defaultValue: 'white',
+      options: [
+        { label: 'White', value: 'white' },
+        { label: 'Pith Cream', value: 'cream' },
+      ],
+    },
+    { name: 'heading', type: 'text', required: true },
+    { name: 'body', type: 'textarea' },
+    actionsField(2),
+  ],
+}
+
+export const PromiseBlock: Block = {
+  slug: 'promise',
+  interfaceName: 'PromiseBlock',
+  labels: { singular: 'Promise band', plural: 'Promise bands' },
+  fields: [
+    { name: 'eyebrow', type: 'text' },
+    {
+      name: 'headline',
+      type: 'textarea',
+      required: true,
+      admin: { description: 'Each line on its own line, for example "No diagnosis."' },
+    },
+    { name: 'body', type: 'textarea' },
+    actionsField(2),
+  ],
+}
+
+export const NoteBandBlock: Block = {
+  slug: 'noteBand',
+  interfaceName: 'NoteBandBlock',
+  labels: { singular: 'Highlighted note', plural: 'Highlighted notes' },
+  fields: [sectionToneField, { name: 'text', type: 'textarea', required: true }],
+}
+
+export const StatementBlock: Block = {
+  slug: 'statement',
+  interfaceName: 'StatementBlock',
+  labels: { singular: 'Statement', plural: 'Statements' },
+  fields: [
+    sectionToneField,
+    { name: 'eyebrow', type: 'text', required: true },
+    { name: 'text', type: 'textarea', required: true },
+  ],
 }
 
 export const pageBlocks: Block[] = [
@@ -236,4 +333,7 @@ export const pageBlocks: Block[] = [
   CtaBandBlock,
   SectionBlock,
   StickyMenuBlock,
+  PromiseBlock,
+  NoteBandBlock,
+  StatementBlock,
 ]

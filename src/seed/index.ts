@@ -3,6 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { getPayload, type Payload } from 'payload'
 
+import { forEducationPage, forEmployersPage, forYouPage, partnersPage } from './pages/audiences'
 import { homePage } from './pages/home'
 import { servicesPage } from './pages/services'
 import { seedImages, type ImageKey, type ImageIds } from './images'
@@ -42,7 +43,16 @@ async function main() {
   const payload = await getPayload({ config })
   const images = await upsertImages(payload)
 
-  for (const page of [homePage(images), servicesPage(images)]) {
+  const pages = [
+    homePage,
+    servicesPage,
+    forYouPage,
+    forEmployersPage,
+    forEducationPage,
+    partnersPage,
+  ].map((build) => build(images))
+
+  for (const page of pages) {
     const existing = await payload.find({
       collection: 'pages',
       where: { slug: { equals: page.slug } },

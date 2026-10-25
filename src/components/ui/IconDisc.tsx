@@ -1,6 +1,6 @@
-import { NavIcon } from '@/components/icons/NavIcon'
+import { AnyIcon } from '@/components/icons/AnyIcon'
 import { discBg } from '@/components/layout/tones'
-import type { IconName, Tone } from '@/content/navigation'
+import type { Tone } from '@/content/navigation'
 
 // Round icon background used on cards (Figma: 44, 54, 60 and 68px discs).
 const sizes = {
@@ -16,7 +16,7 @@ export function IconDisc({
   size = 'sm',
   inverse = false,
 }: {
-  icon: IconName
+  icon: string
   tone?: Tone
   size?: keyof typeof sizes
   // White disc with a purple icon, for cards on the purple band (Figma 31:238).
@@ -30,7 +30,7 @@ export function IconDisc({
         inverse ? 'bg-surface text-primary' : `${discBg[tone]} text-[#f5eede]`
       }`}
     >
-      <NavIcon name={icon} size={s.icon} />
+      <AnyIcon name={icon} size={s.icon} />
     </span>
   )
 }

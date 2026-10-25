@@ -38,6 +38,8 @@ export function CardGrid({ block, index }: { block: CardGridBlock; index: number
   const four = block.columns === '4'
   const cards = block.cards ?? []
   const headingId = `section-${index}`
+  // Four plain cards use the smaller title from the audience pages (Figma 35:328).
+  const hasLinks = cards.some((c) => c.link?.href)
 
   return (
     <Section tone={tone} id={block.anchor ?? undefined} labelledBy={headingId}>
@@ -57,7 +59,7 @@ export function CardGrid({ block, index }: { block: CardGridBlock; index: number
       {/* Tablet and desktop */}
       <ul
         className={`mt-14 hidden gap-6 md:grid md:grid-cols-2 ${
-          four ? 'xl:grid-cols-4' : 'lg:grid-cols-3'
+          four ? 'xl:grid-cols-4' : block.columns === '2' ? '' : 'lg:grid-cols-3'
         }`}
       >
         {cards.map((card) => (
@@ -67,7 +69,7 @@ export function CardGrid({ block, index }: { block: CardGridBlock; index: number
                 <CmsImage media={card.image} sizes="(min-width: 64rem) 384px, 50vw" />
               </div>
             ) : (
-              <CardBody card={card} tone={tone} large={four} />
+              <CardBody card={card} tone={tone} large={four} compact={four && !hasLinks} />
             )}
           </li>
         ))}
@@ -82,7 +84,17 @@ export function CardGrid({ block, index }: { block: CardGridBlock; index: number
   )
 }
 
-function CardBody({ card, tone, large }: { card: Card; tone: SectionTone; large: boolean }) {
+function CardBody({
+  card,
+  tone,
+  large,
+  compact,
+}: {
+  card: Card
+  tone: SectionTone
+  large: boolean
+  compact: boolean
+}) {
   const t = card.tone ?? 'purple'
   return (
     <div
@@ -92,7 +104,13 @@ function CardBody({ card, tone, large }: { card: Card; tone: SectionTone; large:
     >
       <div className="flex flex-col gap-4">
         {card.icon && <IconDisc icon={card.icon} tone={t} size={large ? 'md' : 'sm'} />}
-        <h3 className="text-h3 font-bold">{card.title}</h3>
+        <h3
+          className={
+            compact ? 'font-heading text-xl leading-[1.22] font-bold' : 'text-h3 font-bold'
+          }
+        >
+          {card.title}
+        </h3>
         {card.body && <p className="text-[1.0625rem] leading-[1.55]">{card.body}</p>}
         {card.badge && (
           <p

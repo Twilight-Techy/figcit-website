@@ -3,7 +3,10 @@ import { ContentSection } from '@/components/sections/ContentSection'
 import { CtaBand } from '@/components/sections/CtaBand'
 import { FeatureSplit } from '@/components/sections/FeatureSplit'
 import { Hero } from '@/components/sections/Hero'
+import { NoteBand } from '@/components/sections/NoteBand'
 import { PathCards } from '@/components/sections/PathCards'
+import { PromiseBand } from '@/components/sections/PromiseBand'
+import { Statement } from '@/components/sections/Statement'
 import { Stats } from '@/components/sections/Stats'
 import { StickyMenu } from '@/components/sections/StickyMenu'
 import { StoryTimeline } from '@/components/sections/StoryTimeline'
@@ -35,6 +38,12 @@ export function RenderBlocks({ blocks }: { blocks: Page['layout'] }) {
         return <ContentSection key={key} block={block} index={index} />
       case 'stickyMenu':
         return <StickyMenu key={key} block={block} />
+      case 'promise':
+        return <PromiseBand key={key} block={block} index={index} />
+      case 'noteBand':
+        return <NoteBand key={key} block={block} />
+      case 'statement':
+        return <Statement key={key} block={block} index={index} />
     }
   })
 }

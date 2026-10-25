@@ -5,12 +5,14 @@ import { ArrowIcon } from '@/components/icons'
 // Pill buttons from Figma (Button/Get early access, Button/I'm an organisation): 54px
 // tall with 28px sides (51px on phones). Outline variants add their 1.5px border on top,
 // as in the design.
-export type ButtonVariant = 'primary' | 'outline' | 'cream' | 'outlineLight' | 'teal'
+export type ButtonVariant =
+  'primary' | 'outline' | 'cream' | 'creamOnTeal' | 'outlineLight' | 'teal'
 
 const variants: Record<ButtonVariant, string> = {
   primary: 'bg-primary text-on-primary hover:opacity-90',
   outline: 'border-[1.5px] border-ink text-ink hover:bg-ink/5',
   cream: 'bg-on-band text-band hover:opacity-90',
+  creamOnTeal: 'bg-[#f5eede] text-(--fc-promise) hover:opacity-90',
   outlineLight: 'border-[1.5px] border-on-band text-on-band hover:bg-on-band/10',
   // Hub actions (Register your interest).
   teal: 'bg-disc-teal text-white hover:opacity-90',
