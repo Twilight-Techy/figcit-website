@@ -58,7 +58,9 @@ export default buildConfig({
       token: env.BLOB_READ_WRITE_TOKEN,
       collections: { media: true },
       alwaysInsertFields: true,
-      addRandomSuffix: true,
+      // Files keep their own names. With a random suffix the plugin has to write the new
+      // name back after uploading, and that write-back was lost for most seeded photos.
+      addRandomSuffix: false,
     }),
   ],
 })

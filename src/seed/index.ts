@@ -18,9 +18,51 @@ import { seedImages, type ImageKey, type ImageIds } from './images'
 //
 // Deploys run `pnpm seed:if-empty` after migrating. It only seeds a database with no
 // pages yet, so a new database gets the content and later edits in the admin are never
-// overwritten by a deploy.
+// overwritten by a deploy. It also re-uploads any seeded photo whose file is missing
+// from the Blob store.
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 const context = { disableRevalidate: true }
+
+// Public address of a file in the Vercel Blob store, worked out from the token the same
+// way the storage plugin does. Null when files are stored on disk (local development).
+function blobUrl(filename: string): string | null {
+  const storeId = process.env.BLOB_READ_WRITE_TOKEN?.match(
+    /^vercel_blob_rw_([a-z\d]+)_[a-z\d]+$/i,
+  )?.[1]
+  if (!storeId) return null
+  return `https://${storeId.toLowerCase()}.public.blob.vercel-storage.com/${encodeURIComponent(filename)}`
+}
+
+async function fileMissing(filename: string | null | undefined): Promise<boolean> {
+  if (!filename) return true
+  const url = blobUrl(filename)
+  if (!url) return false
+  const res = await fetch(url, { method: 'HEAD' })
+  return res.status === 404
+}
+
+// The first seeds ran with the Blob plugin's random suffix, which saved the suffixed name
+// for only one photo, so the others pointed at files that don't exist. Re-upload them.
+async function repairImages(payload: Payload) {
+  for (const key of Object.keys(seedImages) as ImageKey[]) {
+    const { docs } = await payload.find({
+      collection: 'media',
+      where: { filename: { like: key } },
+      limit: 1,
+      depth: 0,
+    })
+    const doc = docs[0]
+    if (!doc || !(await fileMissing(doc.filename))) continue
+    await payload.update({
+      collection: 'media',
+      id: doc.id,
+      data: {},
+      filePath: path.join(dirname, 'images', `${key}.webp`),
+      context,
+    })
+    payload.logger.info(`Re-uploaded the missing file for ${key}`)
+  }
+}
 
 async function upsertImages(payload: Payload): Promise<ImageIds> {
   const ids = {} as ImageIds
@@ -52,6 +94,7 @@ async function main() {
   if (process.env.SEED_IF_EMPTY === 'true') {
     const { totalDocs } = await payload.count({ collection: 'pages' })
     if (totalDocs > 0) {
+      await repairImages(payload)
       payload.logger.info(`Seed skipped: the database already has ${totalDocs} pages`)
       process.exit(0)
     }
