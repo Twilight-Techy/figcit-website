@@ -32,9 +32,9 @@ export function StoryTimeline({ block, index }: { block: StoryTimelineBlock; ind
         </div>
 
         <div>
-          {block.intro.eyebrow && <Eyebrow>{block.intro.eyebrow}</Eyebrow>}
+          {block.intro?.eyebrow && <Eyebrow>{block.intro?.eyebrow}</Eyebrow>}
           <h2 id={headingId} className="mt-6 text-h2 font-bold md:mt-8">
-            {block.intro.heading}
+            {block.intro?.heading}
           </h2>
           <ol className="mt-8 flex flex-col gap-7">
             {(block.moments ?? []).map((m) => (

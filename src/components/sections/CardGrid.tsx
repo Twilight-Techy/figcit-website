@@ -43,7 +43,7 @@ export function CardGrid({ block, index }: { block: CardGridBlock; index: number
 
   return (
     <Section tone={tone} id={block.anchor ?? undefined} labelledBy={headingId}>
-      <SectionIntro {...block.intro} headingId={headingId} />
+      <SectionIntro {...(block.intro ?? {})} headingId={headingId} />
 
       {/* Phones */}
       <ul className="mt-3.5 flex flex-col gap-3.5 md:hidden">

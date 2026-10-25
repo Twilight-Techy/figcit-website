@@ -160,6 +160,12 @@ export interface Page {
     | PromiseBlock
     | NoteBandBlock
     | StatementBlock
+    | MissionVisionBlock
+    | StoryBlock
+    | ApproachBlock
+    | ProfileBlock
+    | TeamBlock
+    | PolicyLinksBlock
   )[];
   updatedAt: string;
   createdAt: string;
@@ -186,7 +192,7 @@ export interface HeroBlock {
         id?: string | null;
       }[]
     | null;
-  art?: ('checkIn' | 'photo' | 'tiles' | 'none') | null;
+  art?: ('checkIn' | 'photo' | 'tiles' | 'centred' | 'none') | null;
   image?: (number | null) | Media;
   accent?: ('orange' | 'teal' | 'terracotta') | null;
   figures?:
@@ -286,9 +292,12 @@ export interface CardGridBlock {
    */
   anchor?: string | null;
   background?: ('white' | 'cream') | null;
-  intro: {
+  intro?: {
     eyebrow?: string | null;
-    heading: string;
+    /**
+     * Leave empty to use the eyebrow as the section heading.
+     */
+    heading?: string | null;
     lead?: string | null;
     layout?: ('stacked' | 'split' | 'centred') | null;
   };
@@ -325,6 +334,7 @@ export interface CardGridBlock {
               | 'eye'
               | 'copy'
               | 'check'
+              | 'compass'
               | 'plus'
               | 'minus'
               | 'alert'
@@ -355,9 +365,12 @@ export interface CardGridBlock {
  * via the `definition` "PathCardsBlock".
  */
 export interface PathCardsBlock {
-  intro: {
+  intro?: {
     eyebrow?: string | null;
-    heading: string;
+    /**
+     * Leave empty to use the eyebrow as the section heading.
+     */
+    heading?: string | null;
     lead?: string | null;
     layout?: ('stacked' | 'split' | 'centred') | null;
   };
@@ -389,9 +402,12 @@ export interface PathCardsBlock {
  * via the `definition` "StoryTimelineBlock".
  */
 export interface StoryTimelineBlock {
-  intro: {
+  intro?: {
     eyebrow?: string | null;
-    heading: string;
+    /**
+     * Leave empty to use the eyebrow as the section heading.
+     */
+    heading?: string | null;
     lead?: string | null;
     layout?: ('stacked' | 'split' | 'centred') | null;
   };
@@ -415,9 +431,12 @@ export interface StoryTimelineBlock {
  */
 export interface StatsBlock {
   background?: ('white' | 'cream') | null;
-  intro: {
+  intro?: {
     eyebrow?: string | null;
-    heading: string;
+    /**
+     * Leave empty to use the eyebrow as the section heading.
+     */
+    heading?: string | null;
     lead?: string | null;
     layout?: ('stacked' | 'split' | 'centred') | null;
   };
@@ -440,9 +459,12 @@ export interface StatsBlock {
  */
 export interface FeatureSplitBlock {
   background?: ('white' | 'cream') | null;
-  intro: {
+  intro?: {
     eyebrow?: string | null;
-    heading: string;
+    /**
+     * Leave empty to use the eyebrow as the section heading.
+     */
+    heading?: string | null;
     lead?: string | null;
     layout?: ('stacked' | 'split' | 'centred') | null;
   };
@@ -453,12 +475,18 @@ export interface FeatureSplitBlock {
         id?: string | null;
       }[]
     | null;
+  headingStyle?: ('heading' | 'statement') | null;
+  /**
+   * Extra paragraphs after the lead. Leave a blank line between them.
+   */
+  body?: string | null;
   link?: {
     label?: string | null;
     href?: string | null;
   };
   linkStyle?: ('arrow' | 'button') | null;
   image: number | Media;
+  imageShape?: ('rounded' | 'arch') | null;
   imageSide?: ('right' | 'left') | null;
   accent?: ('orange' | 'teal') | null;
   id?: string | null;
@@ -600,6 +628,7 @@ export interface CardsPart {
               | 'eye'
               | 'copy'
               | 'check'
+              | 'compass'
               | 'plus'
               | 'minus'
               | 'alert'
@@ -677,6 +706,7 @@ export interface NotePart {
         | 'eye'
         | 'copy'
         | 'check'
+        | 'compass'
         | 'plus'
         | 'minus'
         | 'alert'
@@ -796,6 +826,11 @@ export interface PromiseBlock {
  */
 export interface NoteBandBlock {
   background?: ('white' | 'cream') | null;
+  style?: ('crisis' | 'dashed') | null;
+  label?: string | null;
+  /**
+   * Blank line between paragraphs; **double asterisks** for bold.
+   */
   text: string;
   id?: string | null;
   blockName?: string | null;
@@ -812,6 +847,138 @@ export interface StatementBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'statement';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MissionVisionBlock".
+ */
+export interface MissionVisionBlock {
+  eyebrow: string;
+  cards?:
+    | {
+        label: string;
+        icon?: ('target' | 'eye') | null;
+        text: string;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'missionVision';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryBlock".
+ */
+export interface StoryBlock {
+  eyebrow?: string | null;
+  quote: string;
+  body?: string | null;
+  attribution?: string | null;
+  link?: {
+    label?: string | null;
+    href?: string | null;
+  };
+  portrait?: (number | null) | Media;
+  /**
+   * Shown in place of the portrait until a photo is uploaded.
+   */
+  portraitInitials?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'story';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ApproachBlock".
+ */
+export interface ApproachBlock {
+  eyebrow?: string | null;
+  heading: string;
+  questions?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  body?: string | null;
+  matrix?: {
+    label?: string | null;
+    title?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'approach';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProfileBlock".
+ */
+export interface ProfileBlock {
+  eyebrow?: string | null;
+  name: string;
+  role: string;
+  /**
+   * Leave a blank line between paragraphs.
+   */
+  bio: string;
+  quote?: string | null;
+  shortBio?: {
+    label?: string | null;
+    text?: string | null;
+  };
+  portrait?: (number | null) | Media;
+  portraitInitials?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'profile';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlock".
+ */
+export interface TeamBlock {
+  background?: ('white' | 'cream') | null;
+  eyebrow: string;
+  members?:
+    | {
+        /**
+         * Use [Name] until confirmed; it shows as a placeholder.
+         */
+        name: string;
+        role: string;
+        bio?: string | null;
+        photo?: (number | null) | Media;
+        tone?: ('purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue') | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * For example the advisory board.
+   */
+  note?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'team';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PolicyLinksBlock".
+ */
+export interface PolicyLinksBlock {
+  eyebrow: string;
+  text: string;
+  links?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'policyLinks';
 }
 /**
  * Messages sent through the website forms. Deleted automatically after 12 months.
@@ -997,6 +1164,12 @@ export interface PagesSelect<T extends boolean = true> {
         promise?: T | PromiseBlockSelect<T>;
         noteBand?: T | NoteBandBlockSelect<T>;
         statement?: T | StatementBlockSelect<T>;
+        missionVision?: T | MissionVisionBlockSelect<T>;
+        story?: T | StoryBlockSelect<T>;
+        approach?: T | ApproachBlockSelect<T>;
+        profile?: T | ProfileBlockSelect<T>;
+        team?: T | TeamBlockSelect<T>;
+        policyLinks?: T | PolicyLinksBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1190,6 +1363,8 @@ export interface FeatureSplitBlockSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  headingStyle?: T;
+  body?: T;
   link?:
     | T
     | {
@@ -1198,6 +1373,7 @@ export interface FeatureSplitBlockSelect<T extends boolean = true> {
       };
   linkStyle?: T;
   image?: T;
+  imageShape?: T;
   imageSide?: T;
   accent?: T;
   id?: T;
@@ -1443,6 +1619,8 @@ export interface PromiseBlockSelect<T extends boolean = true> {
  */
 export interface NoteBandBlockSelect<T extends boolean = true> {
   background?: T;
+  style?: T;
+  label?: T;
   text?: T;
   id?: T;
   blockName?: T;
@@ -1455,6 +1633,126 @@ export interface StatementBlockSelect<T extends boolean = true> {
   background?: T;
   eyebrow?: T;
   text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MissionVisionBlock_select".
+ */
+export interface MissionVisionBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  cards?:
+    | T
+    | {
+        label?: T;
+        icon?: T;
+        text?: T;
+        tone?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryBlock_select".
+ */
+export interface StoryBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  quote?: T;
+  body?: T;
+  attribution?: T;
+  link?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+      };
+  portrait?: T;
+  portraitInitials?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ApproachBlock_select".
+ */
+export interface ApproachBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  questions?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  body?: T;
+  matrix?:
+    | T
+    | {
+        label?: T;
+        title?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProfileBlock_select".
+ */
+export interface ProfileBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  name?: T;
+  role?: T;
+  bio?: T;
+  quote?: T;
+  shortBio?:
+    | T
+    | {
+        label?: T;
+        text?: T;
+      };
+  portrait?: T;
+  portraitInitials?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamBlock_select".
+ */
+export interface TeamBlockSelect<T extends boolean = true> {
+  background?: T;
+  eyebrow?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        photo?: T;
+        tone?: T;
+        id?: T;
+      };
+  note?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PolicyLinksBlock_select".
+ */
+export interface PolicyLinksBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  text?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

@@ -3,6 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { getPayload, type Payload } from 'payload'
 
+import { aboutPage, teamPage } from './pages/about'
 import { forEducationPage, forEmployersPage, forYouPage, partnersPage } from './pages/audiences'
 import { homePage } from './pages/home'
 import { servicesPage } from './pages/services'
@@ -50,6 +51,8 @@ async function main() {
     forEmployersPage,
     forEducationPage,
     partnersPage,
+    aboutPage,
+    teamPage,
   ].map((build) => build(images))
 
   for (const page of pages) {

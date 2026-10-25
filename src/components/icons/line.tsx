@@ -78,6 +78,12 @@ const paths = {
     </>
   ),
   check: <path d="M20 6 9 17l-5-5" />,
+  compass: (
+    <>
+      <circle cx="12" cy="12" r="10" />
+      <path d="m16.24 7.76-1.8 5.4a2 2 0 0 1-1.27 1.27l-5.41 1.81 1.8-5.4a2 2 0 0 1 1.28-1.28z" />
+    </>
+  ),
   plus: <path d="M5 12h14M12 5v14" />,
   minus: <path d="M5 12h14" />,
   alert: (

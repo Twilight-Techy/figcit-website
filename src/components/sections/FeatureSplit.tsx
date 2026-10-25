@@ -4,27 +4,49 @@ import { Eyebrow } from '@/components/ui/Eyebrow'
 import { Section, cardOn } from '@/components/ui/Section'
 import type { FeatureSplitBlock } from '@/payload-types'
 
-// Text with figures beside a photo (Figma 31:341, "Shaped by lived experience").
+// Text beside a photo: "Shaped by lived experience" (Figma 31:341), "Starting with
+// health and social care" (33:304) and "Who we are" (36:466).
 export function FeatureSplit({ block, index }: { block: FeatureSplitBlock; index: number }) {
   const tone = block.background === 'white' ? 'white' : 'cream'
   const headingId = `section-${index}`
   const left = block.imageSide === 'left'
+  const arch = block.imageShape === 'arch'
   const accent = block.accent === 'teal' ? 'bg-disc-teal' : 'bg-orange'
+  const intro = block.intro ?? {}
+  const paragraphs = (block.body ?? '').split(/\n\s*\n/).filter(Boolean)
+
   return (
     <Section tone={tone} labelledBy={headingId}>
       <div
         className={`grid items-center gap-10 lg:justify-between ${
           left
             ? 'lg:grid-cols-[minmax(0,36.25rem)_minmax(0,33.75rem)]'
-            : 'lg:grid-cols-[minmax(0,35rem)_minmax(0,35rem)]'
+            : arch
+              ? 'lg:grid-cols-[minmax(0,38.75rem)_minmax(0,31.25rem)]'
+              : 'lg:grid-cols-[minmax(0,35rem)_minmax(0,35rem)]'
         }`}
       >
         <div className={`flex flex-col ${left ? 'lg:order-2' : ''}`}>
-          {block.intro.eyebrow && <Eyebrow>{block.intro.eyebrow}</Eyebrow>}
-          <h2 id={headingId} className="mt-5 text-h2 font-bold">
-            {block.intro.heading}
+          {intro.eyebrow && <Eyebrow>{intro.eyebrow}</Eyebrow>}
+          <h2
+            id={headingId}
+            className={
+              block.headingStyle === 'statement'
+                ? 'mt-5 font-heading text-[1.375rem] leading-[1.4] font-bold md:text-[1.75rem]'
+                : 'mt-5 text-h2 font-bold'
+            }
+          >
+            {intro.heading}
           </h2>
-          {block.intro.lead && <p className="mt-7 text-body leading-[1.67]">{block.intro.lead}</p>}
+          {intro.lead && <p className="mt-7 text-body leading-[1.67]">{intro.lead}</p>}
+          {paragraphs.map((p, i) => (
+            <p
+              key={i}
+              className={`${i === 0 && !intro.lead ? 'mt-7' : 'mt-5'} text-body leading-[1.67]`}
+            >
+              {p}
+            </p>
+          ))}
           {block.figures && block.figures.length > 0 && (
             <ul className="mt-7 grid grid-cols-3 gap-2.5 sm:gap-4">
               {block.figures.map((f) => (
@@ -52,7 +74,7 @@ export function FeatureSplit({ block, index }: { block: FeatureSplitBlock; index
               </ArrowLink>
             ))}
         </div>
-        {/* Photo on the right: a quarter circle behind the bottom corner (Figma 31:362).
+        {/* Photo on the right: a shape behind the bottom corner (Figma 31:362, 36:466).
             On the left: a circle behind the top corner (Figma 33:304, "Photo"). */}
         <div className={`relative ${left ? 'pt-5 lg:order-1' : 'pr-5 pb-5'}`}>
           <span
@@ -60,12 +82,18 @@ export function FeatureSplit({ block, index }: { block: FeatureSplitBlock; index
             className={`decorative absolute aspect-square ${accent} ${
               left
                 ? 'top-0 right-[-1.25rem] w-[38%] rounded-pill'
-                : 'right-0 bottom-0 w-[32%] rounded-tl-full'
+                : arch
+                  ? 'right-0 bottom-0 w-[40%] rounded-pill'
+                  : 'right-0 bottom-0 w-[32%] rounded-tl-full'
             }`}
           />
           <div
             className={`relative overflow-hidden bg-surface-muted ${
-              left ? 'aspect-[4/3] rounded-card' : 'aspect-[540/500] rounded-[2rem]'
+              left
+                ? 'aspect-[4/3] rounded-card'
+                : arch
+                  ? 'aspect-[480/540] rounded-t-full rounded-b-card'
+                  : 'aspect-[540/500] rounded-[2rem]'
             }`}
           >
             <CmsImage media={block.image} sizes="(min-width: 64rem) 560px, 90vw" />
