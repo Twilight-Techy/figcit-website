@@ -1,4 +1,5 @@
 import config from '@payload-config'
+import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { getPayload, type Payload } from 'payload'
@@ -58,11 +59,20 @@ async function repairImages(payload: Payload) {
     })
     const doc = docs[0]
     if (!doc || !(await fileMissing(doc.filename))) continue
+    const buffer = await readFile(path.join(dirname, 'images', `${key}.webp`))
     await payload.update({
       collection: 'media',
       id: doc.id,
       data: {},
-      filePath: path.join(dirname, 'images', `${key}.webp`),
+      // Upload under the record's own file name, so pages built before this repair still
+      // point at the right file.
+      file: {
+        data: buffer,
+        mimetype: 'image/webp',
+        name: doc.filename ?? `${key}.webp`,
+        size: buffer.length,
+      },
+      overwriteExistingFiles: true,
       context: context(),
     })
     payload.logger.info(`Re-uploaded the missing file for ${key}`)
