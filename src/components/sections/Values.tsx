@@ -9,6 +9,8 @@ const pill: Record<Tone, { border: string; dot: string }> = {
   terracotta: { border: 'border-disc-terracotta/45', dot: 'bg-disc-terracotta' },
   teal: { border: 'border-disc-teal/45', dot: 'bg-disc-teal' },
   ochre: { border: 'border-disc-ochre/45', dot: 'bg-disc-ochre' },
+  green: { border: 'border-disc-green/45', dot: 'bg-disc-green' },
+  blue: { border: 'border-disc-blue/45', dot: 'bg-disc-blue' },
 }
 
 // "What we believe" (Figma 31:365): centred motto and value pills, with soft circles.

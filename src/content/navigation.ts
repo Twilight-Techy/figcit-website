@@ -14,7 +14,7 @@ export type IconName =
   | 'heart'
   | 'wave'
 
-export type Tone = 'purple' | 'terracotta' | 'teal' | 'ochre'
+export type Tone = 'purple' | 'terracotta' | 'teal' | 'ochre' | 'green' | 'blue'
 
 export type NavLink = { label: string; href: string }
 

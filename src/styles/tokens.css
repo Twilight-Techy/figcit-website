@@ -61,12 +61,16 @@
   --fc-disc-terracotta: var(--fc-terracotta-bloom);
   --fc-disc-purple: var(--fc-fig-purple);
   --fc-disc-ochre: var(--fc-citrus-orange-text);
+  --fc-disc-green: var(--fc-light-available);
+  --fc-disc-blue: var(--fc-light-recovery);
 
   /* Coloured text (badges, figures) that keeps 4.5:1 on cards in every mode */
   --fc-tone-purple: var(--fc-fig-purple);
   --fc-tone-terracotta: #8f4b51;
   --fc-tone-teal: #2f6159;
   --fc-tone-ochre: #8a4d10;
+  --fc-tone-green: #44694a;
+  --fc-tone-blue: #44628a;
 
   /* Type */
   --fc-text-display: clamp(2.5rem, 1.757rem + 3.048vw, 4.5rem); /* 40 → 72 */
@@ -121,6 +125,8 @@
   --fc-tone-terracotta: #e3a1a6;
   --fc-tone-teal: #8fcfc4;
   --fc-tone-ochre: #f0b26a;
+  --fc-tone-green: #a9d3ab;
+  --fc-tone-blue: #a9c3e3;
   --fc-image-filter: brightness(0.92);
 }
 
@@ -142,10 +148,14 @@
   --fc-disc-terracotta: #6b6370;
   --fc-disc-purple: #6b6370;
   --fc-disc-ochre: #6b6370;
+  --fc-disc-green: #6b6370;
+  --fc-disc-blue: #6b6370;
   --fc-tone-purple: #4a3a4c;
   --fc-tone-terracotta: #4a3a4c;
   --fc-tone-teal: #4a3a4c;
   --fc-tone-ochre: #4a3a4c;
+  --fc-tone-green: #4a3a4c;
+  --fc-tone-blue: #4a3a4c;
   --fc-leading-body: 1.7;
   --fc-section-y: clamp(4rem, 2.7rem + 5.333vw, 7.5rem);
   --fc-duration: 0ms;
@@ -168,6 +178,8 @@
   --fc-tone-terracotta: #cfc4d0;
   --fc-tone-teal: #cfc4d0;
   --fc-tone-ochre: #cfc4d0;
+  --fc-tone-green: #cfc4d0;
+  --fc-tone-blue: #cfc4d0;
 }
 
 /* Text size: the middle option is the default. */

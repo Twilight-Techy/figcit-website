@@ -102,7 +102,7 @@ function Tiles({ tiles }: { tiles: NonNullable<HeroBlock['tiles']> }) {
         const cls = `flex aspect-square flex-col justify-between rounded-card p-5 lg:p-6 ${
           tile.tone === 'ochre'
             ? 'bg-orange text-ink'
-            : `${discBg[tile.tone ?? 'purple']} text-[#f5eede]`
+            : `${discBg[tile.tone ?? 'purple']} text-white`
         } ${i === 0 ? 'rounded-tl-[6rem]' : ''}`
         return (
           <li key={tile.id ?? tile.label}>

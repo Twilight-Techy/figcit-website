@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { getPayload, type Payload } from 'payload'
 
 import { homePage } from './pages/home'
+import { servicesPage } from './pages/services'
 import { seedImages, type ImageKey, type ImageIds } from './images'
 
 // Loads the Website Copy v2.0 pages and photos into Payload. Safe to run again: pages
@@ -41,7 +42,7 @@ async function main() {
   const payload = await getPayload({ config })
   const images = await upsertImages(payload)
 
-  for (const page of [homePage(images)]) {
+  for (const page of [homePage(images), servicesPage(images)]) {
     const existing = await payload.find({
       collection: 'pages',
       where: { slug: { equals: page.slug } },
