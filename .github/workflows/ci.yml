@@ -58,6 +58,8 @@ jobs:
         run: pnpm payload migrate
       - name: Integration tests
         run: pnpm test:int
+      - name: Seed content
+        run: pnpm seed
       - name: Build
         run: pnpm build
       - name: Install Playwright browser

@@ -29,6 +29,10 @@
   --color-disc-terracotta: var(--fc-disc-terracotta);
   --color-disc-purple: var(--fc-disc-purple);
   --color-disc-ochre: var(--fc-disc-ochre);
+  --color-tone-purple: var(--fc-tone-purple);
+  --color-tone-terracotta: var(--fc-tone-terracotta);
+  --color-tone-teal: var(--fc-tone-teal);
+  --color-tone-ochre: var(--fc-tone-ochre);
   --color-light-available: var(--fc-light-available);
   --color-light-conditional: var(--fc-light-conditional);
   --color-light-constrained: var(--fc-light-constrained);
@@ -88,7 +92,7 @@
   h3,
   h4 {
     font-family: var(--font-heading);
-    text-wrap: balance;
+    text-wrap: pretty;
   }
 
   p {

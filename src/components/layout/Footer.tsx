@@ -5,6 +5,7 @@ import { CrisisNotice } from '@/components/layout/CrisisNotice'
 import { Logo } from '@/components/layout/Logo'
 import { footerNav, legalNav } from '@/content/navigation'
 import { site } from '@/content/site'
+import { getSiteSettings } from '@/lib/pages'
 
 // Footer (Figma 30:89, mobile 41:1086). On phones the link columns fold into
 // accordions; native <details> needs no JavaScript. From 1280px the tagline and the
@@ -12,11 +13,13 @@ import { site } from '@/content/site'
 const linkClass =
   'rounded-control text-[1.0625rem] leading-[1.3] text-on-footer/90 underline-offset-[0.2em] hover:underline'
 
-export function Footer() {
+export async function Footer() {
+  const settings = await getSiteSettings()
+  const email = settings.email || site.email
   const details = [
-    site.legalName,
-    `${site.locality}, ${site.region}, United Kingdom`,
-    site.companyNumber && `Company number ${site.companyNumber}`,
+    settings.legalName || site.legalName,
+    `${settings.locality || site.locality}, ${settings.region || site.region}, United Kingdom`,
+    settings.companyNumber && `Company number ${settings.companyNumber}`,
   ].filter(Boolean)
 
   return (
@@ -83,8 +86,8 @@ export function Footer() {
         <div className="flex flex-col gap-3 text-[0.8125rem] leading-[1.6] text-on-footer/70 md:border-t md:border-footer-line md:pt-6 md:text-sm md:leading-[normal] md:text-on-footer-muted xl:flex-row xl:justify-between">
           <p>
             {details.join(' · ')} ·{' '}
-            <a href={`mailto:${site.email}`} className="rounded-control hover:underline">
-              {site.email}
+            <a href={`mailto:${email}`} className="rounded-control hover:underline">
+              {email}
             </a>
           </p>
           <ul aria-label="Legal" className="flex flex-wrap">

@@ -1,0 +1,80 @@
+import config from '@payload-config'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { getPayload, type Payload } from 'payload'
+
+import { homePage } from './pages/home'
+import { seedImages, type ImageKey, type ImageIds } from './images'
+
+// Loads the Website Copy v2.0 pages and photos into Payload. Safe to run again: pages
+// are matched by slug and images by file name, so it updates rather than duplicates.
+// Run with: pnpm seed
+const dirname = path.dirname(fileURLToPath(import.meta.url))
+const context = { disableRevalidate: true }
+
+async function upsertImages(payload: Payload): Promise<ImageIds> {
+  const ids = {} as ImageIds
+  for (const [key, alt] of Object.entries(seedImages) as [ImageKey, string][]) {
+    const existing = await payload.find({
+      collection: 'media',
+      where: { filename: { like: key } },
+      limit: 1,
+      depth: 0,
+    })
+    if (existing.docs[0]) {
+      ids[key] = existing.docs[0].id
+      await payload.update({ collection: 'media', id: ids[key], data: { alt }, context })
+      continue
+    }
+    const doc = await payload.create({
+      collection: 'media',
+      data: { alt },
+      filePath: path.join(dirname, 'images', `${key}.webp`),
+      context,
+    })
+    ids[key] = doc.id
+  }
+  return ids
+}
+
+async function main() {
+  const payload = await getPayload({ config })
+  const images = await upsertImages(payload)
+
+  for (const page of [homePage(images)]) {
+    const existing = await payload.find({
+      collection: 'pages',
+      where: { slug: { equals: page.slug } },
+      limit: 1,
+      depth: 0,
+      draft: true,
+    })
+    const data = { ...page, _status: 'published' as const }
+    if (existing.docs[0]) {
+      await payload.update({ collection: 'pages', id: existing.docs[0].id, data, context })
+    } else {
+      await payload.create({ collection: 'pages', data, context })
+    }
+    payload.logger.info(`Seeded /${page.slug === 'home' ? '' : page.slug}`)
+  }
+
+  await payload.updateGlobal({
+    slug: 'site-settings',
+    data: {
+      legalName: 'Figcit Ltd',
+      email: 'admin@figcit.co.uk',
+      locality: 'Reading',
+      region: 'Thames Valley',
+    },
+    context,
+  })
+  process.exit(0)
+}
+
+// `payload run` exits once the module has loaded, so the work happens at top level.
+try {
+  await main()
+} catch (error: unknown) {
+  console.error(error)
+  process.exit(1)
+}
