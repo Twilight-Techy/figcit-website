@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 
 import { Analytics } from '@/components/layout/Analytics'
 import { CookieBanner } from '@/components/layout/CookieBanner'
+import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { JsonLd } from '@/components/layout/JsonLd'
 import { SkipLink } from '@/components/layout/SkipLink'
@@ -43,8 +44,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <SkipLink />
         <JsonLd data={organizationJsonLd()} />
         <Header />
-        {/* Footer with crisis notice (T06) goes here. */}
         <main id="main">{children}</main>
+        <Footer />
         <CookieBanner />
         <Analytics />
       </body>
