@@ -36,23 +36,23 @@ for (const path of pages) {
         const skip =
           '.decorative,[aria-hidden="true"],dialog,[hidden],.sr-only,.comfort-trigger-label,' +
           'details:not([open]) > :not(summary),[role=tablist],[aria-label="On this page"]'
-        const shown = (e: Element) =>
-          e.getClientRects().length > 0 && getComputedStyle(e).visibility !== 'hidden'
-        const name = (e: Element) =>
-          `${e.tagName.toLowerCase()} "${(e.textContent ?? '').trim().slice(0, 30)}"`
+        // No named helpers in here: the test transpiler wraps them in a __name() call
+        // that doesn't exist in the browser.
         for (const e of document.querySelectorAll(
           'main h1, main h2, main h3, main p, main a, main li, main button, footer p, footer a',
         )) {
-          if (!shown(e) || e.closest(skip)) continue
-          const r = e.getBoundingClientRect()
-          if (r.width && (r.right > vw + 1 || r.left < -1)) out.push(`off-screen ${name(e)}`)
+          if (e.getClientRects().length === 0 || e.closest(skip)) continue
           const s = getComputedStyle(e)
+          if (s.visibility === 'hidden') continue
+          const name = `${e.tagName.toLowerCase()} "${(e.textContent ?? '').trim().slice(0, 30)}"`
+          const r = e.getBoundingClientRect()
+          if (r.width && (r.right > vw + 1 || r.left < -1)) out.push(`off-screen ${name}`)
           if (
             s.display !== 'inline' &&
             s.overflowX === 'visible' &&
             e.scrollWidth > e.clientWidth + 2
           )
-            out.push(`doesn't fit ${name(e)}`)
+            out.push(`doesn't fit ${name}`)
         }
         return [...new Set(out)].slice(0, 5)
       })
