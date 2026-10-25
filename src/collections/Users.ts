@@ -1,4 +1,4 @@
-import { APIError, type CollectionConfig } from 'payload'
+import { APIError, Forbidden, type CollectionConfig } from 'payload'
 
 import { authenticated } from '@/access'
 
@@ -26,6 +26,21 @@ export const Users: CollectionConfig = {
     delete: authenticated,
   },
   hooks: {
+    // While there are no users, Payload lets anyone open /admin and create the first
+    // admin. Block that from the web unless ALLOW_FIRST_ADMIN=true is set for the first
+    // deploy (docs/DEPLOYMENT.md). Signed-in admins and server code are unaffected.
+    beforeOperation: [
+      ({ operation, req }) => {
+        if (
+          operation === 'create' &&
+          !req.user &&
+          req.payloadAPI !== 'local' &&
+          process.env.ALLOW_FIRST_ADMIN !== 'true'
+        ) {
+          throw new Forbidden(req.t)
+        }
+      },
+    ],
     beforeValidate: [
       ({ data }) => {
         const password: unknown = data?.password

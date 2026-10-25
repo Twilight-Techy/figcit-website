@@ -50,7 +50,13 @@ How to set up the environments for www.figcit.co.uk (task T04). Someone with acc
 
 ## First admin user
 
-After the first production deploy, open `https://www.figcit.co.uk/admin` and create the first admin account with a password of at least 12 characters. Later admins are invited from the Users screen.
+Creating the first admin from the web is blocked, so nobody else can claim a new database's admin account. For the first production deploy:
+
+1. In Vercel, add `ALLOW_FIRST_ADMIN=true` and redeploy.
+2. Open `https://www.figcit.co.uk/admin` and create the first admin account, with a password of at least 12 characters.
+3. Remove `ALLOW_FIRST_ADMIN` and redeploy.
+
+Later admins are invited from the Users screen by a signed-in admin.
 
 ## First content
 

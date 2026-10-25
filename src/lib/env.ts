@@ -17,6 +17,8 @@ const schema = z
     FORMS_NOTIFY_TO: z.string().email().default('admin@figcit.co.uk'),
     FORMS_FROM: z.string().min(3).default('Figcit website <forms@figcit.co.uk>'),
     TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
+    // Set to "true" only while creating the first admin on a new database (T28).
+    ALLOW_FIRST_ADMIN: z.enum(['true', 'false']).optional(),
     // Protects /cron/retention, which deletes form submissions older than 12 months.
     CRON_SECRET: z.string().min(16).optional(),
   })
