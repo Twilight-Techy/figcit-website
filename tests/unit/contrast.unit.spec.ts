@@ -95,6 +95,7 @@ const pairs: [string, string, number][] = [
   ['--fc-tone-green', '--fc-surface-muted', 4.5],
   ['--fc-tone-blue', '--fc-surface', 4.5],
   ['--fc-tone-blue', '--fc-surface-muted', 4.5],
+  ['--fc-pith-cream', '--fc-promise', 4.5],
   ['--fc-on-footer', '--fc-footer', 4.5],
   ['--fc-on-footer-muted', '--fc-footer', 4.5],
   ['--fc-footer-heading', '--fc-footer', 4.5],

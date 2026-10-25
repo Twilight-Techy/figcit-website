@@ -76,8 +76,11 @@ export const Pages: CollectionConfig = {
         {
           name: 'description',
           type: 'textarea',
-          maxLength: 170,
-          admin: { description: 'Search result summary, up to 160 characters.' },
+          maxLength: 300,
+          admin: {
+            description:
+              'Search result summary. Aim for about 160 characters; longer text is cut off.',
+          },
         },
       ],
     },
