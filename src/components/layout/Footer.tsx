@@ -29,12 +29,12 @@ export async function Footer() {
           <div className="flex max-w-[32.5rem] min-w-0 flex-col gap-[1.125rem] md:gap-6">
             <Logo reversed />
             <p className="font-heading text-[1.875rem] leading-[1.12] font-extrabold tracking-[-0.01em] md:text-[3.25rem] md:leading-[1.02] md:tracking-[-0.025em]">
-              We fix the fit,
-              <br className="hidden md:inline" /> not the people.
+              Fix the fit,
+              <br className="hidden md:inline" /> thrive as you are.
             </p>
             <p className="text-base leading-[1.6] text-on-footer/85 md:text-lg">
-              Figcit helps people and places fit, so everyone can learn, work and thrive as they
-              are.
+              FigCit helps people thrive and helps systems adapt, creating a better fit between
+              people and the world around them.
             </p>
           </div>
 

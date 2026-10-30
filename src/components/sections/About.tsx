@@ -160,7 +160,13 @@ export function Approach({ block, index }: { block: ApproachBlock; index: number
               </li>
             ))}
           </ol>
-          {block.body && <p className="mt-6 text-body">{block.body}</p>}
+          {block.body && (
+            <div className="mt-6 flex flex-col gap-4 text-body">
+              {paragraphs(block.body).map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          )}
         </div>
         <figure className="rounded-card bg-surface p-8">
           <figcaption>
@@ -251,7 +257,7 @@ function initialsOf(name: string): string {
 }
 
 // Co-founders and team (Figma 37:535). Names in [brackets] are placeholders from the copy
-// and are shown muted until Figcit supplies them.
+// and are shown muted until FigCit supplies them.
 export function Team({ block, index }: { block: TeamBlock; index: number }) {
   const headingId = `section-${index}`
   const tone = block.background === 'cream' ? 'cream' : 'white'

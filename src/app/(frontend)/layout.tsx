@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
     default: site.defaultTitle,
-    template: '%s | Figcit',
+    template: '%s | FigCit',
   },
   description: site.defaultDescription,
   applicationName: site.name,

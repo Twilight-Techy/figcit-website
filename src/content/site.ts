@@ -1,13 +1,13 @@
 // Organisation details from the website copy. Editable values (company number, email,
 // phone, address) live in the Payload Site settings global; these are the fallbacks.
 export const site = {
-  name: 'Figcit',
-  legalName: 'Figcit Ltd',
+  name: 'FigCit',
+  legalName: 'FigCit Ltd',
   url: 'https://www.figcit.co.uk',
   tagline: 'Fix the fit, thrive as you are.',
-  defaultTitle: 'Figcit | Support that fits, every day',
+  defaultTitle: 'FigCit | Fix the fit, thrive as you are',
   defaultDescription:
-    'Figcit makes support part of everyday life for young people and adults with mental health conditions and neurodevelopmental differences.',
+    'FigCit creates a better fit between people and the systems around them: an app for everyday life, consulting and training for organisations, and a sensory-conscious Hub. No diagnosis needed.',
   email: 'admin@figcit.co.uk',
   phone: '+447715897120',
   locality: 'Reading',

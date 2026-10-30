@@ -10,7 +10,7 @@ const dots = {
   purple: 'bg-disc-purple',
 } as const
 
-// "A day with Figcit" (Figma 31:277): arched photo on the left, moments on a timeline.
+// "A day with FigCit" (Figma 31:277): arched photo on the left, moments on a timeline.
 export function StoryTimeline({ block, index }: { block: StoryTimelineBlock; index: number }) {
   const headingId = `section-${index}`
   return (

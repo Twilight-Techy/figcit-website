@@ -68,6 +68,8 @@ const nextConfig: NextConfig = {
         destination: 'https://www.figcit.co.uk/:path*',
         permanent: true,
       },
+      // Website Copy v6.0 folds research, evaluation and policy into FigCit Consulting.
+      { source: '/research', destination: '/services/consulting', permanent: true },
     ]
   },
   async headers() {

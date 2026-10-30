@@ -14,10 +14,10 @@ test.describe('Home page', () => {
       }),
     ).toBeVisible()
     for (const name of [
-      'Support for the whole life, not just the hard moments',
-      'Four ways we help people and places fit',
+      'Support for the whole of life, not just the hard moments',
+      'How we create a better fit',
       'Who are you here for?',
-      'A day with Figcit',
+      'A day with FigCit',
       'Help too often arrives after the crash',
       'Shaped by lived experience',
       'Fix the fit, thrive as you are.',

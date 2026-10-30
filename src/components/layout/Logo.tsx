@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-// Logo/Primary from Figma: the mark plus the "figcit" wordmark. The purple shape follows
+// Logo/Primary from Figma: the mark plus the "FigCit" wordmark. The purple shape follows
 // the theme (--fc-primary) so the logo stays legible in dark mode. `reversed` is
 // Logo/Reversed for dark backgrounds such as the footer: cream instead of purple.
 // Phones use the smaller size from the mobile frames (Figma 41:937 and 41:1087).
@@ -11,7 +11,7 @@ export function Logo({ reversed = false }: { reversed?: boolean }) {
       prefetch={false}
       href="/"
       className="inline-flex items-center gap-2 rounded-control md:gap-2.5"
-      aria-label="Figcit home"
+      aria-label="FigCit home"
     >
       <svg
         width="43"
@@ -42,7 +42,7 @@ export function Logo({ reversed = false }: { reversed?: boolean }) {
           reversed ? 'text-on-footer' : 'text-primary'
         }`}
       >
-        figcit
+        FigCit
       </span>
     </Link>
   )

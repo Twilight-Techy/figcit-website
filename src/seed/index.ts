@@ -10,10 +10,11 @@ import { faqsPage } from './pages/faqs'
 import { legalPages } from './pages/legal'
 import { forEducationPage, forEmployersPage, forYouPage, partnersPage } from './pages/audiences'
 import { homePage } from './pages/home'
-import { servicesPage } from './pages/services'
+import { insightsPage } from './pages/insights'
+import { appPage, consultingPage, hubPage, servicesPage } from './pages/services'
 import { seedImages, type ImageKey, type ImageIds } from './images'
 
-// Loads the Website Copy v2.0 pages and photos into Payload. Safe to run again: pages
+// Loads the Website Copy v6.0 pages and photos into Payload. Safe to run again: pages
 // are matched by slug and images by file name, so it updates rather than duplicates.
 // Run with: pnpm seed
 //
@@ -119,6 +120,10 @@ async function main() {
   const pages = [
     homePage,
     servicesPage,
+    appPage,
+    consultingPage,
+    hubPage,
+    insightsPage,
     forYouPage,
     forEmployersPage,
     forEducationPage,
@@ -156,7 +161,7 @@ async function main() {
   await payload.updateGlobal({
     slug: 'site-settings',
     data: {
-      legalName: 'Figcit Ltd',
+      legalName: 'FigCit Ltd',
       email: 'admin@figcit.co.uk',
       phone: '+447715897120',
       locality: 'Reading',

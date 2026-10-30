@@ -5,11 +5,11 @@ import { lexical } from '../lib/lexical'
 type PageData = RequiredDataFromCollectionSlug<'pages'>
 
 // Legal pages from one template (Figma 39:877). The final text is still to be supplied
-// by Figcit (copy Part B, "Still to supply"). These drafts describe what the website
+// by FigCit (copy Part B, "Still to supply"). These drafts describe what the website
 // actually does, so the founder and a solicitor have something accurate to edit;
-// [square brackets] mark what Figcit must confirm. Each page shows the draft notice.
+// [square brackets] mark what FigCit must confirm. Each page shows the draft notice.
 
-const NOTICE = 'Draft for review. Final legal page text is still to be supplied by Figcit.'
+const NOTICE = 'Draft for review. Final legal page text is still to be supplied by FigCit.'
 
 type Section = { heading: string; body: string[] }
 
@@ -23,7 +23,7 @@ function legalPage(
   return {
     title,
     slug,
-    meta: { title: `${title} | Figcit`, description },
+    meta: { title: `${title} | FigCit`, description },
     layout: [
       {
         blockType: 'hero',
@@ -47,12 +47,12 @@ export const legalPages = (): PageData[] => [
   legalPage(
     'privacy',
     'Privacy notice',
-    'How Figcit uses and protects the information you share through this website.',
+    'How FigCit uses and protects the information you share through this website.',
     [
       {
         heading: '1. Who we are',
         body: [
-          'This website is run by Figcit Ltd, a company registered in England and Wales [company number, registered office]. Figcit is the controller of the personal data you give us through this website. The Figcit app has its own privacy notice.',
+          'This website is run by FigCit Ltd, a company registered in England and Wales [company number, registered office]. FigCit is the controller of the personal data you give us through this website. The FigCit App has its own privacy notice.',
         ],
       },
       {
@@ -94,7 +94,7 @@ export const legalPages = (): PageData[] => [
       {
         heading: '1. What we use',
         body: [
-          '- figcit-consent: remembers whether you accepted or rejected analytics, for 180 days. It is needed for the site to respect your choice.\n- Comfort settings (low stimulation, text size and theme) are saved in your browser’s local storage, not in a cookie, and never leave your device.\n- Admin sign-in cookies are used only by Figcit staff on the admin pages.',
+          '- figcit-consent: remembers whether you accepted or rejected analytics, for 180 days. It is needed for the site to respect your choice.\n- Comfort settings (low stimulation, text size and theme) are saved in your browser’s local storage, not in a cookie, and never leave your device.\n- Admin sign-in cookies are used only by FigCit staff on the admin pages.',
         ],
       },
       {
@@ -141,7 +141,7 @@ export const legalPages = (): PageData[] => [
       },
     ],
   ),
-  legalPage('terms', 'Terms of use', 'The terms for using the Figcit website.', [
+  legalPage('terms', 'Terms of use', 'The terms for using the FigCit website.', [
     {
       heading: '1. Using this website',
       body: ['[Final text to supply.]'],
@@ -149,7 +149,7 @@ export const legalPages = (): PageData[] => [
     {
       heading: '2. Not a crisis service',
       body: [
-        'Figcit is not a crisis or emergency service. If you are in danger, call 999. For urgent mental health help, call NHS 111 and choose option 2. Samaritans: 116 123 (free, 24 hours). Or text SHOUT to 85258.',
+        'FigCit is not a crisis or emergency service. If you are in danger, call 999. For urgent mental health help, call NHS 111 and choose option 2. Samaritans: 116 123 (free, 24 hours). Or text SHOUT to 85258.',
       ],
     },
     {
@@ -157,11 +157,11 @@ export const legalPages = (): PageData[] => [
       body: ['[Final text to supply.]'],
     },
   ]),
-  legalPage('safeguarding', 'Safeguarding', 'How Figcit keeps young people and adults safe.', [
+  legalPage('safeguarding', 'Safeguarding', 'How FigCit keeps young people and adults safe.', [
     {
       heading: '1. Our commitment',
       body: [
-        'Every Figcit service is designed to be safe, trauma-informed and confidential by default, and we never ask anyone for a diagnosis. [Final policy text to supply.]',
+        'Every FigCit service is designed to be safe, trauma-informed and confidential by default, and we never ask anyone for a diagnosis. [Final policy text to supply.]',
       ],
     },
     {

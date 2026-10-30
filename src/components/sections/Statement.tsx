@@ -3,7 +3,7 @@ import { Section } from '@/components/ui/Section'
 import type { StatementBlock } from '@/payload-types'
 
 // Label on the left, a longer statement on the right with an orange rule (Figma 35:475,
-// "About Figcit").
+// "About FigCit").
 export function Statement({ block, index }: { block: StatementBlock; index: number }) {
   const headingId = `section-${index}`
   return (

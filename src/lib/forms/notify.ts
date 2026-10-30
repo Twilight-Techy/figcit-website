@@ -7,7 +7,7 @@ const titles: Record<string, string> = {
   partner: 'Partnership enquiry',
 }
 
-// Emails the Figcit inbox about a new submission through Resend's REST API (no SDK).
+// Emails the FigCit inbox about a new submission through Resend's REST API (no SDK).
 // Failures are logged without personal data and never block the submission.
 export async function notifyInbox(
   form: string,

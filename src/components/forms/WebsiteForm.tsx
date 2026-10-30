@@ -34,13 +34,13 @@ export const formMeta: Record<
   'early-access': {
     tab: 'Get early access',
     title: 'Get early access',
-    intro: 'Be one of the first to try the Figcit app.',
+    intro: 'Be one of the first to try the FigCit App.',
     hash: 'get-early-access',
   },
   'hub-interest': {
     tab: 'Hub interest',
     title: 'Register your Hub interest',
-    intro: 'Be the first to hear when the Figcit Hub opens.',
+    intro: 'Be the first to hear when the FigCit Hub opens.',
     hash: 'hub-interest',
   },
 }
@@ -198,7 +198,7 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
           <Checkbox
             form={form}
             {...f('consent')}
-            label="I agree to Figcit storing my details to reply to me. We store data in the UK or EU and never ask for a diagnosis or health details."
+            label="I agree to FigCit storing my details to reply to me. We store data in the UK or EU and never ask for a diagnosis or health details."
           />
         </>
       )}
@@ -245,7 +245,7 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
           <Checkbox
             form={form}
             {...f('consent')}
-            label="I agree to Figcit storing my details to reply to me."
+            label="I agree to FigCit storing my details to reply to me."
           />
         </>
       )}
@@ -279,7 +279,7 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
           <Checkbox
             form={form}
             {...f('consent')}
-            label="I agree to Figcit storing my details to contact me about early access."
+            label="I agree to FigCit storing my details to contact me about early access."
           />
         </>
       )}
@@ -320,7 +320,7 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
           <Checkbox
             form={form}
             {...f('consent')}
-            label="I agree to Figcit storing my details to contact me about the Hub."
+            label="I agree to FigCit storing my details to contact me about the Hub."
           />
         </>
       )}

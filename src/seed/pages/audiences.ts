@@ -10,7 +10,7 @@ export const forYouPage = (img: ImageIds): PageData => ({
   title: 'For you',
   slug: 'for-you',
   meta: {
-    title: 'Support for you | Figcit',
+    title: 'Support for you | FigCit',
     description:
       'Support that fits how you feel right now for your emotional and mental health, your nervous system, your senses, your learning, your work and your relationships. No diagnosis needed.',
   },
@@ -20,7 +20,7 @@ export const forYouPage = (img: ImageIds): PageData => ({
       eyebrow: 'Who we help · For you',
       headline: 'You don’t need fixing. You need support that fits.',
       highlight: 'You need support that fits.',
-      lead: 'Whether you’re living with anxiety, unstable mood, trauma, ADHD, autism, dyslexia, dyscalculia or dyspraxia diagnosed or not; Figcit helps you feel steadier, rest and recover, and keep moving towards the life you want.',
+      lead: 'Whether you’re living with anxiety, unstable mood, trauma, ADHD, autism, dyslexia, dyscalculia or dyspraxia diagnosed or not; FigCit helps you feel steadier, rest and recover, and keep moving towards the life you want.',
       actions: [
         {
           label: 'Get early access',
@@ -36,7 +36,7 @@ export const forYouPage = (img: ImageIds): PageData => ({
     {
       blockType: 'cardGrid',
       background: 'white',
-      intro: { eyebrow: 'For you', heading: 'What Figcit can help with' },
+      intro: { eyebrow: 'For you', heading: 'What FigCit can help with' },
       columns: '3',
       cards: [
         {
@@ -75,7 +75,7 @@ export const forYouPage = (img: ImageIds): PageData => ({
       blockType: 'promise',
       eyebrow: 'Our promise',
       headline: 'No diagnosis.\nNo waiting.\nNo guilt.',
-      body: 'You don’t need a label to get help from Figcit. There are no streaks to keep and no one telling you, you’re behind. You’re not in a competition with anyone. Start with a free check-in and go at your own pace.',
+      body: 'You don’t need a label to get help from FigCit. There are no streaks to keep and no one telling you, you’re behind. You’re not in a competition with anyone. Start with a free check-in and go at your own pace.',
       actions: [
         {
           label: 'Get early access',
@@ -83,13 +83,13 @@ export const forYouPage = (img: ImageIds): PageData => ({
           variant: 'primary',
           arrow: true,
         },
-        { label: 'Explore the Hub', href: '/services#hub', variant: 'outline' },
+        { label: 'Explore the Hub', href: '/services/hub', variant: 'outline' },
       ],
     },
     {
       blockType: 'noteBand',
       background: 'cream',
-      text: 'Figcit is not a crisis service. If you are in danger, call 999. For urgent mental health help, call NHS 111 and choose option 2, or call Samaritans free on 116 123.',
+      text: 'FigCit is not a crisis service. If you are in danger, call 999. For urgent mental health help, call NHS 111 and choose option 2, or call Samaritans free on 116 123.',
     },
   ],
 })
@@ -98,7 +98,7 @@ export const forEmployersPage = (img: ImageIds): PageData => ({
   title: 'For employers',
   slug: 'for-employers',
   meta: {
-    title: 'For employers | Figcit',
+    title: 'For employers | FigCit',
     description:
       'Keep your people well and working: audits, training and technology that adapt work to people’s capacity.',
   },
@@ -139,7 +139,7 @@ export const forEmployersPage = (img: ImageIds): PageData => ({
           icon: 'search',
           tone: 'purple',
           title: 'See where work doesn’t fit',
-          body: 'A CAAM audit shows how your demands, spaces and routines affect people, with adjustments mapped to your Equality Act duties.',
+          body: 'A Capacity Fit Audit shows how your demands, spaces and routines affect people, with adjustments mapped to your Equality Act duties.',
         },
         {
           icon: 'people',
@@ -151,7 +151,7 @@ export const forEmployersPage = (img: ImageIds): PageData => ({
           icon: 'phone',
           tone: 'teal',
           title: 'Everyday support for your people',
-          body: 'Figcit app seats and, from 2028, sponsored Hub places.',
+          body: 'FigCit App seats and, from 2028, sponsored Hub places.',
         },
         {
           icon: 'chart',
@@ -187,8 +187,8 @@ export const forEmployersPage = (img: ImageIds): PageData => ({
           arrow: true,
         },
         {
-          label: 'Explore consulting and training',
-          href: '/services#consulting',
+          label: 'Explore FigCit Consulting',
+          href: '/services/consulting',
           variant: 'outline',
         },
       ],
@@ -200,7 +200,7 @@ export const forEducationPage = (img: ImageIds): PageData => ({
   title: 'For colleges and universities',
   slug: 'for-education',
   meta: {
-    title: 'For colleges and universities | Figcit',
+    title: 'For colleges and universities | FigCit',
     description:
       'Keep students learning while they wait: support that doesn’t need a diagnosis, and adjustments that reach tutors fast.',
   },
@@ -210,7 +210,7 @@ export const forEducationPage = (img: ImageIds): PageData => ({
       eyebrow: 'Who we help · For colleges and universities',
       headline: 'Keep students learning while they wait.',
       highlight: 'while they wait.',
-      lead: 'Many students wait months or years for an assessment, and many never disclose. Figcit gives them support from day one and helps your staff adapt teaching, placements and assessments, so more students stay, progress and finish.',
+      lead: 'Many students wait months or years for an assessment, and many never disclose. FigCit gives them support from day one and helps your staff adapt teaching, placements and assessments, so more students stay, progress and finish.',
       actions: [
         {
           label: 'Book a conversation',
@@ -233,7 +233,7 @@ export const forEducationPage = (img: ImageIds): PageData => ({
           icon: 'phone',
           tone: 'purple',
           title: 'Support from day one',
-          body: 'The Figcit app for students, no diagnosis needed.',
+          body: 'The FigCit App for students, no diagnosis needed.',
         },
         {
           icon: 'people',
@@ -245,7 +245,7 @@ export const forEducationPage = (img: ImageIds): PageData => ({
           icon: 'search',
           tone: 'teal',
           title: 'Clear priorities',
-          body: 'A CAAM audit of learning, placements and assessments, with an action plan.',
+          body: 'A Capacity Fit Audit of learning, placements and assessments, with an action plan.',
         },
         {
           icon: 'chart',
@@ -263,7 +263,7 @@ export const partnersPage = (img: ImageIds): PageData => ({
   title: 'For government, NHS and funders',
   slug: 'partners',
   meta: {
-    title: 'For government, NHS and funders | Figcit',
+    title: 'For government, NHS and funders | FigCit',
     description:
       'Needs-led, non-clinical support from day one with programme licences, training, sponsored Hub places and evaluation.',
   },
@@ -289,8 +289,8 @@ export const partnersPage = (img: ImageIds): PageData => ({
     {
       blockType: 'statement',
       background: 'white',
-      eyebrow: 'About Figcit',
-      text: 'Figcit Ltd is a social care company supporting young people and adults living with trauma, common mental health conditions and neurodevelopmental differences. We combine digital support, organisational training and audits, sensory-friendly community spaces and research to provide needs-led, integrated, non-clinical support that helps people look after their mental health, recover from stress and trauma, stay in or return to education, training and work, build a sustainable income and maintain healthy relationships.',
+      eyebrow: 'About FigCit',
+      text: 'FigCit Ltd is an adaptive wellbeing and professional services company focused on improving the fit between people and the systems, services and environments in which they live, learn and work. We work with young people and adults whose everyday lives are made harder by neurodivergence, mental health challenges, individual differences or environments that do not accommodate them. We combine an adaptive everyday support app, professional consulting (audits, training, programme design, evaluation, research and policy) and a sensory-conscious community Hub. Our support is non-clinical and needs-led, and no diagnosis is required.',
     },
     {
       blockType: 'cardGrid',
@@ -302,7 +302,7 @@ export const partnersPage = (img: ImageIds): PageData => ({
           icon: 'phone',
           tone: 'purple',
           title: 'Programme licences',
-          body: 'The Figcit app for the people your services support.',
+          body: 'The FigCit App for the people your services support.',
         },
         {
           icon: 'people',
@@ -314,7 +314,7 @@ export const partnersPage = (img: ImageIds): PageData => ({
           icon: 'home',
           tone: 'teal',
           title: 'Sponsored Hub places',
-          body: 'Rest, recovery and routine for young people and adults (from 2028).',
+          body: 'Connect, explore and recharge, for young people and adults (from 2028).',
         },
         {
           icon: 'chart',

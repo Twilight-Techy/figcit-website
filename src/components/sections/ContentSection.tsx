@@ -8,7 +8,7 @@ import { AppPreview } from '@/components/sections/AppPreview'
 import { ButtonLink } from '@/components/ui/ButtonLink'
 import { CmsImage } from '@/components/ui/CmsImage'
 import { Eyebrow } from '@/components/ui/Eyebrow'
-import { Rich } from '@/components/ui/Rich'
+import { Rich, paragraphs } from '@/components/ui/Rich'
 import { Section, cardOn, type SectionTone } from '@/components/ui/Section'
 import type { Tone } from '@/content/navigation'
 import type {
@@ -306,7 +306,15 @@ function Text({ part }: { part: TextPart }) {
       </p>
     )
   }
-  return <p className="mt-12 text-lg leading-[1.6]">{part.text}</p>
+  return (
+    <div className="mt-12 flex flex-col gap-5 text-lg leading-[1.6]">
+      {paragraphs(part.text).map((p, i) => (
+        <p key={i}>
+          <Rich text={p} />
+        </p>
+      ))}
+    </div>
+  )
 }
 
 function ListPanels({ part, tone }: { part: ListPanelsPart; tone: SectionTone }) {

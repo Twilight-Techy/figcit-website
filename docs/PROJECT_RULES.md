@@ -6,7 +6,7 @@ These rules apply to every change in this repository. If a rule blocks you, rais
 
 | Topic                             | Source                                         |
 | --------------------------------- | ---------------------------------------------- |
-| Copy, page order, SEO text, forms | Figcit Website Copy v2.0 (Oct 2026)            |
+| Copy, page order, SEO text, forms | FigCit Website Copy v6.0 (Oct 2026)            |
 | Layout, components, states        | Figma: FIGCIT Web Landing Page, page "Website" |
 | Data handling                     | NUCCESS Privacy Notice (draft) and UK GDPR     |
 | Accessibility                     | WCAG 2.2 AA                                    |
