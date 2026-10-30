@@ -5,19 +5,19 @@ import { buildMetadata, organizationJsonLd, serializeJsonLd } from '@/lib/seo'
 describe('buildMetadata', () => {
   it('uses the copy document title as an absolute title and sets a canonical URL', () => {
     const m = buildMetadata({
-      title: 'Our services | Figcit',
+      title: 'Our services | FigCit',
       description: 'Four ways we help.',
       path: '/services',
     })
-    expect(m.title).toEqual({ absolute: 'Our services | Figcit' })
+    expect(m.title).toEqual({ absolute: 'Our services | FigCit' })
     expect(m.alternates?.canonical).toBe('/services')
-    expect(m.openGraph).toMatchObject({ url: '/services', locale: 'en_GB', siteName: 'Figcit' })
+    expect(m.openGraph).toMatchObject({ url: '/services', locale: 'en_GB', siteName: 'FigCit' })
   })
 })
 
 describe('JSON-LD', () => {
-  it('describes Figcit Ltd as an Organization', () => {
-    expect(organizationJsonLd()).toMatchObject({ '@type': 'Organization', name: 'Figcit Ltd' })
+  it('describes FigCit Ltd as an Organization', () => {
+    expect(organizationJsonLd()).toMatchObject({ '@type': 'Organization', name: 'FigCit Ltd' })
   })
 
   it('escapes "<" so data can never close the script tag', () => {

@@ -16,7 +16,7 @@ export const SiteSettings: GlobalConfig = {
   access: { read: anyone, update: authenticated },
   hooks: { afterChange: [revalidateSite] },
   fields: [
-    { name: 'legalName', type: 'text', required: true, defaultValue: 'Figcit Ltd' },
+    { name: 'legalName', type: 'text', required: true, defaultValue: 'FigCit Ltd' },
     {
       name: 'companyNumber',
       type: 'text',

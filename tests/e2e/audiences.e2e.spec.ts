@@ -8,25 +8,25 @@ const pages = [
   {
     path: '/for-you',
     h1: 'You don’t need fixing. You need support that fits.',
-    title: 'Support for you | Figcit',
+    title: 'Support for you | FigCit',
     section: 'No diagnosis. No waiting. No guilt.',
   },
   {
     path: '/for-employers',
     h1: 'Keep your people well and working.',
-    title: 'For employers | Figcit',
+    title: 'For employers | FigCit',
     section: 'Starting with health and social care',
   },
   {
     path: '/for-education',
     h1: 'Keep students learning while they wait.',
-    title: 'For colleges and universities | Figcit',
+    title: 'For colleges and universities | FigCit',
     section: 'What you get',
   },
   {
     path: '/partners',
     h1: 'Needs-led support, without the wait.',
-    title: 'For government, NHS and funders | Figcit',
+    title: 'For government, NHS and funders | FigCit',
     section: 'How we can work together',
   },
 ]

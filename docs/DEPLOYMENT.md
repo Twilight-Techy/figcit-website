@@ -61,7 +61,7 @@ Later admins are invited from the Users screen by a signed-in admin.
 
 ## First content
 
-Pages are stored in Payload and published from the admin. Each deploy runs `pnpm seed:if-empty` after the migrations. On a database with no pages yet, it loads the Website Copy v2.0 pages and placeholder photos (into the Blob store), so the first deploy goes live with content. Once any page exists it does nothing, so deploys never overwrite edits made in the admin.
+Pages are stored in Payload and published from the admin. Each deploy runs `pnpm seed:if-empty` after the migrations. On a database with no pages yet, it loads the Website Copy v6.0 pages and placeholder photos (into the Blob store), so the first deploy goes live with content. Once any page exists it does nothing, so deploys never overwrite edits made in the admin.
 
 To reload the copy by hand, run the full seed with the production environment variables:
 

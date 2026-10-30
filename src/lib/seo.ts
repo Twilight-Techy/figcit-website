@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { site } from '@/content/site'
 
 type PageSeo = {
-  /** SEO title from the copy document, e.g. "Our services | Figcit". */
+  /** SEO title from the copy document, e.g. "Our services | FigCit". */
   title: string
   description: string
   /** Path without host, e.g. "/services". */
@@ -11,7 +11,7 @@ type PageSeo = {
 }
 
 // Builds per-page metadata from the copy document's SEO title and description (rules §9).
-// Titles in the copy already include "| Figcit", so they're used as absolute titles.
+// Titles in the copy already include "| FigCit", so they're used as absolute titles.
 export function buildMetadata({ title, description, path }: PageSeo): Metadata {
   return {
     title: { absolute: title },

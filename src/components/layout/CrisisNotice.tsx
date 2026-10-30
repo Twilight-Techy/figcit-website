@@ -20,7 +20,7 @@ export function CrisisNotice() {
           Need support now?
         </h2>
         <p className="text-[0.9375rem] leading-[1.6] md:text-[1.0625rem] md:leading-[1.55]">
-          Figcit is not a crisis service. But you can connect to further help: if you are in danger
+          FigCit is not a crisis service. But you can connect to further help: if you are in danger
           or harm, call{' '}
           <a className={link} href="tel:999">
             999

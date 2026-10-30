@@ -1,25 +1,27 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
 
 import type { ImageIds } from '../images'
+import { principles } from './principles'
 
 type PageData = RequiredDataFromCollectionSlug<'pages'>
 
-// About us (Figma 36:466, copy Page 7) and Our team (37:535, copy Page 8).
+// About us (Figma 36:466, Website Copy v6.0 "About") and Our team (37:535, copy Page 8).
 
 export const aboutPage = (img: ImageIds): PageData => ({
   title: 'About us',
   slug: 'about',
   meta: {
-    title: 'About Figcit | Fix the fit, thrive as you are',
+    title: 'About FigCit | Fix the fit, thrive as you are',
     description:
-      'Figcit is a social care company helping people with mental health conditions and neurodevelopmental differences and the places around them fit for them.',
+      'FigCit Ltd is an adaptive wellbeing and professional services company working to create a better fit between people and the systems, services and environments in which they live, learn and work.',
   },
   layout: [
     {
       blockType: 'hero',
-      eyebrow: 'About Figcit',
-      headline: 'People don’t need fixing. The fit does.',
-      highlight: 'The fit does.',
+      eyebrow: 'About FigCit',
+      headline: 'Fix the fit, thrive as you are.',
+      highlight: 'thrive as you are.',
+      lead: 'FigCit Limited is an adaptive wellbeing and professional services company working to create a better fit between people and the world around them.',
       art: 'centred',
     },
     {
@@ -28,13 +30,42 @@ export const aboutPage = (img: ImageIds): PageData => ({
       intro: {
         eyebrow: 'Who we are',
         heading:
-          'Figcit is a social care company for young people and adults living with trauma, mental health conditions and neurodevelopmental differences such as ADHD, autism and dyslexia.',
+          'We work with young people and adults who find it hard to navigate everyday life, including education, work, relationships, social activities and personal responsibilities.',
       },
       headingStyle: 'statement',
-      body: 'We help people look after their mental health, ease the weight of stress and trauma, and get through the day, so they can stay in or return to education, training and work, build a sustainable income and keep healthy relationships. We also help the colleges, workplaces and communities around them adapt.\n\nThrough our app, our training and audits, our calm community Hub and our research, we offer support that’s there when it’s needed, with or without a diagnosis. Because people don’t need fixing. The fit does.',
+      body: 'These difficulties may be associated with neurodivergence, mental health challenges, individual differences, or the interaction between a person’s circumstances and the systems and environments around them.\n\nPeople think, feel, sense, communicate, learn and function in different ways. Yet many environments, services and systems are built around narrow expectations of how people should function. When people don’t fit those expectations, their strengths can be overlooked, everyday demands can become hard to manage, and their chances to take part and thrive can shrink.\n\nWe believe the fit needs to change. People should not have to carry the whole burden of adapting to systems that do not recognise their needs.',
       image: img['hub-space'],
       imageShape: 'arch',
       accent: 'orange',
+    },
+    {
+      blockType: 'cardGrid',
+      background: 'cream',
+      intro: { eyebrow: 'What we do' },
+      columns: '3',
+      cards: [
+        {
+          icon: 'phone',
+          tone: 'purple',
+          title: 'FigCit App: everyday support, adapted to you',
+          body: 'Your capacity changes from day to day, so your support should too. The app helps you manage the demands of work, study, relationships, social life and everyday responsibilities in a way that fits how you are today.',
+          link: { label: 'Learn more', href: '/services/app' },
+        },
+        {
+          icon: 'people',
+          tone: 'terracotta',
+          title: 'FigCit Consulting: helping systems work better for people',
+          body: 'We help organisations, education providers and services understand the people they serve and improve the fit between people’s strengths and capacity, everyday demands and the environment. We help them move from spotting barriers to making practical changes, with clear recommendations, implementation plans and follow-up.',
+          link: { label: 'Learn more', href: '/services/consulting' },
+        },
+        {
+          icon: 'home',
+          tone: 'teal',
+          title: 'FigCit Hub: understand yourself, discover your fit',
+          body: 'A sensory-conscious space for connection, collaboration, exploration and rest. It will help people recognise their strengths and interests and explore what fits them better, from subjects, courses and careers to jobs, relationships, homes and communities.',
+          link: { label: 'Learn more', href: '/services/hub' },
+        },
+      ],
     },
     {
       blockType: 'missionVision',
@@ -44,47 +75,31 @@ export const aboutPage = (img: ImageIds): PageData => ({
           label: 'Our mission',
           icon: 'target',
           tone: 'purple',
-          text: 'To make support part of everyday life, so people can look after their wellbeing, stay connected and build the lives they want as they are.',
+          text: 'We develop adaptive technology, deliver professional consulting, and design environments and services that help people function and thrive in everyday life.',
         },
         {
           label: 'Our vision',
           icon: 'eye',
           tone: 'teal',
-          text: 'A world where learning, work and community fit people’s capacity, and no one has to wait for a crisis to get help.',
+          text: 'A world where people can thrive as they are, and systems are designed to work better for the people they serve.',
         },
       ],
     },
     {
+      blockType: 'statement',
+      background: 'white',
+      eyebrow: 'Our purpose',
+      text: 'To help people understand themselves, navigate life’s demands and realise their potential, while helping organisations and communities create environments in which more people can take part and thrive.',
+    },
+    {
       blockType: 'cardGrid',
       background: 'white',
-      intro: { eyebrow: 'What we believe' },
+      intro: {
+        eyebrow: 'What we believe',
+        lead: 'These principles shape how we understand individual needs, assess the fit between people and their environments, make practical recommendations and design solutions for individuals and organisations.',
+      },
       columns: '4',
-      cards: [
-        {
-          icon: 'leaf',
-          tone: 'purple',
-          title: 'Prevention, not diagnosis',
-          body: 'Support starts from what you need today, with or without a label.',
-        },
-        {
-          icon: 'compass',
-          tone: 'terracotta',
-          title: 'Proactive, not reactive',
-          body: 'Places adjust before absence, dropout or crisis.',
-        },
-        {
-          icon: 'heart',
-          tone: 'teal',
-          title: 'Difference, not deficit',
-          body: 'We fix the fit, not the people.',
-        },
-        {
-          icon: 'moon',
-          tone: 'ochre',
-          title: 'Rest is part of life',
-          body: 'Rest, recovery and relaxation are built into how we learn and work.',
-        },
-      ],
+      cards: principles,
     },
     {
       blockType: 'story',
@@ -99,17 +114,17 @@ export const aboutPage = (img: ImageIds): PageData => ({
     {
       blockType: 'approach',
       eyebrow: 'Our approach',
-      heading: 'Before any task, we ask four questions.',
+      heading: 'Before any task, FigCit asks four simple questions.',
       questions: [
         { text: 'What matters?' },
         { text: 'What kind of task is it?' },
         { text: 'What can I manage right now?' },
-        { text: 'What kind of space am I in?' },
+        { text: 'What is my environment like?' },
       ],
-      body: 'Our Capacity Matrix shows energy and mood as a gentle traffic light, so the task, the timing and the space can be matched to the person. Its sixteen-part design draws on the Yoruba Ifá system as cultural inspiration; our evidence comes from research and evaluation.',
+      body: 'We bring together understanding of the individual and adaptation of the environment. We seek to understand people’s strengths, experiences, current capacity and the demands they face, and we look at how environments, expectations, services and systems can work better for them. We put this into practice through adaptive technology, professional consulting, training and research, and by designing more responsive programmes, services, products and environments.\n\nOur Capacity Matrix uses your energy and mood to place you in a capacity band, shown as a calm traffic light, then helps you decide what to do next: go ahead, make the task smaller, move it to a better time or place, or rest first. It never scores or labels you.',
       matrix: {
         label: 'Capacity Matrix',
-        title: 'Energy × mood, shown as a gentle traffic light',
+        title: 'Energy × mood, shown as a calm traffic light',
       },
     },
     {
@@ -117,7 +132,7 @@ export const aboutPage = (img: ImageIds): PageData => ({
       background: 'cream',
       style: 'dashed',
       label: 'Looking ahead',
-      text: '**Figcit Foundation CIC (from late 2028).** A separate community interest company, with its own ownership and finances, that will build on what we learn at the Figcit Hub to help young people into training, education and employment.\n\nAlso on our roadmap: a full Hub launch, voice-first check-ins and wearables, a Training and Research Institute, and work in the US and Africa.',
+      text: 'We are starting in the UK, but FigCit is built to grow anywhere. The app works in any browser, in any country; our audit and training methods can be licensed to trained consultants; and the Hub model can run in partner spaces in any city.\n\n**Because when we fix the fit, people have more room to thrive as they are.**',
     },
   ],
 })
@@ -126,16 +141,16 @@ export const teamPage = (): PageData => ({
   title: 'Our team',
   slug: 'about/team',
   meta: {
-    title: 'Our team | Figcit',
+    title: 'Our team | FigCit',
     description:
-      'Meet the people building Figcit, led by founder and CEO Ganiyat Olatorera Olukemi Kareem.',
+      'Meet the people building FigCit, led by founder and CEO Ganiyat Olatorera Olukemi Kareem.',
   },
   layout: [
     {
       blockType: 'hero',
       eyebrow: 'About · Our team',
-      headline: 'Meet the people building Figcit',
-      highlight: 'building Figcit',
+      headline: 'Meet the people building FigCit',
+      highlight: 'building FigCit',
       art: 'none',
     },
     {
@@ -144,10 +159,10 @@ export const teamPage = (): PageData => ({
       name: 'Ganiyat Olatorera Olukemi Kareem',
       role: 'Founder & CEO',
       quote: 'People don’t need fixing. The fit does.',
-      bio: 'Ganiyat founded Figcit after a day at work when a panic attack turned into a full shutdown, and the help she needed only arrived after the crash while awaiting formal Autism/ADHD diagnosis. It showed her, from the inside, something she had seen for years in her work: people being treated as the problem, when the real problem was the fit.\n\nShe is an internationally qualified social worker awaiting her Social Work England license and an applied public health researcher who studied at Newcastle University, with frontline experience in care and NHS settings. In Lagos, she founded Arraka Wellness Hub, a culturally grounded, person-centred wellbeing coordinated service supported by a Tony Elumelu Foundation grant. She also brings product expertise: as a Tech4Dev Women Techsters Fellow in product management, she served as product owner at Decloud23 Technologies, TeliyTech UK and she holds Google certificates in UX design and project management.\n\nAt Figcit, Ganiyat leads strategy, product and research. She created the Capacity Matrix, NUCRIPCE, the Capacity Adaptive Adjustment Model (CAAM) and FITS training: tools that match what people are asked to do to the capacity they have, in spaces that fit. Her work brings together social work values, lived experience and Yoruba knowledge systems, and she is passionate about making support culturally grounded and open to everyone, with or without a diagnosis.',
+      bio: 'Ganiyat founded FigCit after a day at work when a panic attack turned into a full shutdown, and the help she needed only arrived after the crash while awaiting formal Autism/ADHD diagnosis. It showed her, from the inside, something she had seen for years in her work: people being treated as the problem, when the real problem was the fit.\n\nShe is an internationally qualified social worker awaiting her Social Work England license and an applied public health researcher who studied at Newcastle University, with frontline experience in care and NHS settings. In Lagos, she founded Arraka Wellness Hub, a culturally grounded, person-centred wellbeing coordinated service supported by a Tony Elumelu Foundation grant. She also brings product expertise: as a Tech4Dev Women Techsters Fellow in product management, she served as product owner at Decloud23 Technologies, TeliyTech UK and she holds Google certificates in UX design and project management.\n\nAt FigCit, Ganiyat leads strategy, product and research. She created the Capacity Matrix, NUCRIPCE, the Capacity Adaptive Adjustment Model (CAAM) and FITS training: tools that match what people are asked to do to the capacity they have, in spaces that fit. Her work brings together social work values, lived experience and Yoruba knowledge systems, and she is passionate about making support culturally grounded and open to everyone, with or without a diagnosis.',
       shortBio: {
         label: 'Short bio — for events, speaker profiles and social media',
-        text: 'Ganiyat Olatorera Olukemi Kareem is the founder and CEO of Figcit. She’s an internationally qualified social worker, applied public health researcher and product owner. She founded Arraka Wellness Hub in Lagos with a Tony Elumelu Foundation grant and created the Capacity Matrix, CAAM and FITS. Her own experience of a shutdown at work drives her mission: support that fits, before the crash.',
+        text: 'Ganiyat Olatorera Olukemi Kareem is the founder and CEO of FigCit. She’s an internationally qualified social worker, applied public health researcher and product owner. She founded Arraka Wellness Hub in Lagos with a Tony Elumelu Foundation grant and created the Capacity Matrix, CAAM and FITS. Her own experience of a shutdown at work drives her mission: support that fits, before the crash.',
       },
       portraitInitials: 'GK',
     },

@@ -5,7 +5,7 @@ export const contactPage = (): RequiredDataFromCollectionSlug<'pages'> => ({
   title: 'Contact',
   slug: 'contact',
   meta: {
-    title: 'Contact Figcit',
+    title: 'Contact FigCit',
     description:
       'Book a conversation, partner with us or ask a question — we’d love to hear from you.',
   },
@@ -42,14 +42,14 @@ export const contactPage = (): RequiredDataFromCollectionSlug<'pages'> => ({
           icon: 'phone',
           tone: 'teal',
           title: 'Get early access',
-          body: 'For individuals who want to try the Figcit app first.',
+          body: 'For individuals who want to try the FigCit App first.',
           link: { label: 'Get early access', href: '#get-early-access' },
         },
         {
           icon: 'home',
           tone: 'ochre',
           title: 'Register your Hub interest',
-          body: 'Be the first to hear when the Figcit Hub opens.',
+          body: 'Be the first to hear when the FigCit Hub opens.',
           link: { label: 'Register your interest', href: '#hub-interest' },
         },
       ],

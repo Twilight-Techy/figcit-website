@@ -62,7 +62,7 @@ test('sends a valid early access request and confirms it', async ({ page }) => {
   await panel.getByLabel('Email').fill('playwright@example.com')
   await panel.getByText('Student', { exact: true }).click()
   await panel.getByLabel('I confirm I am 16 or over.').check()
-  await panel.getByLabel(/I agree to Figcit storing my details/).check()
+  await panel.getByLabel(/I agree to FigCit storing my details/).check()
   await panel.getByRole('button', { name: 'Get early access' }).click()
 
   const done = panel.getByRole('status')

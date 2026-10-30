@@ -1,12 +1,12 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
 
-// Questions (Figma 38:826, copy Page 10).
+// Questions (Figma 38:826, copy Page 10; answers updated in Website Copy v6.0).
 export const faqsPage = (): RequiredDataFromCollectionSlug<'pages'> => ({
   title: 'Questions',
   slug: 'faqs',
   meta: {
-    title: 'Questions | Figcit',
-    description: 'Answers to common questions about Figcit, the app, the Hub and working with us.',
+    title: 'Questions | FigCit',
+    description: 'Answers to common questions about FigCit, the app, the Hub and working with us.',
   },
   layout: [
     { blockType: 'hero', eyebrow: 'Questions', headline: 'Questions people ask us', art: 'none' },
@@ -14,22 +14,37 @@ export const faqsPage = (): RequiredDataFromCollectionSlug<'pages'> => ({
       blockType: 'faq',
       items: [
         {
+          question: 'What is FigCit?',
+          answer:
+            'FigCit Ltd is an adaptive wellbeing and professional services company. We help people manage everyday life through the FigCit App and the FigCit Hub, and we help organisations adapt through FigCit Consulting.',
+        },
+        {
           question: 'Do I need a diagnosis?',
           answer: 'No. Everything we offer starts from what you need today.',
         },
         {
-          question: 'Is Figcit a therapy or a medical service?',
+          question: 'Is FigCit therapy or a medical service?',
           answer:
-            'No. We provide non-clinical support for everyday wellbeing and daily life. We don’t diagnose or treat, and we’ll point you to talking therapies and specialist help when you need more.',
+            'No. We don’t diagnose or treat, and the app is not a medical device. When you need more than everyday support, we point you to the right help, including NHS 111, NHS talking therapies and crisis lines.',
         },
         {
           question: 'Who can see my check-ins?',
           answer: 'Only you. Organisations only ever see anonymised trends for large groups.',
         },
         {
-          question: 'Who is Figcit for?',
+          question: 'Who is FigCit for?',
           answer:
-            'Figcit is designed with Young people aged 16 and over and adults living with trauma, mental health conditions or neurodevelopmental differences and the employers, colleges, universities and services that support them. But anyone, anywhere regardless of their condition can use Figcit.',
+            'Adults aged 18 and over whose day sometimes asks more than they have (and young people aged 16–17 moving from school into college, training or work), and the employers, schools, colleges, universities and services who want to support them. You don’t need a label, and you’ll be welcome whatever your story.',
+        },
+        {
+          question: 'What is a Needs and Fit Analysis?',
+          answer:
+            'A look at your strengths, your needs and how well your work or study environment fits you, with a practical adjustment plan. No diagnosis needed, and it is not a diagnosis.',
+        },
+        {
+          question: 'Where is FigCit available?',
+          answer:
+            'We’re starting in the UK. The app works in any browser, and we plan to bring FigCit to other countries from 2029.',
         },
         {
           question: 'When does the Hub open?',

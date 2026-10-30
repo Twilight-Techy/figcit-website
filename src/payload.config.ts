@@ -26,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: ' · Figcit admin',
+      titleSuffix: ' · FigCit admin',
     },
   },
   collections: [Pages, Media, FormSubmissions, Users],

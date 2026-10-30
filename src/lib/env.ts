@@ -15,7 +15,7 @@ const schema = z
     // without a Turnstile secret, the bot check is skipped (development only).
     RESEND_API_KEY: z.string().min(1).optional(),
     FORMS_NOTIFY_TO: z.string().email().default('admin@figcit.co.uk'),
-    FORMS_FROM: z.string().min(3).default('Figcit website <forms@figcit.co.uk>'),
+    FORMS_FROM: z.string().min(3).default('FigCit website <forms@figcit.co.uk>'),
     TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
     // Set to "true" only while creating the first admin on a new database (T28).
     ALLOW_FIRST_ADMIN: z.enum(['true', 'false']).optional(),

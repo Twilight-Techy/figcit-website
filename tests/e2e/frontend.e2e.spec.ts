@@ -5,7 +5,7 @@ test.describe('Frontend', () => {
   test('home page renders with one h1 and no accessibility violations', async ({ page }) => {
     await page.goto('/')
 
-    await expect(page).toHaveTitle(/Figcit/)
+    await expect(page).toHaveTitle(/FigCit/)
     await expect(page.locator('h1')).toHaveCount(1)
 
     const results = await new AxeBuilder({ page })

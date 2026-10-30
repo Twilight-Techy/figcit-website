@@ -7,15 +7,17 @@ const axe = (page: Page) => new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2a
 test.describe('About us', () => {
   test('tells the story in the order of the design', async ({ page }) => {
     await page.goto('/about')
-    await expect(page).toHaveTitle('About Figcit | Fix the fit, thrive as you are')
+    await expect(page).toHaveTitle('About FigCit | Fix the fit, thrive as you are')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      'People don’t need fixing. The fit does.',
+      'Fix the fit, thrive as you are.',
     )
     for (const name of [
+      'What we do',
       'Our mission and vision',
+      'Our purpose',
       'What we believe',
       'Our story',
-      'Before any task, we ask four questions.',
+      'Before any task, FigCit asks four simple questions.',
     ]) {
       await expect(page.getByRole('heading', { level: 2, name })).toBeVisible()
     }
@@ -50,7 +52,7 @@ test.describe('Our team', () => {
     await page.getByRole('button', { name: 'Copy short bio' }).click()
     await expect(page.getByRole('button', { name: 'Copy short bio' })).toHaveText('Copied')
     const copied = await page.evaluate(() => navigator.clipboard.readText())
-    expect(copied).toContain('founder and CEO of Figcit')
+    expect(copied).toContain('founder and CEO of FigCit')
   })
 
   test('links to every policy', async ({ page }) => {

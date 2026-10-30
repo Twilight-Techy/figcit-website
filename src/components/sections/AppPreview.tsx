@@ -11,7 +11,7 @@ export function AppPreview() {
   return (
     <div
       role="img"
-      aria-label="The Figcit app check-in screen: energy and mood sliders, a Conditional traffic light and three suggestions"
+      aria-label="The FigCit App check-in screen: energy and mood sliders, a Conditional traffic light and three suggestions"
       className="relative mx-auto aspect-[420/700] w-full max-w-[26.25rem] font-heading text-[#2a1e2e]"
     >
       <span

@@ -118,12 +118,12 @@ function NavDisclosure({
   )
 }
 
-// Mega menu — Services (Figma 40:845): four cards in one white panel.
+// Mega menu — Services (Figma 40:845): three service cards in one white panel.
 function MegaPanel({ items, pathname }: { items: NavItem[]; pathname: string }) {
   return (
-    <ul className="absolute top-[calc(100%+0.25rem)] left-1/2 z-40 flex w-[61rem] -translate-x-1/2 gap-4 rounded-card bg-surface p-6 shadow-panel">
+    <ul className="absolute top-[calc(100%+0.25rem)] left-1/2 z-40 flex w-[48.5rem] -translate-x-1/2 whitespace-normal gap-4 rounded-card bg-surface p-6 shadow-panel">
       {items.map((item) => (
-        <li key={item.href} className="w-[13.75rem] shrink-0">
+        <li key={item.href} className="w-[14.5rem] shrink-0">
           <Link
             prefetch={false}
             href={item.href}

@@ -13,9 +13,7 @@ test.describe('Header on desktop', () => {
     await page.keyboard.press('Enter')
 
     await expect(trigger).toHaveAttribute('aria-expanded', 'true')
-    await expect(
-      page.getByRole('banner').getByRole('link', { name: /The Figcit app/ }),
-    ).toBeVisible()
+    await expect(page.getByRole('banner').getByRole('link', { name: /FigCit App/ })).toBeVisible()
     expect((await axe(page).analyze()).violations).toEqual([])
 
     await page.keyboard.press('Escape')
@@ -62,14 +60,16 @@ test.describe('Header on mobile', () => {
     const dialog = page.getByRole('dialog', { name: 'Menu' })
     await expect(dialog).toBeVisible()
     // Services starts open (14b); opening another group closes it.
-    await expect(dialog.getByRole('link', { name: 'The Figcit app' })).toBeVisible()
+    await expect(dialog.getByRole('link', { name: 'FigCit App' })).toBeVisible()
     await dialog.getByRole('button', { name: 'Who we help' }).click()
     await expect(dialog.getByRole('button', { name: 'Who we help' })).toHaveAttribute(
       'aria-expanded',
       'true',
     )
-    await expect(dialog.getByRole('link', { name: 'For colleges and universities' })).toBeVisible()
-    await expect(dialog.getByRole('link', { name: 'The Figcit app' })).toBeHidden()
+    await expect(
+      dialog.getByRole('link', { name: 'For schools, colleges and universities' }),
+    ).toBeVisible()
+    await expect(dialog.getByRole('link', { name: 'FigCit App' })).toBeHidden()
     expect((await axe(page).analyze()).violations).toEqual([])
 
     await page.keyboard.press('Escape')
