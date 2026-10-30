@@ -18,8 +18,8 @@ test.describe('Questions', () => {
     await page.goto('/faqs')
     const blocks = await page.locator('script[type="application/ld+json"]').allTextContents()
     const faq = blocks.map((b) => JSON.parse(b)).find((d) => d['@type'] === 'FAQPage')
-    expect(faq.mainEntity).toHaveLength(6)
-    expect(faq.mainEntity[0].name).toBe('Do I need a diagnosis?')
+    expect(faq.mainEntity).toHaveLength(9)
+    expect(faq.mainEntity[0].name).toBe('What is FigCit?')
   })
 
   test('has no accessibility violations', async ({ page }) => {
