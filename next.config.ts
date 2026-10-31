@@ -13,15 +13,15 @@ const isHosted = Boolean(process.env.VERCEL)
 // Security pass (T28). 'unsafe-inline' scripts are needed for the inline data Next.js
 // streams into statically built pages (a nonce would force every page to render on
 // demand) and for ComfortInit; styles for Next.js and the Payload admin. Everything
-// else is limited to this site, Plausible (after consent) and Cloudflare Turnstile.
+// else is limited to this site, Google Analytics (after consent) and Cloudflare Turnstile.
 // Violations are reported to /csp-report.
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://plausible.io https://challenges.cloudflare.com`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://challenges.cloudflare.com`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://*.google-analytics.com https://www.googletagmanager.com",
   "font-src 'self'",
-  "connect-src 'self' https://plausible.io https://challenges.cloudflare.com",
+  "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://challenges.cloudflare.com",
   'frame-src https://challenges.cloudflare.com',
   "worker-src 'self' blob:",
   "manifest-src 'self'",

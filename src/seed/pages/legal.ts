@@ -67,7 +67,7 @@ export const legalPages = (): PageData[] => [
         heading: '3. How we use it',
         body: [
           'To reply to you, arrange what you asked for and, for early access and Hub interest, tell you when the app or the Hub is ready. Our lawful basis is your consent, which you give when you tick the box on the form. You can withdraw it at any time by emailing us.',
-          'If you accept analytics cookies, we count page visits with Plausible, which does not use cookies to track you across sites or collect personal data.',
+          'If you accept analytics cookies, we use Google Analytics to see how visitors use the website, such as which pages they view and which buttons they press. Our lawful basis is your consent. Google Analytics does not receive your name, email or anything you type into our forms, and we have turned off its advertising features.',
         ],
       },
       {
@@ -75,6 +75,7 @@ export const legalPages = (): PageData[] => [
         body: [
           'Data is stored in the UK or EU. Form messages are kept in our database in London (Neon) and sent to our inbox by Resend from its EU region (Ireland). The website is hosted by Vercel with servers in London.',
           'We delete form messages automatically 12 months after they arrive.',
+          'If you accept analytics, Google processes analytics data for us and may store it outside the UK and EU, with the safeguards UK data protection law requires. We keep analytics data for 14 months.',
         ],
       },
       {
@@ -94,13 +95,13 @@ export const legalPages = (): PageData[] => [
       {
         heading: '1. What we use',
         body: [
-          '- figcit-consent: remembers whether you accepted or rejected analytics, for 180 days. It is needed for the site to respect your choice.\n- Comfort settings (low stimulation, text size and theme) are saved in your browser’s local storage, not in a cookie, and never leave your device.\n- Admin sign-in cookies are used only by FigCit staff on the admin pages.',
+          '- figcit-consent: remembers whether you accepted or rejected analytics, for 180 days. It is needed for the site to respect your choice.\n- _ga and _ga_<ID>: Google Analytics cookies that tell visits apart, for up to 2 years. Set only if you choose Accept.\n- Comfort settings (low stimulation, text size and theme) are saved in your browser’s local storage, not in a cookie, and never leave your device.\n- Admin sign-in cookies are used only by FigCit staff on the admin pages.',
         ],
       },
       {
         heading: '2. Analytics',
         body: [
-          'We only load Plausible analytics after you choose Accept. Plausible counts visits without cookies and without collecting personal data. If you choose Reject, nothing is loaded.',
+          'We only load Google Analytics after you choose Accept. It uses the _ga cookies to count visits and see how the website is used; its advertising features are turned off. If you choose Reject, nothing is loaded, and if you change your mind later we stop Google Analytics and delete its cookies.',
         ],
       },
       {

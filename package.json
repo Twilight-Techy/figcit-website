@@ -23,6 +23,7 @@
     "test:perf": "lhci autorun --config=./lighthouserc.cjs"
   },
   "dependencies": {
+    "@next/third-parties": "16.4.3",
     "@payloadcms/db-postgres": "3.92.0",
     "@payloadcms/next": "3.92.0",
     "@payloadcms/richtext-lexical": "3.92.0",

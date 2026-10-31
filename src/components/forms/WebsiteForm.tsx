@@ -8,6 +8,7 @@ import { ArrowIcon } from '@/components/icons'
 import { LineIcon } from '@/components/icons/line'
 import { Checkbox, RadioPills, Select, TextArea, TextField } from '@/components/forms/Fields'
 import { Turnstile } from '@/components/forms/Turnstile'
+import { trackEvent } from '@/lib/analytics'
 import { iAmOptions, partnershipOptions, sectorOptions, type FormType } from '@/lib/forms/options'
 import type { SubmitResult } from '@/lib/forms/submit'
 
@@ -72,8 +73,11 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
   // Move focus to the result so keyboard and screen-reader users hear it.
   useEffect(() => {
     if (state.status === 'error') summaryRef.current?.focus()
-    if (state.status === 'success') successRef.current?.focus()
-  }, [state])
+    if (state.status === 'success') {
+      successRef.current?.focus()
+      trackEvent('contact_form_sent', { form_type: form })
+    }
+  }, [state, form])
 
   if (state.status === 'success') {
     return (
