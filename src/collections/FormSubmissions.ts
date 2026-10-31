@@ -11,11 +11,13 @@ const readOnly = (field: Field): Field =>
 // Deleted automatically 12 months after they arrive (rules §5, /cron/retention).
 export const FormSubmissions: CollectionConfig = {
   slug: 'form-submissions',
-  labels: { singular: 'Form submission', plural: 'Form submissions' },
+  labels: { singular: 'Message', plural: 'Messages' },
   admin: {
+    group: 'Inbox',
     useAsTitle: 'email',
     defaultColumns: ['form', 'email', 'status', 'createdAt'],
-    description: 'Messages sent through the website forms. Deleted automatically after 12 months.',
+    description:
+      'Messages sent through the website forms. Mark each one Replied or Closed when it’s dealt with. Deleted automatically after 12 months.',
   },
   access: {
     create: () => false,

@@ -7,7 +7,10 @@ export const MIN_PASSWORD_LENGTH = 12
 // Admin accounts only; there are no public user accounts on the website.
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: { singular: 'Editor', plural: 'Editors' },
   admin: {
+    group: 'Settings',
+    description: 'People who can sign in to this admin.',
     useAsTitle: 'email',
   },
   auth: {

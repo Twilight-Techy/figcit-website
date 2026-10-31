@@ -11,6 +11,7 @@ import {
   toneField,
 } from './fields'
 import { aboutBlocks } from './about'
+import { withRowLabel } from './rowLabel'
 import { FaqBlock, LegalBlock } from './text'
 import { SectionBlock, StickyMenuBlock, anyIconField } from './section'
 
@@ -422,4 +423,4 @@ export const pageBlocks: Block[] = [
   ContactFormsBlock,
   FaqBlock,
   LegalBlock,
-]
+].map(withRowLabel)

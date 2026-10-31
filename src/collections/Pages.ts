@@ -29,9 +29,16 @@ const revalidateDelete: CollectionAfterDeleteHook<Page> = ({ doc, context }) => 
 // public only sees published versions (rules §10).
 export const Pages: CollectionConfig = {
   slug: 'pages',
+  labels: { singular: 'Page', plural: 'Pages' },
+  defaultSort: 'slug',
   admin: {
+    group: 'Website',
+    description:
+      'Every page on the website. Edit a page, then press Publish changes to put it live.',
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', '_status', 'updatedAt'],
+    pagination: { defaultLimit: 50 },
+    listSearchableFields: ['title', 'slug'],
     preview: (doc) =>
       typeof doc?.slug === 'string'
         ? `/preview?path=${encodeURIComponent(pathForSlug(doc.slug))}`
@@ -52,9 +59,15 @@ export const Pages: CollectionConfig = {
     afterDelete: [revalidateDelete],
   },
   fields: [
-    { name: 'title', type: 'text', required: true },
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      admin: { description: 'The page’s name in the admin and the browser tab fallback.' },
+    },
     {
       name: 'slug',
+      label: 'Page address',
       type: 'text',
       required: true,
       unique: true,
@@ -69,12 +82,19 @@ export const Pages: CollectionConfig = {
     },
     {
       name: 'meta',
+      label: 'Search engines (SEO)',
       type: 'group',
       admin: { position: 'sidebar' },
       fields: [
-        { name: 'title', type: 'text', admin: { description: 'Browser and search title.' } },
+        {
+          name: 'title',
+          label: 'SEO title',
+          type: 'text',
+          admin: { description: 'Shown in the browser tab and in Google. Under 60 characters.' },
+        },
         {
           name: 'description',
+          label: 'Search description',
           type: 'textarea',
           maxLength: 300,
           admin: {
@@ -84,6 +104,14 @@ export const Pages: CollectionConfig = {
         },
       ],
     },
-    { name: 'layout', type: 'blocks', blocks: pageBlocks, required: true },
+    {
+      name: 'layout',
+      label: 'Page sections',
+      labels: { singular: 'Section', plural: 'Sections' },
+      type: 'blocks',
+      blocks: pageBlocks,
+      required: true,
+      admin: { initCollapsed: true },
+    },
   ],
 }

@@ -3,6 +3,7 @@ import type { Block, Field } from 'payload'
 import { lineIconNames } from '@/components/icons/line'
 
 import { actionsField, anchorField, imageField, sectionToneField, toneField } from './fields'
+import { withRowLabel } from './rowLabel'
 
 // A page section assembled from smaller parts, for the long pages (Our Services, the
 // audience pages). Parts stack in order; an optional illustration or photo sits beside
@@ -275,7 +276,7 @@ export const SectionBlock: Block = {
         ActionsPart,
         TextPart,
         ListPanelsPart,
-      ],
+      ].map(withRowLabel),
     },
   ],
 }
