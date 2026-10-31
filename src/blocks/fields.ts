@@ -72,24 +72,39 @@ export const anchorField: Field = {
     !value || /^[a-z0-9-]+$/.test(value) || 'Lower-case letters, numbers and hyphens only',
 }
 
+// "href" in the code; editors see "Link" with examples of what they can enter.
+const hrefField = {
+  name: 'href',
+  label: 'Link',
+  type: 'text',
+  validate: validateHref,
+  admin: {
+    description:
+      'A page such as /contact, a section such as /contact#get-early-access, or a full https:// address.',
+  },
+} as const
+
 export const linkFields = (name: string, required = false): Field => ({
   name,
   type: 'group',
   fields: [
-    { name: 'label', type: 'text', required },
-    { name: 'href', type: 'text', required, validate: validateHref },
+    { name: 'label', label: 'Link text', type: 'text', required },
+    { ...hrefField, required },
   ],
 })
 
 export const actionsField = (maxRows = 2): Field => ({
   name: 'actions',
+  label: 'Buttons',
+  labels: { singular: 'Button', plural: 'Buttons' },
   type: 'array',
   maxRows,
   fields: [
-    { name: 'label', type: 'text', required: true },
-    { name: 'href', type: 'text', required: true, validate: validateHref },
+    { name: 'label', label: 'Button text', type: 'text', required: true },
+    { ...hrefField, required: true },
     {
       name: 'variant',
+      label: 'Style',
       type: 'select',
       defaultValue: 'primary',
       options: [
@@ -97,21 +112,26 @@ export const actionsField = (maxRows = 2): Field => ({
         { label: 'Outline', value: 'outline' },
       ],
     },
-    { name: 'arrow', type: 'checkbox', defaultValue: false },
+    { name: 'arrow', label: 'Show an arrow', type: 'checkbox', defaultValue: false },
   ],
 })
 
 export const introField: Field = {
   name: 'intro',
   type: 'group',
+  label: 'Section heading',
   fields: [
-    { name: 'eyebrow', type: 'text' },
+    {
+      name: 'eyebrow',
+      type: 'text',
+      admin: { description: 'The small coloured label above the heading.' },
+    },
     {
       name: 'heading',
       type: 'text',
       admin: { description: 'Leave empty to use the eyebrow as the section heading.' },
     },
-    { name: 'lead', type: 'textarea' },
+    { name: 'lead', label: 'Introduction', type: 'textarea' },
     {
       name: 'layout',
       type: 'select',

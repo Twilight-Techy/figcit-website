@@ -12,7 +12,11 @@ const revalidateSite: GlobalAfterChangeHook = ({ doc, context }) => {
 // Organisation details shown in the footer and structured data.
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
-  label: 'Site settings',
+  label: 'Company details',
+  admin: {
+    group: 'Settings',
+    description: 'Shown in the website footer and in the information Google reads about FigCit.',
+  },
   access: { read: anyone, update: authenticated },
   hooks: { afterChange: [revalidateSite] },
   fields: [

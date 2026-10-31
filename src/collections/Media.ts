@@ -12,12 +12,17 @@ export const Media: CollectionConfig = {
     update: authenticated,
     delete: authenticated,
   },
+  labels: { singular: 'Photo', plural: 'Media library' },
   admin: {
+    group: 'Website',
+    description: 'Photos used on the website. Every photo needs a description for screen readers.',
     useAsTitle: 'alt',
+    defaultColumns: ['filename', 'alt', 'updatedAt'],
   },
   fields: [
     {
       name: 'alt',
+      label: 'Description',
       type: 'text',
       required: true,
       admin: {

@@ -7,6 +7,7 @@ import * as migration_20261025_020045_audience_blocks from './20261025_020045_au
 import * as migration_20261025_021751_about_team_blocks from './20261025_021751_about_team_blocks';
 import * as migration_20261025_023043_contact_forms from './20261025_023043_contact_forms';
 import * as migration_20261025_024415_faq_legal from './20261025_024415_faq_legal';
+import * as migration_20261031_103054_site_settings_figcit_name from './20261031_103054_site_settings_figcit_name';
 
 export const migrations = [
   {
@@ -52,6 +53,11 @@ export const migrations = [
   {
     up: migration_20261025_024415_faq_legal.up,
     down: migration_20261025_024415_faq_legal.down,
-    name: '20261025_024415_faq_legal'
+    name: '20261025_024415_faq_legal',
+  },
+  {
+    up: migration_20261031_103054_site_settings_figcit_name.up,
+    down: migration_20261031_103054_site_settings_figcit_name.down,
+    name: '20261031_103054_site_settings_figcit_name'
   },
 ];

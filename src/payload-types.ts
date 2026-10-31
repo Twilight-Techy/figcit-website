@@ -126,11 +126,16 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Every page on the website. Edit a page, then press Publish changes to put it live.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
   id: number;
+  /**
+   * The page’s name in the admin and the browser tab fallback.
+   */
   title: string;
   /**
    * "home" for the home page; otherwise the URL path, for example about/team.
@@ -138,7 +143,7 @@ export interface Page {
   slug: string;
   meta?: {
     /**
-     * Browser and search title.
+     * Shown in the browser tab and in Google. Under 60 characters.
      */
     title?: string | null;
     /**
@@ -193,6 +198,9 @@ export interface HeroBlock {
   actions?:
     | {
         label: string;
+        /**
+         * A page such as /contact, a section such as /contact#get-early-access, or a full https:// address.
+         */
         href: string;
         variant?: ('primary' | 'outline') | null;
         arrow?: boolean | null;
@@ -240,6 +248,8 @@ export interface HeroBlock {
   blockType: 'hero';
 }
 /**
+ * Photos used on the website. Every photo needs a description for screen readers.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
@@ -300,6 +310,9 @@ export interface CardGridBlock {
   anchor?: string | null;
   background?: ('white' | 'cream') | null;
   intro?: {
+    /**
+     * The small coloured label above the heading.
+     */
     eyebrow?: string | null;
     /**
      * Leave empty to use the eyebrow as the section heading.
@@ -353,6 +366,9 @@ export interface CardGridBlock {
         badge?: string | null;
         link?: {
           label?: string | null;
+          /**
+           * A page such as /contact, a section such as /contact#get-early-access, or a full https:// address.
+           */
           href?: string | null;
         };
         image?: (number | null) | Media;
@@ -361,6 +377,9 @@ export interface CardGridBlock {
     | null;
   action?: {
     label?: string | null;
+    /**
+     * A page such as /contact, a section such as /contact#get-early-access, or a full https:// address.
+     */
     href?: string | null;
   };
   cardLinkStyle?: ('arrow' | 'button') | null;
@@ -374,6 +393,9 @@ export interface CardGridBlock {
  */
 export interface PathCardsBlock {
   intro?: {
+    /**
+     * The small coloured label above the heading.
+     */
     eyebrow?: string | null;
     /**
      * Leave empty to use the eyebrow as the section heading.
@@ -411,6 +433,9 @@ export interface PathCardsBlock {
  */
 export interface StoryTimelineBlock {
   intro?: {
+    /**
+     * The small coloured label above the heading.
+     */
     eyebrow?: string | null;
     /**
      * Leave empty to use the eyebrow as the section heading.
@@ -440,6 +465,9 @@ export interface StoryTimelineBlock {
 export interface StatsBlock {
   background?: ('white' | 'cream') | null;
   intro?: {
+    /**
+     * The small coloured label above the heading.
+     */
     eyebrow?: string | null;
     /**
      * Leave empty to use the eyebrow as the section heading.
@@ -468,6 +496,9 @@ export interface StatsBlock {
 export interface FeatureSplitBlock {
   background?: ('white' | 'cream') | null;
   intro?: {
+    /**
+     * The small coloured label above the heading.
+     */
     eyebrow?: string | null;
     /**
      * Leave empty to use the eyebrow as the section heading.
@@ -490,6 +521,9 @@ export interface FeatureSplitBlock {
   body?: string | null;
   link?: {
     label?: string | null;
+    /**
+     * A page such as /contact, a section such as /contact#get-early-access, or a full https:// address.
+     */
     href?: string | null;
   };
   linkStyle?: ('arrow' | 'button') | null;
@@ -531,6 +565,9 @@ export interface CtaBandBlock {
   actions?:
     | {
         label: string;
+        /**
+         * A page such as /contact, a section such as /contact#get-early-access, or a full https:// address.
+         */
         href: string;
         variant?: ('primary' | 'outline') | null;
         arrow?: boolean | null;
@@ -736,6 +773,9 @@ export interface ActionsPart {
   actions?:
     | {
         label: string;
+        /**
+         * A page such as /contact, a section such as /contact#get-early-access, or a full https:// address.
+         */
         href: string;
         variant?: ('primary' | 'outline') | null;
         arrow?: boolean | null;
@@ -818,6 +858,9 @@ export interface PromiseBlock {
   actions?:
     | {
         label: string;
+        /**
+         * A page such as /contact, a section such as /contact#get-early-access, or a full https:// address.
+         */
         href: string;
         variant?: ('primary' | 'outline') | null;
         arrow?: boolean | null;
@@ -1064,7 +1107,7 @@ export interface LegalBlock {
   blockType: 'legal';
 }
 /**
- * Messages sent through the website forms. Deleted automatically after 12 months.
+ * Messages sent through the website forms. Mark each one Replied or Closed when it’s dealt with. Deleted automatically after 12 months.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "form-submissions".
@@ -1111,6 +1154,8 @@ export interface FormSubmission {
   createdAt: string;
 }
 /**
+ * People who can sign in to this admin.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
@@ -2039,6 +2084,8 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * Shown in the website footer and in the information Google reads about FigCit.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings".
  */

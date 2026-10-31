@@ -1,0 +1,377 @@
+// FigCit theme for the Payload admin. Payload's own styles sit in the payload-default
+// layer, so these unlayered rules win without !important.
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('../../fonts/figtree-latin-variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  src: url('../../fonts/atkinson-hyperlegible-next-latin-variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+// Warm neutrals from Pith Cream to Fig Ink replace Payload's greys, so every surface,
+// border and text shade in the admin follows the brand. Generated from the site tokens.
+:root {
+  --color-base-0: rgb(255, 255, 255);
+  --color-base-50: rgb(251, 248, 242);
+  --color-base-100: rgb(245, 238, 222);
+  --color-base-150: rgb(231, 224, 210);
+  --color-base-200: rgb(218, 210, 199);
+  --color-base-250: rgb(204, 196, 187);
+  --color-base-300: rgb(191, 183, 175);
+  --color-base-350: rgb(177, 169, 163);
+  --color-base-400: rgb(164, 155, 152);
+  --color-base-450: rgb(150, 141, 140);
+  --color-base-500: rgb(137, 127, 128);
+  --color-base-550: rgb(123, 113, 116);
+  --color-base-600: rgb(110, 99, 105);
+  --color-base-650: rgb(96, 85, 93);
+  --color-base-700: rgb(83, 72, 81);
+  --color-base-750: rgb(69, 58, 69);
+  --color-base-800: rgb(56, 44, 58);
+  --color-base-850: rgb(42, 30, 46);
+  --color-base-900: rgb(32, 23, 36);
+  --color-base-950: rgb(23, 16, 26);
+  --color-base-1000: rgb(13, 9, 16);
+
+  // Payload's "success" scale drives focus rings and highlights: Fig Purple.
+  --color-success-50: rgb(246, 238, 245);
+  --color-success-100: rgb(229, 217, 228);
+  --color-success-150: rgb(212, 196, 210);
+  --color-success-200: rgb(194, 176, 193);
+  --color-success-250: rgb(177, 155, 175);
+  --color-success-300: rgb(160, 134, 158);
+  --color-success-350: rgb(143, 113, 140);
+  --color-success-400: rgb(125, 93, 123);
+  --color-success-450: rgb(108, 72, 105);
+  --color-success-500: rgb(91, 51, 88);
+  --color-success-550: rgb(84, 47, 82);
+  --color-success-600: rgb(78, 43, 76);
+  --color-success-650: rgb(71, 39, 69);
+  --color-success-700: rgb(64, 35, 63);
+  --color-success-750: rgb(58, 32, 57);
+  --color-success-800: rgb(51, 28, 51);
+  --color-success-850: rgb(44, 24, 44);
+  --color-success-900: rgb(38, 20, 38);
+  --color-success-950: rgb(31, 16, 32);
+}
+
+:root {
+  --font-body: 'Atkinson Hyperlegible Next', system-ui, 'Segoe UI', Arial, sans-serif;
+  --fc-admin-heading: 'Figtree', system-ui, 'Segoe UI', Arial, sans-serif;
+  --fc-admin-purple: #5b3358;
+  --fc-admin-orange: #e08830;
+  --fc-admin-mark: var(--fc-admin-purple);
+  --fc-admin-accent: var(--fc-admin-purple);
+  --fc-admin-on-accent: #ffffff;
+  --style-radius-s: 6px;
+  --style-radius-m: 10px;
+  --style-radius-l: 16px;
+}
+
+html[data-theme='dark'] {
+  --fc-admin-mark: #d9b8d5;
+  --fc-admin-accent: #d9b8d5;
+  --fc-admin-on-accent: #1c1420;
+}
+
+// Light mode: a cream page with white cards and inputs, like the website.
+html[data-theme='light'] {
+  --theme-bg: rgb(251, 248, 242);
+  --theme-input-bg: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+.collection-list__title,
+.doc-header__title,
+.render-title {
+  font-family: var(--fc-admin-heading);
+  letter-spacing: -0.01em;
+}
+
+// Primary actions (Publish, Save, Create New) in Fig Purple.
+.btn--style-primary {
+  background-color: var(--fc-admin-accent);
+  color: var(--fc-admin-on-accent);
+
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled) {
+    background-color: color-mix(in srgb, var(--fc-admin-accent) 85%, black);
+    color: var(--fc-admin-on-accent);
+  }
+
+  &:disabled {
+    background-color: var(--theme-elevation-150);
+    color: var(--theme-elevation-500);
+  }
+}
+
+// Logo and icon
+
+.fc-admin-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+
+  &__mark {
+    width: auto;
+    height: 3rem;
+  }
+
+  &__name {
+    margin: 0;
+    font-family: var(--fc-admin-heading);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--fc-admin-mark);
+  }
+
+  &__tagline {
+    margin: 0.25rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--theme-elevation-600);
+  }
+}
+
+.fc-admin-icon {
+  display: block;
+  width: auto;
+  height: 1.5rem;
+}
+
+// Section headers in the page editor
+
+.fc-block-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  min-width: 0;
+
+  &__number {
+    font-variant-numeric: tabular-nums;
+    color: var(--theme-elevation-500);
+  }
+
+  &__type {
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    background: var(--theme-elevation-100);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  &__summary {
+    overflow: hidden;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// Dashboard welcome panel
+
+// :where keeps this at element specificity so the link styles below can override it.
+:where(.fc-dashboard) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fc-dashboard {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+
+  &__welcome {
+    padding: 2rem;
+    border-radius: var(--style-radius-l);
+    background: var(--fc-admin-purple);
+    color: #f5eede;
+    background-image: radial-gradient(
+      circle at 100% 0,
+      rgb(224 136 48 / 0.55) 0,
+      rgb(224 136 48 / 0.55) 5.5rem,
+      transparent 5.6rem
+    );
+  }
+
+  &__eyebrow {
+    margin: 0;
+    font-family: var(--fc-admin-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f0b26a;
+  }
+
+  &__title {
+    margin: 0.5rem 0 0;
+    font-size: 2.25rem;
+    line-height: 1.1;
+    color: #ffffff;
+  }
+
+  &__lead {
+    max-width: 40rem;
+    margin: 0.75rem 0 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgb(245 238 222 / 0.9);
+
+    strong {
+      color: #ffffff;
+    }
+  }
+
+  &__actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__action {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    height: 100%;
+    padding: 1.25rem;
+    border: 1px solid var(--theme-elevation-150);
+    border-radius: var(--style-radius-m);
+    background: var(--theme-elevation-0);
+    transition: border-color 150ms, box-shadow 150ms;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--fc-admin-accent);
+      box-shadow: 0 0 0 1px var(--fc-admin-accent);
+    }
+  }
+
+  &__action-title {
+    font-family: var(--fc-admin-heading);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--fc-admin-mark);
+  }
+
+  &__action-text,
+  &__meta,
+  &__empty {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--theme-elevation-600);
+  }
+
+  &__panels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1rem;
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border: 1px solid var(--theme-elevation-150);
+    border-radius: var(--style-radius-m);
+    background: var(--theme-elevation-0);
+  }
+
+  &__panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+  }
+
+  &__count {
+    min-width: 2rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    background: var(--fc-admin-orange);
+    font-weight: 700;
+    text-align: center;
+    color: #2a1e2e;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li + li {
+      border-top: 1px solid var(--theme-elevation-100);
+    }
+
+    a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+      padding: 0.625rem 0.5rem;
+      margin: 0 -0.5rem;
+      border-radius: var(--style-radius-s);
+
+      &:hover,
+      &:focus-visible {
+        background: var(--theme-elevation-50);
+      }
+    }
+  }
+
+  &__status {
+    margin-left: 0.5rem;
+    padding: 0.0625rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    &--published {
+      background: rgb(94 140 97 / 0.18);
+      color: #3c6a3f;
+    }
+
+    &--draft {
+      background: rgb(224 136 48 / 0.2);
+      color: #8a4e10;
+    }
+  }
+
+  &__more {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-weight: 700;
+    color: var(--fc-admin-mark);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+html[data-theme='dark'] .fc-dashboard__status {
+  &--published {
+    color: #a8d3aa;
+  }
+
+  &--draft {
+    color: #f0b26a;
+  }
+}

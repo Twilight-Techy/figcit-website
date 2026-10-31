@@ -62,7 +62,7 @@ describe('Pages', () => {
         data: { title: 'Bad', slug: 'Bad Slug', layout },
         context,
       }),
-    ).rejects.toThrow(/slug/i)
+    ).rejects.toThrow(/Page address/)
   })
 
   it('rejects links that could point off-site in disguise', async () => {

@@ -27,6 +27,16 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: ' · FigCit admin',
+      icons: [{ rel: 'icon', type: 'image/svg+xml', url: '/icon.svg' }],
+    },
+    // Gravatar would need a third-party image source in the CSP; initials-style default instead.
+    avatar: 'default',
+    components: {
+      graphics: {
+        Logo: '/components/admin/AdminLogo#AdminLogo',
+        Icon: '/components/admin/AdminIcon#AdminIcon',
+      },
+      beforeDashboard: ['/components/admin/Dashboard#Dashboard'],
     },
   },
   collections: [Pages, Media, FormSubmissions, Users],
