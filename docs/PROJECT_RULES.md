@@ -25,7 +25,7 @@ Where the copy and the design disagree, the copy wins for words and the design w
 | Styling         | Tailwind CSS v4, with design tokens as CSS custom properties |
 | Email           | Resend                                                       |
 | Hosting         | Vercel, with server functions pinned to London (`lhr1`)      |
-| Analytics       | Plausible (EU), loaded only after consent                    |
+| Analytics       | Google Analytics 4, loaded only after consent                |
 | Package manager | pnpm (lockfile committed)                                    |
 | Language        | TypeScript, `strict`                                         |
 
@@ -83,7 +83,7 @@ tests/                 unit (int) and end-to-end (e2e)
 - Fonts are self-hosted with `next/font/local`: Figtree for headings and Atkinson Hyperlegible Next for body, one variable Latin file per family (about 55 KB in total), `display: swap`.
 - No carousels, autoplay, video backgrounds or decorative animation (website brief). Transitions stay under 200 ms and are switched off by `prefers-reduced-motion` and low-stimulation mode.
 - Icons are inline SVG components. No icon fonts or whole-library imports.
-- Third-party scripts: Plausible only, loaded with `strategy="lazyOnload"` after consent.
+- Third-party scripts: Google Analytics 4 only (`@next/third-parties`), loaded after consent with Consent Mode v2 and advertising storage denied.
 - No heavy libraries such as lodash, moment or animation frameworks. Use the platform (`Intl`, CSS) first.
 
 ## 4. Memory

@@ -61,7 +61,8 @@ export function CookieBanner() {
             </h2>
             <p className="text-[0.9375rem] leading-[1.6]">
               We use essential cookies to make this site work. With your permission we’d also use
-              privacy-friendly analytics to improve it. Nothing non-essential runs until you choose.
+              Google Analytics cookies to see how the site is used and improve it. Nothing
+              non-essential runs until you choose.
             </p>
           </div>
         </div>

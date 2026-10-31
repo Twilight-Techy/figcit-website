@@ -35,6 +35,8 @@ jobs:
       DATABASE_URL: postgres://figcit:figcit@127.0.0.1:5432/figcit
       PAYLOAD_SECRET: ci-only-secret-not-used-anywhere-else-0123456789
       NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      # A dummy ID so the consent tests can check when Google Analytics loads.
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: G-TEST000000
       NEXT_TELEMETRY_DISABLED: 1
     steps:
       - uses: actions/checkout@v7
