@@ -5,7 +5,8 @@ import type { ImageIds } from '../images'
 type PageData = RequiredDataFromCollectionSlug<'pages'>
 
 // FigCit Consulting sub-pages from "Website Pages: Capacity Fit Audit and Capacity Fit
-// Profile" v1.0. Public wording only: no method detail, which stays confidential.
+// Profile" v1.0, using the Master Copy name for the individual service, Needs and Fit
+// Analysis. Public wording only: no method detail, which stays confidential.
 
 const bookConversation = {
   label: 'Book a conversation',
@@ -14,8 +15,8 @@ const bookConversation = {
   arrow: true,
 } as const
 
-const startProfile = {
-  label: 'Start your profile',
+const startAnalysis = {
+  label: 'Start your analysis',
   href: '/contact#book-a-conversation',
   variant: 'primary',
   arrow: true,
@@ -172,9 +173,9 @@ export const capacityFitAuditPage = (img: ImageIds): PageData => ({
             'No. The audit looks at how well the organisation fits everyone, whether or not they have a diagnosis or have told you about a condition.',
         },
         {
-          question: 'How does it link to the Capacity Fit Profile?',
+          question: 'How does it link to the Needs and Fit Analysis?',
           answer:
-            'The audit looks at the whole organisation. Where individuals would benefit from their own plan, you can offer them a Capacity Fit Profile, bought on its own or together with the audit.',
+            'The audit looks at the whole organisation. Where individuals would benefit from their own plan, you can offer them a Needs and Fit Analysis, bought on its own or together with the audit.',
         },
         {
           question: 'Does it replace Disability Confident or Thriving at Work?',
@@ -191,11 +192,11 @@ export const capacityFitAuditPage = (img: ImageIds): PageData => ({
   ],
 })
 
-export const capacityFitProfilePage = (img: ImageIds): PageData => ({
-  title: 'Capacity Fit Profile',
-  slug: 'services/consulting/capacity-fit-profile',
+export const needsAndFitAnalysisPage = (img: ImageIds): PageData => ({
+  title: 'Needs and Fit Analysis',
+  slug: 'services/consulting/needs-and-fit-analysis',
   meta: {
-    title: 'Capacity Fit Profile | Personal workplace and study adjustment plan | FigCit',
+    title: 'Needs and Fit Analysis | Personal workplace and study adjustment plan | FigCit',
     description:
       'Understand your strengths, needs and capacity, and how well your work or study fits you. Get a personal adjustment plan you own. No diagnosis needed.',
   },
@@ -203,10 +204,10 @@ export const capacityFitProfilePage = (img: ImageIds): PageData => ({
     {
       blockType: 'hero',
       eyebrow: 'FigCit Consulting',
-      headline: 'Capacity Fit Profile',
+      headline: 'Needs and Fit Analysis',
       lead: 'Understand what you need, how your work or study fits you, and what would help. No diagnosis needed.',
       actions: [
-        startProfile,
+        startAnalysis,
         { label: 'Ask your organisation', href: '#ways-to-access', variant: 'outline' },
       ],
       art: 'photo',
@@ -217,7 +218,7 @@ export const capacityFitProfilePage = (img: ImageIds): PageData => ({
       blockType: 'statement',
       background: 'white',
       eyebrow: 'What it is',
-      text: 'The Capacity Fit Profile is a structured assessment of your strengths, your needs and how your capacity changes, and of how well your work or study environment fits you. It ends with a practical adjustment plan that you own. It is not a diagnosis and it is not a personality test. It looks at the fit between you and your environment, because that is usually what can change.',
+      text: 'The Needs and Fit Analysis is a structured assessment of your strengths, your needs and how your capacity changes, and of how well your work or study environment fits you. It ends with a practical adjustment plan that you own. It is not a diagnosis and it is not a personality test. It looks at the fit between you and your environment, because that is usually what can change.',
     },
     {
       blockType: 'statement',
@@ -266,15 +267,15 @@ export const capacityFitProfilePage = (img: ImageIds): PageData => ({
       intro: { heading: 'What you receive' },
       aside: 'none',
       parts: [
-        { blockType: 'subheading', text: 'The profile includes', size: 'hidden' },
+        { blockType: 'subheading', text: 'The analysis includes', size: 'hidden' },
         {
           blockType: 'listPanels',
           panels: [
             {
-              title: 'Your profile includes',
+              title: 'Your analysis includes',
               style: 'checks',
               items: [
-                { text: 'A personal Capacity Fit Profile report. It belongs to you.' },
+                { text: 'A personal needs and fit report. It belongs to you.' },
                 {
                   text: 'An adjustment plan you can share with your employer, college or university, only if you choose to.',
                 },
@@ -294,7 +295,7 @@ export const capacityFitProfilePage = (img: ImageIds): PageData => ({
       blockType: 'statement',
       background: 'white',
       eyebrow: 'Your choice, your information',
-      text: 'Your full report is yours. If your organisation pays for your profile, we agree with you at the start what will be shared, and nothing is shared without your consent. Your information is stored securely in the UK.',
+      text: 'Your full report is yours. If your organisation pays for your analysis, we agree with you at the start what will be shared, and nothing is shared without your consent. Your information is stored securely in the UK.',
     },
     {
       blockType: 'cardGrid',
@@ -307,7 +308,7 @@ export const capacityFitProfilePage = (img: ImageIds): PageData => ({
           icon: 'briefcase',
           tone: 'purple',
           title: 'Through your employer, college or university',
-          body: 'Many organisations pay for profiles for their staff or students. Ask your HR team or student support service.',
+          body: 'Many organisations pay for analyses for their staff or students. Ask your HR team or student support service.',
         },
         {
           icon: 'heart',
@@ -349,7 +350,7 @@ export const capacityFitProfilePage = (img: ImageIds): PageData => ({
         {
           question: 'What if my job doesn’t fit me at all?',
           answer:
-            'Most misfits can be solved by changing how the work is done. Where they can’t, your plan sets out options. A profile is never used to decide whether you keep your job.',
+            'Most misfits can be solved by changing how the work is done. Where they can’t, your plan sets out options. An analysis is never used to decide whether you keep your job.',
         },
       ],
     },
@@ -357,7 +358,7 @@ export const capacityFitProfilePage = (img: ImageIds): PageData => ({
       blockType: 'ctaBand',
       background: 'cream',
       heading: 'Find out what fits you.',
-      actions: [startProfile, { label: 'Ask a question', href: '/contact', variant: 'outline' }],
+      actions: [startAnalysis, { label: 'Ask a question', href: '/contact', variant: 'outline' }],
     },
   ],
 })

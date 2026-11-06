@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { getPayload, type Payload } from 'payload'
 
 import { aboutPage, teamPage } from './pages/about'
-import { capacityFitAuditPage, capacityFitProfilePage } from './pages/capacityFit'
+import { capacityFitAuditPage, needsAndFitAnalysisPage } from './pages/consultingServices'
 import { contactPage } from './pages/contact'
 import { faqsPage } from './pages/faqs'
 import { legalPages } from './pages/legal'
@@ -125,7 +125,7 @@ async function main() {
     consultingPage,
     hubPage,
     capacityFitAuditPage,
-    capacityFitProfilePage,
+    needsAndFitAnalysisPage,
     insightsPage,
     forYouPage,
     forEmployersPage,

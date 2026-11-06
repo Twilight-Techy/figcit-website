@@ -9,7 +9,7 @@ const servicePages = [
   ['/services/consulting', 'Building systems that work for people'],
   ['/services/hub', 'A space to connect, explore and recharge'],
   ['/services/consulting/capacity-fit-audit', 'Capacity Fit Audit'],
-  ['/services/consulting/capacity-fit-profile', 'Capacity Fit Profile'],
+  ['/services/consulting/needs-and-fit-analysis', 'Needs and Fit Analysis'],
 ] as const
 
 test.describe('Our Services pages', () => {
@@ -32,9 +32,9 @@ test.describe('Our Services pages', () => {
     await expect(page.getByRole('img', { name: /FigCit App check-in screen/ })).toBeVisible()
   })
 
-  test('consulting links to the audit and profile pages', async ({ page }) => {
+  test('consulting links to the audit and analysis pages', async ({ page }) => {
     await page.goto('/services/consulting')
-    for (const name of ['capacity-fit-audit', 'capacity-fit-profile']) {
+    for (const name of ['capacity-fit-audit', 'needs-and-fit-analysis']) {
       await expect(
         page.locator(`main a[href="/services/consulting/${name}"]:visible`).first(),
       ).toBeVisible()

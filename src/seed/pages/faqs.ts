@@ -37,7 +37,7 @@ export const faqsPage = (): RequiredDataFromCollectionSlug<'pages'> => ({
             'Adults aged 18 and over whose day sometimes asks more than they have (and young people aged 16–17 moving from school into college, training or work), and the employers, schools, colleges, universities and services who want to support them. You don’t need a label, and you’ll be welcome whatever your story.',
         },
         {
-          question: 'What is a Capacity Fit Profile?',
+          question: 'What is a Needs and Fit Analysis?',
           answer:
             'A look at your strengths, your needs and how well your work or study environment fits you, with a practical adjustment plan. No diagnosis needed, and it is not a diagnosis.',
         },
