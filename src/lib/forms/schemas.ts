@@ -40,7 +40,7 @@ export const schemas = {
     firstName: trimmed('first name', 80),
     email,
     iAmA: z.enum(iAmOptions, { error: 'Choose the option that describes you' }),
-    ageConfirmed: mustTick('Confirm you are 16 or over'),
+    ageConfirmed: mustTick('Confirm you are 18 or over'),
     consent,
   }),
   'book-conversation': z.object({

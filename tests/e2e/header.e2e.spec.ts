@@ -38,6 +38,16 @@ test.describe('Header on desktop', () => {
     await expect(page.getByRole('banner').getByRole('link', { name: 'For employers' })).toBeHidden()
   })
 
+  test('keeps the header inside the page margins at 1280px', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 })
+    await page.goto('/', { waitUntil: 'networkidle' })
+    const button = await page
+      .getByRole('banner')
+      .getByRole('link', { name: 'Get early access' })
+      .boundingBox()
+    expect((button?.x ?? 0) + (button?.width ?? 0)).toBeLessThanOrEqual(1200)
+  })
+
   test('shows both call-to-action buttons', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' })
     await expect(

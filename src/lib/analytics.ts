@@ -37,17 +37,22 @@ export function withdrawConsent() {
 }
 
 export type KeyEvent =
-  'get_early_access_click' | 'book_conversation_click' | 'organisation_click' | 'contact_form_sent'
+  | 'get_early_access_click'
+  | 'book_conversation_click'
+  | 'organisation_click'
+  | 'start_analysis_click'
+  | 'contact_form_sent'
 
 export function trackEvent(name: KeyEvent, params?: Record<string, string>) {
   if (!GA_MEASUREMENT_ID || readConsent() !== 'accepted' || !window.dataLayer) return
   gtag('event', name, params)
 }
 
-// The key events from the copy that come from links. "I'm an organisation" also points at
-// the booking form, so it is told apart by its label.
+// The key events from the copy that come from links. "I'm an organisation" and "Start your
+// analysis" also point at the booking form, so they are told apart by their labels.
 export function keyEventForLink(href: string, label: string): KeyEvent | null {
   if (/^I.m an organisation$/i.test(label.trim())) return 'organisation_click'
+  if (/^Start your analysis$/i.test(label.trim())) return 'start_analysis_click'
   if (href.endsWith('#get-early-access')) return 'get_early_access_click'
   if (href.endsWith('#book-a-conversation')) return 'book_conversation_click'
   return null

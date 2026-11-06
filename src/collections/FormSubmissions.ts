@@ -50,7 +50,7 @@ export const FormSubmissions: CollectionConfig = {
         { name: 'name', type: 'text' },
         { name: 'email', type: 'email', required: true },
         { name: 'iAmA', label: 'I am', type: 'select', options: [...iAmOptions] },
-        { name: 'ageConfirmed', label: 'Confirmed 16 or over', type: 'checkbox' },
+        { name: 'ageConfirmed', label: 'Confirmed minimum age', type: 'checkbox' },
         { name: 'organisation', type: 'text' },
         { name: 'role', type: 'text' },
         { name: 'sector', type: 'select', options: [...sectorOptions] },

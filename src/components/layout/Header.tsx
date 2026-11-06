@@ -27,14 +27,14 @@ export function Header() {
           <Link
             prefetch={false}
             href={headerActions.secondary.href}
-            className="header-desktop rounded-pill border-[1.5px] border-primary px-[1.375rem] py-3.5 font-heading text-[0.9375rem] leading-none font-bold text-primary transition-calm transition-colors hover:bg-primary/8"
+            className="header-desktop rounded-pill border-[1.5px] border-primary px-4 py-3.5 min-[90rem]:px-[1.375rem] font-heading text-[0.9375rem] leading-none font-bold text-primary transition-calm transition-colors hover:bg-primary/8"
           >
             {headerActions.secondary.label}
           </Link>
           <Link
             prefetch={false}
             href={headerActions.primary.href}
-            className="header-desktop rounded-pill bg-primary px-[1.375rem] py-[0.9375rem] font-heading text-[0.9375rem] leading-none font-bold text-on-primary transition-calm transition-opacity hover:opacity-90"
+            className="header-desktop rounded-pill bg-primary px-4 py-[0.9375rem] min-[90rem]:px-[1.375rem] font-heading text-[0.9375rem] leading-none font-bold text-on-primary transition-calm transition-opacity hover:opacity-90"
           >
             {headerActions.primary.label}
           </Link>
