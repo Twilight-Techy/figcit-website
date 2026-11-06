@@ -320,7 +320,7 @@ export const needsAndFitAnalysisPage = (img: ImageIds): PageData => ({
           icon: 'user',
           tone: 'terracotta',
           title: 'On your own',
-          body: 'From £195, payable in three instalments. Ask us about sponsored places.',
+          body: '£150–£195, payable in three instalments. Ask us about sponsored places.',
         },
       ],
     },
