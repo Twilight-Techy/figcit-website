@@ -31,7 +31,7 @@ describe('form schemas', () => {
       firstName: 'Enter your first name',
       email: 'Enter an email address like name@example.com',
       iAmA: 'Choose the option that describes you',
-      ageConfirmed: 'Confirm you are 16 or over',
+      ageConfirmed: 'Confirm you are 18 or over',
     })
     expect(r.errors.consent).toMatch(/agree/)
   })

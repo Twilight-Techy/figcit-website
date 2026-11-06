@@ -70,6 +70,7 @@ export const forYouPage = (img: ImageIds): PageData => ({
           body: 'Find the words to ask for what you need, and people who understand.',
         },
       ],
+      action: { label: 'Capacity Fit Profile', href: '/services/consulting/capacity-fit-profile' },
     },
     {
       blockType: 'promise',
@@ -140,6 +141,7 @@ export const forEmployersPage = (img: ImageIds): PageData => ({
           tone: 'purple',
           title: 'See where work doesn’t fit',
           body: 'A Capacity Fit Audit shows how your demands, spaces and routines affect people, with adjustments mapped to your Equality Act duties.',
+          link: { label: 'Capacity Fit Audit', href: '/services/consulting/capacity-fit-audit' },
         },
         {
           icon: 'people',
@@ -246,6 +248,7 @@ export const forEducationPage = (img: ImageIds): PageData => ({
           tone: 'teal',
           title: 'Clear priorities',
           body: 'A Capacity Fit Audit of learning, placements and assessments, with an action plan.',
+          link: { label: 'Capacity Fit Audit', href: '/services/consulting/capacity-fit-audit' },
         },
         {
           icon: 'chart',
@@ -323,6 +326,7 @@ export const partnersPage = (img: ImageIds): PageData => ({
           body: 'Measured outcomes and briefings on participation in education, training and work.',
         },
       ],
+      action: { label: 'Capacity Fit Audit', href: '/services/consulting/capacity-fit-audit' },
     },
     {
       blockType: 'ctaBand',

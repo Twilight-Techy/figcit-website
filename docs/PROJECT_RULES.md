@@ -126,7 +126,7 @@ tests/                 unit (int) and end-to-end (e2e)
 - No non-essential cookies or scripts before consent. The cookie banner gives Accept and Reject equal weight (design state D), and the choice is stored in one essential first-party cookie.
 - All data stays in the UK or EU: Neon region, media storage and Vercel functions.
 - Form fields are exactly those in the copy document:
-  - **Get early access:** first name, email, "I am a…", confirm 16 or over, consent
+  - **Get early access:** first name, email, "I am a…", confirm 18 or over, consent
   - **Book a conversation:** name, email, organisation, role, sector, what you'd like to discuss, adjustments, consent
   - **Hub interest:** first name, email, town or city, how you might use the Hub, consent
   - **Partner with us:** name, email, organisation, type of partnership, message, consent

@@ -67,7 +67,7 @@ export const legalPages = (): PageData[] => [
         heading: '2. What we collect',
         body: [
           'We only collect what you choose to send us through our forms:',
-          '- **Get early access:** first name, email, which describes you (individual, student, employer or other), and confirmation that you are 16 or over.\n- **Book a conversation:** name, email, organisation, role, sector, what you would like to discuss, and any adjustments that would help.\n- **Hub interest:** first name, email, town or city, and how you might use the Hub.\n- **Partner with us:** name, email, organisation, type of partnership, and your message.',
+          '- **Get early access:** first name, email, which describes you (individual, student, employer or other), and confirmation that you are 18 or over.\n- **Book a conversation:** name, email, organisation, role, sector, what you would like to discuss, and any adjustments that would help.\n- **Hub interest:** first name, email, town or city, and how you might use the Hub.\n- **Partner with us:** name, email, organisation, type of partnership, and your message.',
           'What we never ask for: a diagnosis, health details or your date of birth.',
           'To stop spam, we keep a scrambled code made from your internet address. We never keep the address itself, and the code cannot be turned back into your address.',
         ],
@@ -84,7 +84,7 @@ export const legalPages = (): PageData[] => [
         heading: '4. Where it is stored and who helps us',
         body: [
           'Form messages are stored in the UK or EU. We use these companies to run the website:',
-          '- **Neon** keeps form messages in our database (London).\n- **Resend** sends form messages to our inbox (EU, Ireland).\n- **Vercel** hosts the website (London).\n- **Google Analytics** shows us how the website is used, only if you accept analytics. Google may store this data outside the UK and EU, with the safeguards UK data protection law requires. See our [Cookies page](/cookies).',
+          '- **Neon** keeps form messages in our database (London).\n- **Resend** sends form messages to our inbox (EU, Ireland).\n- **Vercel** hosts the website (London).\n- **Cloudflare Turnstile** checks that form messages come from people, not bots.\n- **Google Analytics** shows us how the website is used, only if you accept analytics. Google may store this data outside the UK and EU, with the safeguards UK data protection law requires. See our [Cookies page](/cookies).',
         ],
       },
       {
@@ -264,7 +264,7 @@ export const legalPages = (): PageData[] => [
       {
         heading: '6. Other places to get help',
         body: [
-          '- **Domestic abuse:** National Domestic Abuse Helpline, 0808 2000 247.\n- **Worried about a child:** NSPCC Helpline, 0808 800 5000.\n- **Children and young people:** Childline, 0800 1111.\n- **Emotional support:** Samaritans, 116 123.',
+          '- **Domestic abuse:** National Domestic Abuse Helpline, 0808 2000 247, or Men’s Advice Line, 0808 8010 327.\n- **Worried about a child:** NSPCC Helpline, 0808 800 5000.\n- **Children and young people:** Childline, 0800 1111.\n- **Emotional support:** Samaritans, 116 123.',
         ],
       },
     ],

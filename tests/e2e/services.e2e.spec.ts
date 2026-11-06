@@ -8,6 +8,8 @@ const servicePages = [
   ['/services/app', 'Everyday support, adapted to you'],
   ['/services/consulting', 'Building systems that work for people'],
   ['/services/hub', 'A space to connect, explore and recharge'],
+  ['/services/consulting/capacity-fit-audit', 'Capacity Fit Audit'],
+  ['/services/consulting/capacity-fit-profile', 'Capacity Fit Profile'],
 ] as const
 
 test.describe('Our Services pages', () => {
@@ -16,7 +18,7 @@ test.describe('Our Services pages', () => {
     await expect(
       page.getByRole('heading', { level: 1, name: 'How we create a better fit' }),
     ).toBeVisible()
-    for (const [href] of servicePages) {
+    for (const [href] of servicePages.slice(0, 3)) {
       await expect(page.locator(`main a[href="${href}"]`).first()).toBeVisible()
     }
   })
@@ -30,6 +32,15 @@ test.describe('Our Services pages', () => {
     await expect(page.getByRole('img', { name: /FigCit App check-in screen/ })).toBeVisible()
   })
 
+  test('consulting links to the audit and profile pages', async ({ page }) => {
+    await page.goto('/services/consulting')
+    for (const name of ['capacity-fit-audit', 'capacity-fit-profile']) {
+      await expect(
+        page.locator(`main a[href="/services/consulting/${name}"]:visible`).first(),
+      ).toBeVisible()
+    }
+  })
+
   test('the old research page redirects to FigCit Consulting', async ({ page }) => {
     await page.goto('/research')
     await expect(page).toHaveURL(/\/services\/consulting$/)
@@ -39,6 +50,7 @@ test.describe('Our Services pages', () => {
   })
 
   test('has no accessibility violations on desktop and phones', async ({ page }) => {
+    test.setTimeout(180_000)
     for (const href of ['/services', ...servicePages.map(([h]) => h)]) {
       await page.setViewportSize({ width: 1440, height: 900 })
       await page.goto(href)

@@ -94,7 +94,14 @@ function groupItems(label: string): NavLink[] {
 }
 
 export const footerNav: { heading: string; links: NavLink[] }[] = [
-  { heading: 'Services', links: groupItems('Services') },
+  {
+    heading: 'Services',
+    links: [
+      ...groupItems('Services'),
+      { label: 'Capacity Fit Audit', href: '/services/consulting/capacity-fit-audit' },
+      { label: 'Capacity Fit Profile', href: '/services/consulting/capacity-fit-profile' },
+    ],
+  },
   { heading: 'Who we help', links: groupItems('Who we help') },
   {
     heading: 'FigCit',

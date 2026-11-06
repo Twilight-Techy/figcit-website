@@ -279,7 +279,7 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
             label="I am a…"
             options={iAmOptions.map((value) => ({ value, label: iAmLabels[value] }))}
           />
-          <Checkbox form={form} {...f('ageConfirmed')} label="I confirm I am 16 or over." />
+          <Checkbox form={form} {...f('ageConfirmed')} label="I confirm I am 18 or over." />
           <Checkbox
             form={form}
             {...f('consent')}

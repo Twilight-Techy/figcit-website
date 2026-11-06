@@ -261,7 +261,7 @@ export const consultingPage = (img: ImageIds): PageData => ({
       accent: 'terracotta',
     },
     {
-      blockType: 'section',
+      blockType: 'cardGrid',
       anchor: 'services',
       background: 'cream',
       intro: {
@@ -270,70 +270,73 @@ export const consultingPage = (img: ImageIds): PageData => ({
         lead: 'FigCit Consulting works with employers, schools, colleges, universities, health and care services, councils and funders to identify barriers, improve accessibility and develop approaches that reflect the needs and experiences of the people they serve, including people with mental health challenges and neurodivergent people. We bring together lived experience, research, systems thinking and practical design, and we help organisations move from identifying problems to making meaningful changes.',
         layout: 'split',
       },
+      columns: '3',
+      cards: [
+        {
+          icon: 'search',
+          tone: 'purple',
+          title: 'Capacity Fit Audits',
+          body: 'Accessibility and reasonable-adjustment audits built on our Capacity Adaptive Adjustment Model (CAAM). They show when and where your demands, timing and spaces don’t fit people, how quickly you adapt, and what misfit is costing you. You get a Capacity Fit Score, a demand–capacity map and a costed action plan linked to the Equality Act 2010, with quarterly monitoring.',
+          link: { label: 'Learn more', href: '/services/consulting/capacity-fit-audit' },
+        },
+        {
+          icon: 'home',
+          tone: 'teal',
+          title: 'Adaptive-environment assessments',
+          body: 'A focused review of a building, service or digital space: noise, light, layout, quiet space, signage and digital access, with practical changes.',
+        },
+        {
+          icon: 'people',
+          tone: 'terracotta',
+          title: 'FITS workforce and professional training',
+          body: 'Awareness (half day), Practitioner (two days) and Licensed Capacity Fit Consultant training for managers, HR teams, educators and support staff.',
+        },
+        {
+          icon: 'hand',
+          tone: 'green',
+          title: 'Health and social prescribing programme and service design',
+          body: 'Co-designed pathways, community support and link-worker models for NHS bodies, councils and voluntary sector partners.',
+        },
+        {
+          icon: 'graduation',
+          tone: 'ochre',
+          title: 'Youth programme design, implementation and evaluation',
+          body: 'Programmes that help young people into learning, training and work, and evidence of what works.',
+        },
+        {
+          icon: 'chart',
+          tone: 'blue',
+          title: 'Implementation research and service evaluation',
+          body: 'How and why a programme or service works in practice, carried out with our research partner CESNE and university partners.',
+        },
+        {
+          icon: 'bank',
+          tone: 'purple',
+          title: 'Policy analysis and development',
+          body: 'Reasonable-adjustment, accessibility and service-integration policy for public bodies, employers and sector bodies.',
+        },
+        {
+          icon: 'user',
+          tone: 'teal',
+          title: 'Capacity Fit Profile for your staff or students',
+          body: 'Individual analyses for people who opt in during or after an audit, delivered through the FigCit Hub, with a personal adjustment plan and optional follow-up. Buy the Capacity Fit Audit and Capacity Fit Profiles together as an annual subscription.',
+          link: { label: 'Learn more', href: '/services/consulting/capacity-fit-profile' },
+        },
+        {
+          icon: 'compass',
+          tone: 'terracotta',
+          title: 'Research-informed service improvement',
+          body: 'Turning audit, evaluation and research findings into a clear implementation plan, with follow-up to check what changed.',
+        },
+      ],
+    },
+    {
+      blockType: 'section',
+      background: 'white',
+      intro: { heading: 'How we work with you' },
       aside: 'none',
       parts: [
-        { blockType: 'subheading', text: 'Our services' },
-        {
-          blockType: 'cards',
-          columns: '3',
-          cards: [
-            {
-              icon: 'search',
-              tone: 'purple',
-              title: 'Capacity Fit Audits',
-              body: 'Accessibility and reasonable-adjustment audits built on our Capacity Adaptive Adjustment Model (CAAM). They show when and where your demands, timing and spaces don’t fit people, how quickly you adapt, and what misfit is costing you. You get a Capacity Fit Score, a demand–capacity map and a costed action plan linked to the Equality Act 2010, with quarterly monitoring.',
-            },
-            {
-              icon: 'home',
-              tone: 'teal',
-              title: 'Adaptive-environment assessments',
-              body: 'A focused review of a building, service or digital space: noise, light, layout, quiet space, signage and digital access, with practical changes.',
-            },
-            {
-              icon: 'people',
-              tone: 'terracotta',
-              title: 'FITS workforce and professional training',
-              body: 'Awareness (half day), Practitioner (two days) and Licensed Capacity Fit Consultant training for managers, HR teams, educators and support staff.',
-            },
-            {
-              icon: 'hand',
-              tone: 'green',
-              title: 'Health and social prescribing programme and service design',
-              body: 'Co-designed pathways, community support and link-worker models for NHS bodies, councils and voluntary sector partners.',
-            },
-            {
-              icon: 'graduation',
-              tone: 'ochre',
-              title: 'Youth programme design, implementation and evaluation',
-              body: 'Programmes that help young people into learning, training and work, and evidence of what works.',
-            },
-            {
-              icon: 'chart',
-              tone: 'blue',
-              title: 'Implementation research and service evaluation',
-              body: 'How and why a programme or service works in practice, carried out with our research partner CESNE and university partners.',
-            },
-            {
-              icon: 'bank',
-              tone: 'purple',
-              title: 'Policy analysis and development',
-              body: 'Reasonable-adjustment, accessibility and service-integration policy for public bodies, employers and sector bodies.',
-            },
-            {
-              icon: 'user',
-              tone: 'teal',
-              title: 'Needs and Fit Analysis for your staff or students',
-              body: 'Individual analyses for people who opt in during or after an audit, delivered through the FigCit Hub, with a personal adjustment plan and optional follow-up. Buy the Capacity Fit Audit and Needs and Fit Analyses together as an annual subscription.',
-            },
-            {
-              icon: 'compass',
-              tone: 'terracotta',
-              title: 'Research-informed service improvement',
-              body: 'Turning audit, evaluation and research findings into a clear implementation plan, with follow-up to check what changed.',
-            },
-          ],
-        },
-        { blockType: 'subheading', text: 'How we work with you' },
+        { blockType: 'subheading', text: 'The steps', size: 'hidden' },
         {
           blockType: 'steps',
           layout: 'flow',
@@ -363,7 +366,7 @@ export const consultingPage = (img: ImageIds): PageData => ({
     {
       blockType: 'section',
       anchor: 'research',
-      background: 'white',
+      background: 'cream',
       intro: {
         eyebrow: 'Research, evaluation and policy',
         heading: 'How we measure what changes',
@@ -491,7 +494,7 @@ export const hubPage = (img: ImageIds): PageData => ({
               icon: 'compass',
               tone: 'purple',
               title: 'Discover your fit',
-              body: 'Explore your strengths, talents and interests, and the courses, careers, jobs, relationships, homes and communities that suit you. Includes our Needs and Fit Analysis.',
+              body: 'Explore your strengths, talents and interests, and the courses, careers, jobs, relationships, homes and communities that suit you. Includes our Capacity Fit Profile.',
             },
             {
               icon: 'moon',
@@ -542,12 +545,12 @@ export const hubPage = (img: ImageIds): PageData => ({
     },
     {
       blockType: 'section',
-      anchor: 'needs-and-fit-analysis',
+      anchor: 'capacity-fit-profile',
       background: 'cream',
       intro: {
-        eyebrow: 'Needs and Fit Analysis',
+        eyebrow: 'Capacity Fit Profile',
         heading: 'Struggling at work or in study, but not sure why or what would help?',
-        lead: 'You don’t need a diagnosis. Our Needs and Fit Analysis looks at your strengths, what you find hard, how your capacity changes through the week and how well your work or study environment fits you.',
+        lead: 'You don’t need a diagnosis. Our Capacity Fit Profile looks at your strengths, what you find hard, how your capacity changes through the week and how well your work or study environment fits you.',
         layout: 'split',
       },
       aside: 'none',
@@ -555,12 +558,24 @@ export const hubPage = (img: ImageIds): PageData => ({
         {
           blockType: 'text',
           style: 'body',
-          text: 'You get your own needs and fit report and a practical plan for the adjustments that would help, which you can choose to share with your employer, college or university. Add a follow-up plan to review your progress at two weeks, one month, three, six and twelve months, and every year after that for up to four years.\n\n**How to get one:** refer yourself, ask your GP practice link worker or social prescriber, or ask your employer, college or university. Places can be paid for by you or sponsored by an employer, institution, grant or public programme.',
+          text: 'You get your own Capacity Fit Profile report and a practical plan for the adjustments that would help, which you can choose to share with your employer, college or university. Add a follow-up plan to review your progress at two weeks, one month, three, six and twelve months, and every year after that for up to four years.\n\n**How to get one:** refer yourself, ask your GP practice link worker or social prescriber, or ask your employer, college or university. Places can be paid for by you or sponsored by an employer, institution, grant or public programme.',
         },
         {
           blockType: 'text',
           style: 'small',
-          text: 'The Needs and Fit Analysis is not a diagnosis. If anything suggests you might benefit from a medical assessment, we’ll help you speak to your GP.',
+          text: 'The Capacity Fit Profile is not a diagnosis. If anything suggests you might benefit from a medical assessment, we’ll help you speak to your GP.',
+        },
+        {
+          blockType: 'actions',
+          buttonTone: 'teal',
+          actions: [
+            {
+              label: 'More about the Capacity Fit Profile',
+              href: '/services/consulting/capacity-fit-profile',
+              variant: 'primary',
+              arrow: true,
+            },
+          ],
         },
       ],
     },
