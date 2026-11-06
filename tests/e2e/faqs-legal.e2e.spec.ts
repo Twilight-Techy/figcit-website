@@ -34,7 +34,7 @@ const legal = [
   ['/accessibility', 'Accessibility statement'],
   ['/terms', 'Terms of use'],
   ['/safeguarding', 'Safeguarding'],
-  ['/complaints', 'Complaints'],
+  ['/complaints', 'Complaints and feedback'],
 ] as const
 
 for (const [path, title] of legal) {
