@@ -318,9 +318,9 @@ export const consultingPage = (img: ImageIds): PageData => ({
         {
           icon: 'user',
           tone: 'teal',
-          title: 'Needs and Fit Analysis for your staff or students',
-          body: 'Individual analyses for people who opt in during or after an audit, delivered through the FigCit Hub, with a personal adjustment plan and optional follow-up. Buy the Capacity Fit Audit and Needs and Fit Analyses together as an annual subscription.',
-          link: { label: 'Learn more', href: '/services/consulting/needs-and-fit-analysis' },
+          title: 'Capacity Fit Profile for your staff or students',
+          body: 'Individual analyses for people who opt in during or after an audit, delivered through the FigCit Hub, with a personal adjustment plan and optional follow-up. Buy the Capacity Fit Audit and Capacity Fit Profiles together as an annual subscription.',
+          link: { label: 'Learn more', href: '/services/consulting/capacity-fit-profile' },
         },
         {
           icon: 'compass',
@@ -494,7 +494,7 @@ export const hubPage = (img: ImageIds): PageData => ({
               icon: 'compass',
               tone: 'purple',
               title: 'Discover your fit',
-              body: 'Explore your strengths, talents and interests, and the courses, careers, jobs, relationships, homes and communities that suit you. Includes our Needs and Fit Analysis.',
+              body: 'Explore your strengths, talents and interests, and the courses, careers, jobs, relationships, homes and communities that suit you. Includes our Capacity Fit Profile.',
             },
             {
               icon: 'moon',
@@ -545,12 +545,12 @@ export const hubPage = (img: ImageIds): PageData => ({
     },
     {
       blockType: 'section',
-      anchor: 'needs-and-fit-analysis',
+      anchor: 'capacity-fit-profile',
       background: 'cream',
       intro: {
-        eyebrow: 'Needs and Fit Analysis',
+        eyebrow: 'Capacity Fit Profile',
         heading: 'Struggling at work or in study, but not sure why or what would help?',
-        lead: 'You don’t need a diagnosis. Our Needs and Fit Analysis looks at your strengths, what you find hard, how your capacity changes through the week and how well your work or study environment fits you.',
+        lead: 'You don’t need a diagnosis. Our Capacity Fit Profile looks at your strengths, what you find hard, how your capacity changes through the week and how well your work or study environment fits you.',
         layout: 'split',
       },
       aside: 'none',
@@ -558,20 +558,20 @@ export const hubPage = (img: ImageIds): PageData => ({
         {
           blockType: 'text',
           style: 'body',
-          text: 'You get your own needs and fit report and a practical plan for the adjustments that would help, which you can choose to share with your employer, college or university. Add a follow-up plan to review your progress at two weeks, one month, three, six and twelve months, and every year after that for up to four years.\n\n**How to get one:** refer yourself, ask your GP practice link worker or social prescriber, or ask your employer, college or university. Places can be paid for by you or sponsored by an employer, institution, grant or public programme.',
+          text: 'You get your own Capacity Fit Profile report and a practical plan for the adjustments that would help, which you can choose to share with your employer, college or university. Add a follow-up plan to review your progress at two weeks, one month, three, six and twelve months, and every year after that for up to four years.\n\n**How to get one:** refer yourself, ask your GP practice link worker or social prescriber, or ask your employer, college or university. Places can be paid for by you or sponsored by an employer, institution, grant or public programme.',
         },
         {
           blockType: 'text',
           style: 'small',
-          text: 'The Needs and Fit Analysis is not a diagnosis. If anything suggests you might benefit from a medical assessment, we’ll help you speak to your GP.',
+          text: 'The Capacity Fit Profile is not a diagnosis. If anything suggests you might benefit from a medical assessment, we’ll help you speak to your GP.',
         },
         {
           blockType: 'actions',
           buttonTone: 'teal',
           actions: [
             {
-              label: 'More about the Needs and Fit Analysis',
-              href: '/services/consulting/needs-and-fit-analysis',
+              label: 'More about the Capacity Fit Profile',
+              href: '/services/consulting/capacity-fit-profile',
               variant: 'primary',
               arrow: true,
             },

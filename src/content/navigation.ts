@@ -99,7 +99,7 @@ export const footerNav: { heading: string; links: NavLink[] }[] = [
     links: [
       ...groupItems('Services'),
       { label: 'Capacity Fit Audit', href: '/services/consulting/capacity-fit-audit' },
-      { label: 'Needs and Fit Analysis', href: '/services/consulting/needs-and-fit-analysis' },
+      { label: 'Capacity Fit Profile', href: '/services/consulting/capacity-fit-profile' },
     ],
   },
   { heading: 'Who we help', links: groupItems('Who we help') },
