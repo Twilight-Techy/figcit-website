@@ -9,7 +9,7 @@ type PageData = RequiredDataFromCollectionSlug<'pages'>
 // replaced Plausible after that document was written. [Square brackets] mark facts FigCit
 // must still supply; a page with any of them keeps its draft notice.
 
-const LAST_UPDATED = 'Last updated: 6 November 2026'
+const FIRST_PUBLISHED = '6 November 2026'
 const EMAIL = '[admin@figcit.co.uk](mailto:admin@figcit.co.uk)'
 const EASS = 'Equality Advisory and Support Service (EASS): 0808 800 0082'
 
@@ -20,7 +20,7 @@ function legalPage(
   title: string,
   description: string,
   sections: Section[],
-  options: { showCookieSettings?: boolean; notice?: string } = {},
+  options: { showCookieSettings?: boolean; notice?: string; updated?: string } = {},
 ): PageData {
   return {
     title,
@@ -31,7 +31,7 @@ function legalPage(
         blockType: 'hero',
         eyebrow: 'Legal',
         headline: title,
-        subline: LAST_UPDATED,
+        subline: `Last updated: ${options.updated ?? FIRST_PUBLISHED}`,
         art: 'none',
       },
       {
@@ -60,7 +60,7 @@ export const legalPages = (): PageData[] => [
       {
         heading: '1. Who we are',
         body: [
-          'This website is run by FigCit Ltd [company registration status, company number and registered office address]. FigCit decides how the information you give us through this website is used. The FigCit App has its own privacy notice.',
+          'This website is run by FigCit. FigCit is not yet incorporated as a company, and we will update this notice when it is. FigCit decides how the information you give us through this website is used. The FigCit App has its own privacy notice.',
         ],
       },
       {
@@ -108,7 +108,7 @@ export const legalPages = (): PageData[] => [
         ],
       },
     ],
-    { notice: 'Draft: FigCit’s company details are still to be confirmed.' },
+    { updated: '9 November 2026' },
   ),
   legalPage(
     'cookies',
@@ -178,39 +178,45 @@ export const legalPages = (): PageData[] => [
       },
     ],
   ),
-  legalPage('terms', 'Terms of use', 'The terms for using the FigCit website.', [
-    {
-      heading: 'At a glance',
-      body: [
-        '- This website gives general information. It is not medical, legal or crisis advice.\n- FigCit is not a crisis or emergency service.\n- Please be kind and respectful to others in all FigCit spaces.',
-      ],
-    },
-    {
-      heading: '1. Using this website',
-      body: [
-        'By using this website, you agree to these terms.',
-        '- The information on this site is generally supportive. It is not medical, mental health, legal or employment advice, and it does not replace a professional opinion.\n- We keep the information correct and up to date routinely.\n- Our content, logos and designs belong to FigCit Ltd. Please ask before you copy or reuse them.\n- Do not use the site for anything unlawful, to send spam, or to try to break or overload it.\n- Our site may link to other websites. We are not responsible for their content.\n- We may update these terms. The date at the top of the page shows the latest version.\n- These terms are governed by the laws in the UK.',
-      ],
-    },
-    {
-      heading: '2. Not a crisis service',
-      body: [
-        'FigCit is not a crisis or emergency service.',
-        '- **You or someone else is in danger:** call 999.\n- **You need urgent mental health help:** call NHS 111 and choose the mental health option.\n- **You want to talk to someone, any time:** Samaritans, 116 123 (free, 24 hours).\n- **You prefer to text:** text SHOUT to 85258.',
-      ],
-    },
-    {
-      heading: '3. Code of conduct',
-      body: [
-        'FigCit services, events and spaces should feel safe for everyone. This includes this website, our events and training, and the FigCit Hub.',
-        'We ask everyone to:',
-        '- treat others with respect, patience and kindness\n- respect that people have different needs, and make or accept reasonable adjustments\n- keep other people’s personal stories and details private',
-        'We do not accept:',
-        '- harassment, bullying, threats or abuse\n- discrimination of any kind\n- sharing someone else’s personal information without their permission\n- misusing our forms or contact details',
-        'If someone breaks the code, we may ask them to stop, remove content, end their access or take other action. If you have a concern, see [Safeguarding](/safeguarding) or [Complaints and feedback](/complaints).',
-      ],
-    },
-  ]),
+  legalPage(
+    'terms',
+    'Terms of use',
+    'The terms for using the FigCit website.',
+    [
+      {
+        heading: 'At a glance',
+        body: [
+          '- This website gives general information. It is not medical, legal or crisis advice.\n- FigCit is not a crisis or emergency service.\n- Please be kind and respectful to others in all FigCit spaces.',
+        ],
+      },
+      {
+        heading: '1. Using this website',
+        body: [
+          'By using this website, you agree to these terms.',
+          '- The information on this site is generally supportive. It is not medical, mental health, legal or employment advice, and it does not replace a professional opinion.\n- We keep the information correct and up to date routinely.\n- Our content, logos and designs belong to FigCit. Please ask before you copy or reuse them.\n- Do not use the site for anything unlawful, to send spam, or to try to break or overload it.\n- Our site may link to other websites. We are not responsible for their content.\n- We may update these terms. The date at the top of the page shows the latest version.\n- These terms are governed by the laws in the UK.',
+        ],
+      },
+      {
+        heading: '2. Not a crisis service',
+        body: [
+          'FigCit is not a crisis or emergency service.',
+          '- **You or someone else is in danger:** call 999.\n- **You need urgent mental health help:** call NHS 111 and choose the mental health option. In Scotland, call NHS 24 on 111.\n- **You want to talk to someone, any time:** Samaritans, 116 123 (free, 24 hours).\n- **You prefer to text:** text SHOUT to 85258.',
+        ],
+      },
+      {
+        heading: '3. Code of conduct',
+        body: [
+          'FigCit services, events and spaces should feel safe for everyone. This includes this website, our events and training, and the FigCit Hub.',
+          'We ask everyone to:',
+          '- treat others with respect, patience and kindness\n- respect that people have different needs, and make or accept reasonable adjustments\n- keep other people’s personal stories and details private',
+          'We do not accept:',
+          '- harassment, bullying, threats or abuse\n- discrimination of any kind\n- sharing someone else’s personal information without their permission\n- misusing our forms or contact details',
+          'If someone breaks the code, we may ask them to stop, remove content, end their access or take other action. If you have a concern, see [Safeguarding](/safeguarding) or [Complaints and feedback](/complaints).',
+        ],
+      },
+    ],
+    { updated: '9 November 2026' },
+  ),
   legalPage(
     'safeguarding',
     'Safeguarding',

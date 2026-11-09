@@ -16,7 +16,7 @@ export const faqsPage = (): RequiredDataFromCollectionSlug<'pages'> => ({
         {
           question: 'What is FigCit?',
           answer:
-            'FigCit Ltd is an adaptive wellbeing and professional services company. We help people manage everyday life through the FigCit App and the FigCit Hub, and we help organisations adapt through FigCit Consulting.',
+            'FigCit is an adaptive wellbeing and professional services company. We help people manage everyday life through the FigCit App and the FigCit Hub, and we help organisations adapt through FigCit Consulting.',
         },
         {
           question: 'Do I need a diagnosis?',

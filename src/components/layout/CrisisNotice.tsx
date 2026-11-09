@@ -29,7 +29,11 @@ export function CrisisNotice() {
           <a className={link} href="tel:111">
             NHS 111
           </a>{' '}
-          and choose option 2. Samaritans:{' '}
+          and choose option 2 (in Scotland,{' '}
+          <a className={link} href="tel:111">
+            NHS 24 on 111
+          </a>
+          ). Samaritans:{' '}
           <a className={link} href="tel:116123">
             116 123
           </a>{' '}

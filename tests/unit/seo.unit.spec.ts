@@ -16,8 +16,8 @@ describe('buildMetadata', () => {
 })
 
 describe('JSON-LD', () => {
-  it('describes FigCit Ltd as an Organization', () => {
-    expect(organizationJsonLd()).toMatchObject({ '@type': 'Organization', name: 'FigCit Ltd' })
+  it('describes FigCit as an Organization', () => {
+    expect(organizationJsonLd()).toMatchObject({ '@type': 'Organization', name: 'FigCit' })
   })
 
   it('escapes "<" so data can never close the script tag', () => {

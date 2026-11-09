@@ -13,7 +13,7 @@ test.describe('SEO base', () => {
     const jsonLd = await page.locator('script[type="application/ld+json"]').textContent()
     expect(JSON.parse(jsonLd ?? '{}')).toMatchObject({
       '@type': 'Organization',
-      name: 'FigCit Ltd',
+      name: 'FigCit',
     })
   })
 
