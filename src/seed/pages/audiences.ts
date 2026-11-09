@@ -90,7 +90,7 @@ export const forYouPage = (img: ImageIds): PageData => ({
     {
       blockType: 'noteBand',
       background: 'cream',
-      text: 'FigCit is not a crisis service. If you are in danger, call 999. For urgent mental health help, call NHS 111 and choose option 2, or call Samaritans free on 116 123.',
+      text: 'FigCit is not a crisis service. If you are in danger, call 999. For urgent mental health help, call NHS 111 and choose option 2 (in Scotland, NHS 24 on 111), or call Samaritans free on 116 123.',
     },
   ],
 })
@@ -293,7 +293,7 @@ export const partnersPage = (img: ImageIds): PageData => ({
       blockType: 'statement',
       background: 'white',
       eyebrow: 'About FigCit',
-      text: 'FigCit Ltd is an adaptive wellbeing and professional services company focused on improving the fit between people and the systems, services and environments in which they live, learn and work. We work with young people and adults whose everyday lives are made harder by neurodivergence, mental health challenges, individual differences or environments that do not accommodate them. We combine an adaptive everyday support app, professional consulting (audits, training, programme design, evaluation, research and policy) and a sensory-conscious community Hub. Our support is non-clinical and needs-led, and no diagnosis is required.',
+      text: 'FigCit is an adaptive wellbeing and professional services company focused on improving the fit between people and the systems, services and environments in which they live, learn and work. We work with young people and adults whose everyday lives are made harder by neurodivergence, mental health challenges, individual differences or environments that do not accommodate them. We combine an adaptive everyday support app, professional consulting (audits, training, programme design, evaluation, research and policy) and a sensory-conscious community Hub. Our support is non-clinical and needs-led, and no diagnosis is required.',
     },
     {
       blockType: 'cardGrid',

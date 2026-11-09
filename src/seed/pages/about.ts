@@ -13,7 +13,7 @@ export const aboutPage = (img: ImageIds): PageData => ({
   meta: {
     title: 'About FigCit | Fix the fit, thrive as you are',
     description:
-      'FigCit Ltd is an adaptive wellbeing and professional services company working to create a better fit between people and the systems, services and environments in which they live, learn and work.',
+      'FigCit is an adaptive wellbeing and professional services company working to create a better fit between people and the systems, services and environments in which they live, learn and work.',
   },
   layout: [
     {
@@ -21,7 +21,7 @@ export const aboutPage = (img: ImageIds): PageData => ({
       eyebrow: 'About FigCit',
       headline: 'Fix the fit, thrive as you are.',
       highlight: 'thrive as you are.',
-      lead: 'FigCit Limited is an adaptive wellbeing and professional services company working to create a better fit between people and the world around them.',
+      lead: 'FigCit is an adaptive wellbeing and professional services company working to create a better fit between people and the world around them.',
       art: 'centred',
     },
     {

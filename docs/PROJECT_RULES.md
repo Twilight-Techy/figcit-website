@@ -130,7 +130,7 @@ tests/                 unit (int) and end-to-end (e2e)
   - **Book a conversation:** name, email, organisation, role, sector, what you'd like to discuss, adjustments, consent
   - **Hub interest:** first name, email, town or city, how you might use the Hub, consent
   - **Partner with us:** name, email, organisation, type of partnership, message, consent
-- The crisis notice (999, NHS 111 option 2, Samaritans 116 123, text SHOUT to 85258) appears in the footer of every page and can't be removed in the CMS.
+- The crisis notice (999, NHS 111 option 2, NHS 24 on 111 in Scotland, Samaritans 116 123, text SHOUT to 85258) appears in the footer of every page and can't be removed in the CMS.
 - Legal pages (privacy, cookies, accessibility, terms, safeguarding, complaints) use the legal template and are editable in Payload.
 
 ## 8. Accessibility (WCAG 2.2 AA)

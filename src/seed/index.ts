@@ -164,7 +164,7 @@ async function main() {
   await payload.updateGlobal({
     slug: 'site-settings',
     data: {
-      legalName: 'FigCit Ltd',
+      legalName: 'FigCit',
       email: 'admin@figcit.co.uk',
       phone: '+447715897120',
       locality: 'Reading',

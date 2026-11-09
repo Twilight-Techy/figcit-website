@@ -8,6 +8,7 @@ import * as migration_20261025_021751_about_team_blocks from './20261025_021751_
 import * as migration_20261025_023043_contact_forms from './20261025_023043_contact_forms';
 import * as migration_20261025_024415_faq_legal from './20261025_024415_faq_legal';
 import * as migration_20261031_103054_site_settings_figcit_name from './20261031_103054_site_settings_figcit_name';
+import * as migration_20261109_140722_site_settings_name_without_ltd from './20261109_140722_site_settings_name_without_ltd';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20261031_103054_site_settings_figcit_name.up,
     down: migration_20261031_103054_site_settings_figcit_name.down,
-    name: '20261031_103054_site_settings_figcit_name'
+    name: '20261031_103054_site_settings_figcit_name',
+  },
+  {
+    up: migration_20261109_140722_site_settings_name_without_ltd.up,
+    down: migration_20261109_140722_site_settings_name_without_ltd.down,
+    name: '20261109_140722_site_settings_name_without_ltd'
   },
 ];

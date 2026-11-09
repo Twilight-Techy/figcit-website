@@ -2,7 +2,8 @@
 // phone, address) live in the Payload Site settings global; these are the fallbacks.
 export const site = {
   name: 'FigCit',
-  legalName: 'FigCit Ltd',
+  // "Ltd" only once FigCit Ltd is incorporated (UK company naming law).
+  legalName: 'FigCit',
   url: 'https://www.figcit.co.uk',
   tagline: 'Fix the fit, thrive as you are.',
   defaultTitle: 'FigCit | Fix the fit, thrive as you are',
