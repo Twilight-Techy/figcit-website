@@ -13,8 +13,8 @@ describe('key events', () => {
     expect(keyEventForLink('/contact#book-a-conversation', 'I’m an organisation')).toBe(
       'organisation_click',
     )
-    expect(keyEventForLink('/contact#book-a-conversation', 'Start your analysis')).toBe(
-      'start_analysis_click',
+    expect(keyEventForLink('/contact#book-a-conversation', 'Start your profile')).toBe(
+      'start_profile_click',
     )
     expect(keyEventForLink('/about', 'About')).toBeNull()
   })

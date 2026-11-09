@@ -70,10 +70,7 @@ export const forYouPage = (img: ImageIds): PageData => ({
           body: 'Find the words to ask for what you need, and people who understand.',
         },
       ],
-      action: {
-        label: 'Needs and Fit Analysis',
-        href: '/services/consulting/needs-and-fit-analysis',
-      },
+      action: { label: 'Capacity Fit Profile', href: '/services/consulting/capacity-fit-profile' },
     },
     {
       blockType: 'promise',

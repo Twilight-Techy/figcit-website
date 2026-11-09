@@ -70,6 +70,12 @@ const nextConfig: NextConfig = {
       },
       // Website Copy v6.0 folds research, evaluation and policy into FigCit Consulting.
       { source: '/research', destination: '/services/consulting', permanent: true },
+      // The individual service was briefly called Needs and Fit Analysis (November 2026).
+      {
+        source: '/services/consulting/needs-and-fit-analysis',
+        destination: '/services/consulting/capacity-fit-profile',
+        permanent: true,
+      },
     ]
   },
   async headers() {
