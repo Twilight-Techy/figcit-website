@@ -9,5 +9,8 @@
       "path": "/cron/retention",
       "schedule": "15 3 * * *"
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": false
+  }
 }

@@ -27,8 +27,9 @@ How to set up the environments for www.figcit.co.uk (task T04). Someone with acc
 | `NEXT_PUBLIC_SITE_URL`  | `https://www.figcit.co.uk` | the preview URL                    |
 | `BLOB_READ_WRITE_TOKEN` | set by the Blob store      | set by the Blob store              |
 
-3. In **Settings → Git**, set production to deploy only from `main`. Every pull request then gets a preview URL.
-4. Set the **Ignored Build Step** so a deploy only happens when GitHub CI has passed, or require the `checks` status before merging (step 5).
+3. Deploys run from GitHub Actions (`.github/workflows/deploy.yml`), not Vercel's Git integration, which `vercel.json` switches off. Vercel's Hobby plan blocks Git deploys of commits by anyone outside the Vercel team; deploys made with a token aren't blocked. Production deploys when CI passes on `main`; pull requests from this repository get a preview link in a comment. Run the **Deploy** workflow by hand to redeploy production.
+4. Create a Vercel token (Account Settings → Tokens, scope: the FigCit team) and save it as the `VERCEL_TOKEN` repository secret. `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` are saved as secrets too. When the token expires, deploys fail in the Deploy workflow until it is replaced.
+5. Require the `checks` status before merging (step 6), because production deploys follow CI on `main`.
 
 ## 4. Email, bot protection and analytics
 
