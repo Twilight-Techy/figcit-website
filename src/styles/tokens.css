@@ -58,6 +58,10 @@
   --fc-footer-card: rgb(245 238 222 / 0.06);
   --fc-footer-focus: #f0b26a;
 
+  /* QR codes (CTA band): always dark on light, in every mode, so phone cameras can read them */
+  --fc-qr-bg: var(--fc-white);
+  --fc-qr-ink: var(--fc-fig-ink);
+
   /* Icon discs on cards */
   --fc-disc-teal: var(--fc-rind-teal);
   --fc-disc-terracotta: var(--fc-terracotta-bloom);
