@@ -2,6 +2,9 @@ import { encode } from 'uqr'
 
 // QR codes for the CTA band. Pure functions, so the same code runs on the server and in tests.
 
+/** The live site. QR codes always point here, whatever address the current deployment runs on. */
+export const QR_ORIGIN = 'https://www.figcit.co.uk'
+
 /** The full address a QR code should open: a site path like /contact#get-early-access, or an absolute URL. */
 export function qrTarget(href: string, siteUrl: string): string {
   return new URL(href, siteUrl).toString()

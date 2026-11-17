@@ -1,7 +1,6 @@
 import { QrCode } from '@/components/ui/QrCode'
 import { ButtonLink } from '@/components/ui/ButtonLink'
-import { env } from '@/lib/env'
-import { qrTarget } from '@/lib/qr'
+import { QR_ORIGIN, qrTarget } from '@/lib/qr'
 import type { CtaBandBlock } from '@/payload-types'
 
 // Closing call to action: purple card with circles (Figma 31:390, mobile full width).
@@ -9,11 +8,11 @@ import type { CtaBandBlock } from '@/payload-types'
 // shrink into the corners so they never sit behind the text.
 //
 // The home page band (its first action is "Get early access") also shows a QR code (Figma
-// "With QR code"): a white tile on the right from 1280px, and a centred tile under the
-// buttons on phones and tablets, where there is no room beside the text. The code opens
-// this same band on the home page, so the visitor lands where they can choose Get early
-// access or Book a conversation. Other bands, such as Insights (first action "Book a
-// conversation"), get no QR code and no anchor.
+// "With QR code"): a white tile on the right, on desktop only (from 1280px). Phones and
+// tablets have no QR code: there is no room beside the text, and nobody can scan the
+// screen they are holding. The code opens this same band on the home page, so the visitor
+// lands where they can choose Get early access or Book a conversation. Other bands, such
+// as Insights (first action "Book a conversation"), get no QR code and no anchor.
 const QR_ANCHOR = 'get-started'
 
 export function CtaBand({ block, index }: { block: CtaBandBlock; index: number }) {
@@ -21,7 +20,9 @@ export function CtaBand({ block, index }: { block: CtaBandBlock; index: number }
   const showQr = (block.actions ?? [])[0]?.href.endsWith('#get-early-access') ?? false
   const qr = showQr
     ? {
-        value: qrTarget(`/#${QR_ANCHOR}`, env.NEXT_PUBLIC_SITE_URL),
+        // Always the live site, never NEXT_PUBLIC_SITE_URL: that setting is a preview or
+        // vercel.app address on some deployments, and a QR code is scanned from any device.
+        value: qrTarget(`/#${QR_ANCHOR}`, QR_ORIGIN),
         label: 'QR code: opens the FigCit home page at get early access or book a conversation',
         caption: 'Scan to get started',
       }
@@ -78,18 +79,9 @@ export function CtaBand({ block, index }: { block: CtaBandBlock; index: number }
                 </ButtonLink>
               ))}
             </div>
-            {qr && (
-              // Phones and tablets: divider, then the tile centred (left-aligned from 768px).
-              <div className="flex flex-col items-center gap-3 border-t border-on-band/20 pt-7 md:items-start xl:hidden">
-                <div className="rounded-3xl bg-(--fc-qr-bg) p-4 text-(--fc-qr-ink)">
-                  <QrCode value={qr.value} label={qr.label} className="size-36" />
-                </div>
-                <p className="text-sm leading-5 font-bold">{qr.caption}</p>
-              </div>
-            )}
           </div>
           {qr && (
-            // From 1280px: a tile floating over the circles, 136px from the right edge on the 1440 design.
+            // Desktop only, from 1280px: a tile floating over the circles, 136px from the right edge on the 1440 design.
             <div className="absolute top-14 right-12 hidden flex-col items-center gap-3 rounded-[1.75rem] bg-(--fc-qr-bg) p-4 text-(--fc-qr-ink) min-[1440px]:right-34 xl:flex">
               <QrCode value={qr.value} label={qr.label} className="size-[13.75rem]" />
               <p className="w-[13.75rem] text-center text-sm leading-5 font-bold">{qr.caption}</p>

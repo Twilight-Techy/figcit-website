@@ -37,7 +37,20 @@ test.describe('Home page', () => {
     await expect(band).toBeInViewport()
     await expect(band.getByRole('link', { name: 'Get early access' })).toBeVisible()
     await expect(band.getByRole('link', { name: 'Book a conversation' })).toBeVisible()
-    await expect(band.getByRole('img', { name: /QR code/ }).first()).toBeVisible()
+    await expect(band.getByRole('img', { name: /QR code/ })).toBeVisible()
+  })
+
+  test('shows no QR code on phones or tablets, but the band and its anchor still work', async ({
+    page,
+  }) => {
+    for (const width of [390, 820]) {
+      await page.setViewportSize({ width, height: 900 })
+      await page.goto('/#get-started', { waitUntil: 'networkidle' })
+      const band = page.locator('#get-started')
+      await expect(band.getByRole('link', { name: 'Get early access' })).toBeVisible()
+      await expect(band.getByRole('link', { name: 'Book a conversation' })).toBeVisible()
+      await expect(band.getByRole('img', { name: /QR code/ })).toHaveCount(0)
+    }
   })
 
   test('links each path card to its audience page', async ({ page }) => {

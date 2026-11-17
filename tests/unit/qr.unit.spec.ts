@@ -4,10 +4,11 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it, vi } from 'vitest'
 
 import { CtaBand } from '@/components/sections/CtaBand'
-import { qrModules, qrTarget } from '@/lib/qr'
+import { QR_ORIGIN, qrModules, qrTarget } from '@/lib/qr'
 import type { CtaBandBlock } from '@/payload-types'
 
-vi.mock('@/lib/env', () => ({ env: { NEXT_PUBLIC_SITE_URL: 'https://www.figcit.co.uk' } }))
+// The live site's NEXT_PUBLIC_SITE_URL is currently a vercel.app address; the QR code must ignore it.
+vi.mock('@/lib/env', () => ({ env: { NEXT_PUBLIC_SITE_URL: 'https://figcit-website.vercel.app' } }))
 
 const HOME_BAND_URL = 'https://www.figcit.co.uk/#get-started'
 const EARLY_ACCESS_URL = 'https://www.figcit.co.uk/contact#get-early-access'
@@ -84,7 +85,7 @@ describe('CtaBand QR code', () => {
     },
   ]
 
-  it('shows a QR code that opens this band on the home page, on phones/tablets and on desktop', () => {
+  it('shows one QR code, for desktop only, that opens this band on the home page', () => {
     const html = renderToStaticMarkup(
       createElement(CtaBand, { block: band(earlyAccess), index: 0 }),
     )
@@ -93,9 +94,24 @@ describe('CtaBand QR code', () => {
         /<svg[^>]*role="img"[^>]*aria-label="QR code: opens the FigCit home page[^"]*"[^>]*><path d="([^"]+)"/g,
       ),
     ]
-    expect(codes).toHaveLength(2)
-    for (const [, path] of codes) expect(decodePath(path!, 29, 2)).toBe(HOME_BAND_URL)
+    // one tile, and it is hidden below 1280px: no QR code on phones or tablets
+    expect(codes).toHaveLength(1)
+    expect(html).toMatch(/class="[^"]*\bhidden\b[^"]*\bxl:flex\b[^"]*"/)
+    expect(html).not.toContain('xl:hidden')
+    expect(decodePath(codes[0]![1]!, 29, 2)).toBe(HOME_BAND_URL)
     expect(html).toContain('Scan to get started')
+  })
+
+  it('always points the QR code at the live site, not at the deployment address', () => {
+    // the mocked NEXT_PUBLIC_SITE_URL above is a vercel.app address, as on the live site today
+    const html = renderToStaticMarkup(
+      createElement(CtaBand, { block: band(earlyAccess), index: 0 }),
+    )
+    const [, path] = [
+      ...html.matchAll(/aria-label="QR code[^"]*"[^>]*><path d="([^"]+)"/g),
+    ][0] as unknown as [string, string]
+    expect(decodePath(path, 29, 2)).toBe(`${QR_ORIGIN}/#get-started`)
+    expect(html).not.toContain('vercel.app')
   })
 
   it('puts the anchor the QR code points at on the band', () => {
