@@ -14,12 +14,17 @@ const schema = z
     // Which Vercel deployment this is; with SITE_INDEXABLE, decides if search engines may index.
     VERCEL_ENV: z.string().optional(),
     SITE_INDEXABLE: z.string().optional(),
-    // Forms (T24). Without a Resend key, submissions are saved but no email is sent;
-    // without a Turnstile secret, the bot check is skipped (development only).
-    RESEND_API_KEY: z.string().min(1).optional(),
+    // Forms (T24). Notification emails go over SMTP, the same setup as the app's backend
+    // (SMTP_URL, e.g. smtps://user:pass@host:465). Without it, submissions are saved but no
+    // email is sent; without a Turnstile secret, the bot check is skipped (development only).
+    SMTP_URL: z.string().min(1).optional(),
     FORMS_NOTIFY_TO: z.string().email().default('admin@figcit.co.uk'),
     FORMS_FROM: z.string().min(3).default('FigCit website <forms@figcit.co.uk>'),
     TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
+    // Tester feedback goes to the app's backend with this key (the backend's
+    // WEBSITE_FEEDBACK_KEY), so all feedback is read in the staff app.
+    FEEDBACK_API_URL: z.string().url().default('https://api.figcit.co.uk'),
+    WEBSITE_FEEDBACK_KEY: z.string().min(24).optional(),
     // Set to "true" only while creating the first admin on a new database (T28).
     ALLOW_FIRST_ADMIN: z.enum(['true', 'false']).optional(),
     // Protects /cron/retention, which deletes form submissions older than 12 months.

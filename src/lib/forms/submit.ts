@@ -3,13 +3,22 @@ import 'server-only'
 import type { Payload } from 'payload'
 
 import { hashIp, RATE_LIMIT, verifyTurnstile } from '@/lib/forms/protection'
-import { notifyInbox } from '@/lib/forms/notify'
-import { formTypes, validate, type FieldErrors, type FormType } from '@/lib/forms/schemas'
+import { forwardFeedback, type FeedbackTarget } from '@/lib/forms/feedback'
+import { notifyInbox, type Notify } from '@/lib/forms/notify'
+import {
+  formTypes,
+  validate,
+  type FieldErrors,
+  type FormInput,
+  type FormType,
+} from '@/lib/forms/schemas'
 
 export type SubmitResult =
   | { status: 'idle' }
   | { status: 'success' }
   | { status: 'error'; message: string; errors?: FieldErrors; values?: Record<string, string> }
+
+type InboxForm = Exclude<FormType, 'tester-feedback'>
 
 export const HONEYPOT_FIELD = 'website'
 
@@ -18,7 +27,9 @@ type Options = {
   ip: string
   secret: string
   turnstileSecret?: string
-  notify?: { apiKey?: string; to: string; from: string; adminUrl: string }
+  notify?: Notify
+  /** Where tester feedback goes: the app's backend, so all feedback is read in one place. */
+  feedback?: FeedbackTarget
 }
 
 // Core of the form server action, kept separate so it can be tested without Next.js.
@@ -60,6 +71,15 @@ export async function handleSubmission(
     }
   }
 
+  if (form === 'tester-feedback') {
+    const sent = opts.feedback
+      ? await forwardFeedback(result.data as FormInput<'tester-feedback'>, opts.feedback)
+      : false
+    return sent
+      ? { status: 'success' }
+      : { status: 'error', message: 'That didn’t send. Please try again in a minute.' }
+  }
+
   const ipHash = hashIp(opts.ip, opts.secret)
   const since = new Date(Date.now() - RATE_LIMIT.windowMinutes * 60_000).toISOString()
   const recent = await opts.payload.count({
@@ -76,7 +96,11 @@ export async function handleSubmission(
 
   await opts.payload.create({
     collection: 'form-submissions',
-    data: { form: form as FormType, ...result.data, ipHash },
+    data: {
+      form: form as InboxForm,
+      ...(result.data as FormInput<InboxForm>),
+      ipHash,
+    },
   })
 
   if (opts.notify) await notifyInbox(form, result.data, opts.notify)

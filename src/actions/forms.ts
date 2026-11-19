@@ -22,11 +22,12 @@ export async function submitForm(
       secret: env.PAYLOAD_SECRET,
       turnstileSecret: env.TURNSTILE_SECRET_KEY,
       notify: {
-        apiKey: env.RESEND_API_KEY,
+        smtpUrl: env.SMTP_URL,
         to: env.FORMS_NOTIFY_TO,
         from: env.FORMS_FROM,
         adminUrl: `${env.NEXT_PUBLIC_SITE_URL}/admin/collections/form-submissions`,
       },
+      feedback: { apiUrl: env.FEEDBACK_API_URL, key: env.WEBSITE_FEEDBACK_KEY },
     })
   } catch {
     console.error(`[forms] submission failed for ${form}`)

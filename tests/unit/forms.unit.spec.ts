@@ -67,4 +67,20 @@ describe('form schemas', () => {
     })
     expect(r.ok).toBe(false)
   })
+
+  it('takes tester feedback with only a kind, the words and consent', () => {
+    const r = validate('tester-feedback', {
+      kind: 'idea',
+      message: ' A dark mode ',
+      where: '',
+      name: '',
+      email: '',
+      consent: 'on',
+    })
+    expect(r).toEqual({ ok: true, data: { kind: 'idea', message: 'A dark mode', consent: true } })
+    const bad = validate('tester-feedback', { kind: 'rant', message: '', email: 'nope' })
+    expect(bad.ok).toBe(false)
+    if (!bad.ok)
+      expect(Object.keys(bad.errors).sort()).toEqual(['consent', 'email', 'kind', 'message'])
+  })
 })

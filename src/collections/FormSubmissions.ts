@@ -1,7 +1,7 @@
 import type { CollectionConfig, Field } from 'payload'
 
 import { authenticated } from '@/access'
-import { formTypes, iAmOptions, partnershipOptions, sectorOptions } from '@/lib/forms/schemas'
+import { inboxFormTypes, iAmOptions, partnershipOptions, sectorOptions } from '@/lib/forms/schemas'
 
 const readOnly = (field: Field): Field =>
   ({ ...field, admin: { ...field.admin, readOnly: true } }) as Field
@@ -44,7 +44,7 @@ export const FormSubmissions: CollectionConfig = {
           type: 'select',
           required: true,
           index: true,
-          options: formTypes.map((value) => ({ label: value, value })),
+          options: inboxFormTypes.map((value) => ({ label: value, value })),
         },
         { name: 'firstName', type: 'text' },
         { name: 'name', type: 'text' },

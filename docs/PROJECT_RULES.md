@@ -23,7 +23,7 @@ Where the copy and the design disagree, the copy wins for words and the design w
 | CMS             | Payload 3, running inside the same Next.js app at `/admin`   |
 | Database        | Neon Postgres, UK or EU region                               |
 | Styling         | Tailwind CSS v4, with design tokens as CSS custom properties |
-| Email           | Resend                                                       |
+| Email           | SMTP, the same mail setup as the app's backend               |
 | Hosting         | Vercel, with server functions pinned to London (`lhr1`)      |
 | Analytics       | Google Analytics 4, loaded only after consent                |
 | Package manager | pnpm (lockfile committed)                                    |

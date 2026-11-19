@@ -32,7 +32,7 @@ How to set up the environments for www.figcit.co.uk (task T04). Someone with acc
 
 ## 4. Email, bot protection and analytics
 
-1. **Resend:** add and verify the `figcit.co.uk` domain (SPF and DKIM DNS records), then create an API key with send-only access. Create the domain in the **Ireland (eu-west-1)** region: the website copy requires data stored in the UK or EU, and the privacy notice says so.
+1. **Email:** form notifications go over SMTP, the same mail setup as the app's backend. Set `SMTP_URL` to the backend's value and `FORMS_FROM` to an address that account may send as. Tester feedback (Contact, `#tester-feedback`) isn't stored here: it goes to the backend with `WEBSITE_FEEDBACK_KEY` (the same value as on the backend) and is read in the staff app.
 2. **Cloudflare Turnstile:** create a widget for `www.figcit.co.uk` in "Managed" mode, which is usually invisible, so there are no puzzles.
 3. **Google Analytics 4:** create a GA4 property and web data stream for `www.figcit.co.uk`, then set `NEXT_PUBLIC_GA_MEASUREMENT_ID` (starts with `G-`) for **Production only**, so previews aren't counted. In GA, set data retention to 14 months (the privacy page says so), leave Google signals and ads personalisation off, and mark `get_early_access_click`, `book_conversation_click`, `organisation_click`, `start_profile_click` and `contact_form_sent` as key events. Link Google Search Console to the same account and submit `https://www.figcit.co.uk/sitemap.xml`. Analytics only load after a visitor accepts the cookie banner.
 4. **Retention job:** `vercel.json` runs `/cron/retention` daily at 03:15. It deletes form submissions older than 12 months and needs `CRON_SECRET`.
