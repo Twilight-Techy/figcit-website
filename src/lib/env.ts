@@ -11,6 +11,9 @@ const schema = z
     // go to local disk, which is only acceptable in development.
     BLOB_READ_WRITE_TOKEN: z.string().min(1).optional(),
     VERCEL: z.string().optional(),
+    // Which Vercel deployment this is; with SITE_INDEXABLE, decides if search engines may index.
+    VERCEL_ENV: z.string().optional(),
+    SITE_INDEXABLE: z.string().optional(),
     // Forms (T24). Without a Resend key, submissions are saved but no email is sent;
     // without a Turnstile secret, the bot check is skipped (development only).
     RESEND_API_KEY: z.string().min(1).optional(),
@@ -26,6 +29,18 @@ const schema = z
     message: 'BLOB_READ_WRITE_TOKEN is required on Vercel (media must not go to local disk)',
     path: ['BLOB_READ_WRITE_TOKEN'],
   })
+  // The live site's canonical links, sitemap and sharing tags come from this URL. A
+  // vercel.app address there made Google index figcit-website.vercel.app (November 2026).
+  .refine(
+    (e) =>
+      !(e.VERCEL_ENV === 'production' || e.SITE_INDEXABLE === 'true') ||
+      !new URL(e.NEXT_PUBLIC_SITE_URL).hostname.endsWith('.vercel.app'),
+    {
+      message:
+        'NEXT_PUBLIC_SITE_URL must be the real domain (https://www.figcit.co.uk) on the live site, not a vercel.app address',
+      path: ['NEXT_PUBLIC_SITE_URL'],
+    },
+  )
 
 export type Env = z.infer<typeof schema>
 
