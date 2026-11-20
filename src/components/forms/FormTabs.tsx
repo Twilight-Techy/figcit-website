@@ -7,7 +7,13 @@ import { formTypes, type FormType } from '@/lib/forms/options'
 
 // Tabbed forms on Contact (Figma 38:604). Each tab has an address, such as
 // /contact#get-early-access, so header buttons and cards open the right form.
-const order: FormType[] = ['book-conversation', 'partner', 'early-access', 'hub-interest']
+const order: FormType[] = [
+  'book-conversation',
+  'partner',
+  'early-access',
+  'hub-interest',
+  'tester-feedback',
+]
 
 function fromHash(hash: string): FormType | undefined {
   const h = hash.replace(/^#/, '')

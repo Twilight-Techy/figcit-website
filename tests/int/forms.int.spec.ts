@@ -1,5 +1,5 @@
 import { getPayload, type Payload } from 'payload'
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { deleteExpiredSubmissions, handleSubmission } from '@/lib/forms/submit'
 import config from '@/payload.config'
@@ -88,5 +88,68 @@ describe('form submissions', () => {
     const aYearAndADayLater = new Date(Date.now() + 366 * 24 * 60 * 60 * 1000)
     expect(await deleteExpiredSubmissions(payload, new Date())).toBe(0)
     expect(await deleteExpiredSubmissions(payload, aYearAndADayLater)).toBe(1)
+  })
+
+  describe('tester feedback', () => {
+    const feedback = (overrides: Record<string, string> = {}) => {
+      const fd = new FormData()
+      const fields = {
+        kind: 'confusing',
+        where: 'Plan your time',
+        message: 'I could not tell lunch was only a suggestion',
+        email: '',
+        consent: 'on',
+        ...overrides,
+      }
+      for (const [k, v] of Object.entries(fields)) fd.set(k, v)
+      return fd
+    }
+    const target = { apiUrl: 'https://api.example.test/', key: 'k'.repeat(30) }
+
+    it('goes to the app backend with the key, and the website keeps no copy', async () => {
+      const fetch = vi.fn(
+        async (_url: string, _init: RequestInit) => new Response('{}', { status: 201 }),
+      )
+      vi.stubGlobal('fetch', fetch)
+      const r = await handleSubmission('tester-feedback', feedback(), {
+        payload,
+        ip: '203.0.113.20',
+        secret,
+        feedback: target,
+      })
+      vi.unstubAllGlobals()
+      expect(r).toEqual({ status: 'success' })
+      const [url, init] = fetch.mock.calls[0] ?? []
+      expect(url).toBe('https://api.example.test/v1/app-feedback/website')
+      expect((init?.headers as Record<string, string>)['x-website-key']).toBe(target.key)
+      expect(JSON.parse(String(init?.body))).toEqual({
+        kind: 'confusing',
+        text: 'I could not tell lunch was only a suggestion',
+        page: 'Plan your time',
+      })
+      expect((await payload.count({ collection: 'form-submissions' })).totalDocs).toBe(0)
+    })
+
+    it('says it did not send when the backend refuses or is not set up', async () => {
+      vi.stubGlobal(
+        'fetch',
+        vi.fn(async () => new Response('', { status: 403 })),
+      )
+      const refused = await handleSubmission('tester-feedback', feedback(), {
+        payload,
+        ip: '203.0.113.21',
+        secret,
+        feedback: target,
+      })
+      vi.unstubAllGlobals()
+      expect(refused.status).toBe('error')
+      const unset = await handleSubmission('tester-feedback', feedback(), {
+        payload,
+        ip: '203.0.113.21',
+        secret,
+        feedback: { apiUrl: target.apiUrl },
+      })
+      expect(unset.status).toBe('error')
+    })
   })
 })

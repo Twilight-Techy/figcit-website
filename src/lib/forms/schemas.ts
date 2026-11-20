@@ -3,9 +3,17 @@ import { z } from 'zod'
 // The four forms from the website copy (Part B, Forms). Never ask for a diagnosis,
 // health details or date of birth (rules §7): there are no fields for them here.
 
-import { formTypes, iAmOptions, partnershipOptions, sectorOptions, type FormType } from './options'
+import {
+  feedbackKinds,
+  formTypes,
+  iAmOptions,
+  inboxFormTypes,
+  partnershipOptions,
+  sectorOptions,
+  type FormType,
+} from './options'
 
-export { formTypes, iAmOptions, partnershipOptions, sectorOptions, type FormType }
+export { formTypes, iAmOptions, inboxFormTypes, partnershipOptions, sectorOptions, type FormType }
 
 const trimmed = (label: string, max: number) =>
   z
@@ -67,6 +75,20 @@ export const schemas = {
     partnershipType: z.enum(partnershipOptions, { error: 'Choose a type of partnership' }),
     message: trimmed('message', 2000),
     consent,
+  }),
+  'tester-feedback': z.object({
+    kind: z.enum(feedbackKinds, { error: 'Choose what kind of feedback this is' }),
+    where: optional(200),
+    message: trimmed('feedback', 2000),
+    name: optional(100),
+    email: z
+      .string()
+      .trim()
+      .max(254, 'Enter a shorter email address')
+      .email('Enter an email address like name@example.com')
+      .optional()
+      .or(z.literal('').transform(() => undefined)),
+    consent: mustTick('Tick the box to agree to us storing your feedback'),
   }),
 } satisfies Record<FormType, z.ZodType>
 

@@ -1,5 +1,7 @@
 import 'server-only'
 
+import nodemailer, { type Transporter } from 'nodemailer'
+
 const titles: Record<string, string> = {
   'early-access': 'Early access request',
   'book-conversation': 'Book a conversation',
@@ -7,31 +9,33 @@ const titles: Record<string, string> = {
   partner: 'Partnership enquiry',
 }
 
-// Emails the FigCit inbox about a new submission through Resend's REST API (no SDK).
-// Failures are logged without personal data and never block the submission.
+export type Notify = { smtpUrl?: string; to: string; from: string; adminUrl: string }
+
+let transport: { url: string; t: Transporter } | undefined
+const transportFor = (url: string): Transporter => {
+  if (transport?.url !== url) transport = { url, t: nodemailer.createTransport(url) }
+  return transport.t
+}
+
+// Emails the FigCit inbox about a new submission over SMTP, the same mail setup the app uses
+// (SMTP_URL). Failures are logged without personal data and never block the submission.
 export async function notifyInbox(
   form: string,
   data: Record<string, unknown>,
-  opts: { apiKey?: string; to: string; from: string; adminUrl: string },
+  opts: Notify,
 ): Promise<void> {
-  if (!opts.apiKey) return
+  if (!opts.smtpUrl) return
   const lines = Object.entries(data)
     .filter(([, v]) => v !== undefined && v !== true)
     .map(([k, v]) => `${k}: ${String(v)}`)
   try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${opts.apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: opts.from,
-        to: [opts.to],
-        subject: `New website form: ${titles[form] ?? form}`,
-        text: `${lines.join('\n')}\n\nView in admin: ${opts.adminUrl}`,
-      }),
-      signal: AbortSignal.timeout(8000),
+    await transportFor(opts.smtpUrl).sendMail({
+      from: opts.from,
+      to: opts.to,
+      subject: `New website form: ${titles[form] ?? form}`,
+      text: `${lines.join('\n')}\n\nView in admin: ${opts.adminUrl}`,
     })
-    if (!res.ok) console.error(`[forms] notification failed with status ${res.status}`)
   } catch {
-    console.error('[forms] notification request failed')
+    console.error('[forms] notification email failed')
   }
 }

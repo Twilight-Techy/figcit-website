@@ -9,7 +9,14 @@ import { LineIcon } from '@/components/icons/line'
 import { Checkbox, RadioPills, Select, TextArea, TextField } from '@/components/forms/Fields'
 import { Turnstile } from '@/components/forms/Turnstile'
 import { trackEvent } from '@/lib/analytics'
-import { iAmOptions, partnershipOptions, sectorOptions, type FormType } from '@/lib/forms/options'
+import {
+  feedbackKindLabels,
+  feedbackKinds,
+  iAmOptions,
+  partnershipOptions,
+  sectorOptions,
+  type FormType,
+} from '@/lib/forms/options'
 import type { SubmitResult } from '@/lib/forms/submit'
 
 // The four website forms (copy Part B, Forms; Figma 39:742 and 38:604). Fields match the
@@ -44,6 +51,13 @@ export const formMeta: Record<
     intro: 'Be the first to hear when the FigCit Hub opens.',
     hash: 'hub-interest',
   },
+  'tester-feedback': {
+    tab: 'Tester feedback',
+    title: 'Tester feedback',
+    intro:
+      'Testing the FigCit App? Tell us what broke, what was confusing, or an idea. If you’re signed in, the app has its own Send feedback link too.',
+    hash: 'tester-feedback',
+  },
 }
 
 const iAmLabels: Record<(typeof iAmOptions)[number], string> = {
@@ -58,6 +72,7 @@ const submitLabel: Record<FormType, string> = {
   partner: 'Send',
   'early-access': 'Get early access',
   'hub-interest': 'Register your interest',
+  'tester-feedback': 'Send feedback',
 }
 
 export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headingLevel?: 2 | 3 }) {
@@ -97,8 +112,9 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
           Thank you — we’ve got it.
         </Heading>
         <p className="max-w-[30rem] text-[1.0625rem] leading-[1.55]">
-          We’ll be in touch soon at the email you gave us. If you asked for an adjustment, we’ll use
-          it.
+          {form === 'tester-feedback'
+            ? 'Your feedback is with the team. It really helps.'
+            : 'We’ll be in touch soon at the email you gave us. If you asked for an adjustment, we’ll use it.'}
         </p>
         <Link
           prefetch={false}
@@ -325,6 +341,54 @@ export function WebsiteForm({ form, headingLevel = 2 }: { form: FormType; headin
             form={form}
             {...f('consent')}
             label="I agree to FigCit storing my details to contact me about the Hub."
+          />
+        </>
+      )}
+
+      {form === 'tester-feedback' && (
+        <>
+          <RadioPills
+            form={form}
+            {...f('kind')}
+            label="What kind of feedback?"
+            options={feedbackKinds.map((value) => ({ value, label: feedbackKindLabels[value] }))}
+          />
+          <TextField
+            form={form}
+            {...f('where')}
+            optional
+            label="Where did it happen?"
+            placeholder="e.g. the app’s Plan your time screen"
+          />
+          <TextArea
+            form={form}
+            {...f('message')}
+            label="Your feedback"
+            placeholder="What you did, what you expected, and what happened instead"
+          />
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-5">
+            <TextField
+              form={form}
+              {...f('name')}
+              optional
+              label="Name"
+              placeholder="Your name"
+              autoComplete="name"
+            />
+            <TextField
+              form={form}
+              {...f('email')}
+              optional
+              type="email"
+              label="Email"
+              placeholder="If you’d like a reply"
+              autoComplete="email"
+            />
+          </div>
+          <Checkbox
+            form={form}
+            {...f('consent')}
+            label="I agree to FigCit storing my feedback, and my email if I gave it, to improve the app and reply to me."
           />
         </>
       )}
