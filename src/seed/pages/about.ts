@@ -109,6 +109,7 @@ export const aboutPage = (img: ImageIds): PageData => ({
       body: 'That afternoon gave me a clear question: what if support started with the capacity a person has right now and the places around them adapted to it? Our 2026 research with CESNE gave that question weight: 73% of 244 people had left a job, course or opportunity because their needs weren’t met. They didn’t need fixing. The fit did.',
       attribution: 'Ganiyat Olatorera Olukemi Kareem, Founder & CEO',
       link: { label: 'Meet our team', href: '/about/team' },
+      portrait: img.founder,
       portraitInitials: 'GK',
     },
     {
@@ -137,7 +138,7 @@ export const aboutPage = (img: ImageIds): PageData => ({
   ],
 })
 
-export const teamPage = (): PageData => ({
+export const teamPage = (img: ImageIds): PageData => ({
   title: 'Our team',
   slug: 'about/team',
   meta: {
@@ -164,6 +165,7 @@ export const teamPage = (): PageData => ({
         label: 'Short bio — for events, speaker profiles and social media',
         text: 'Ganiyat Olatorera Olukemi Kareem is the founder and CEO of FigCit. She’s an internationally qualified social worker, applied public health researcher and product owner. She founded Arraka Wellness Hub in Lagos with a Tony Elumelu Foundation grant and created the Capacity Matrix, CAAM and FITS. Her own experience of a shutdown at work drives her mission: support that fits, before the crash.',
       },
+      portrait: img.founder,
       portraitInitials: 'GK',
     },
     {

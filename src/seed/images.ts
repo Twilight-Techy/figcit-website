@@ -7,6 +7,8 @@ export const seedImages = {
   'care-team': 'A group of care workers in teal uniforms laughing together in a staff room',
   'partners-meeting': 'Colleagues around an office table in a planning meeting',
   'lived-experience': 'Three young people talking around a table covered in notes',
+  founder:
+    'Ganiyat Olatorera Olukemi Kareem, founder and CEO of FigCit, in a cream blazer and gold earrings, smiling outside an office building',
 } as const
 
 export type ImageKey = keyof typeof seedImages
