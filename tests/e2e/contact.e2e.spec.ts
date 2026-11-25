@@ -79,10 +79,10 @@ test('has no accessibility violations on desktop and phones', async ({ page }) =
   expect((await axe(page).analyze()).violations).toEqual([])
 })
 
-test('the header button opens the early access form from another page', async ({ page }) => {
+test('the Contact page link opens the early access form', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
-  await page.goto('/about', { waitUntil: 'networkidle' })
-  await page.getByRole('banner').getByRole('link', { name: 'Get early access' }).click()
+  await page.goto('/contact', { waitUntil: 'networkidle' })
+  await page.getByRole('main').getByRole('link', { name: 'Get early access' }).first().click()
   await expect(page).toHaveURL(/\/contact#get-early-access$/)
   await expect(page.getByRole('tab', { name: 'Get early access' })).toHaveAttribute(
     'aria-selected',

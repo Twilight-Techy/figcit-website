@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     depth: 0,
     pagination: false,
   })
-  return docs.map((doc) => {
+  const pages: MetadataRoute.Sitemap = docs.map((doc) => {
     const path = pathForSlug(doc.slug)
     return {
       url: `${env.NEXT_PUBLIC_SITE_URL}${path === '/' ? '' : path}`,
@@ -23,4 +23,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: path === '/' ? 1 : 0.7,
     }
   })
+  // The download page is code, not a CMS page.
+  pages.push({
+    url: `${env.NEXT_PUBLIC_SITE_URL}/download`,
+    changeFrequency: 'monthly',
+    priority: 0.9,
+  })
+  return pages
 }

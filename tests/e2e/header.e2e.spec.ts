@@ -43,16 +43,14 @@ test.describe('Header on desktop', () => {
     await page.goto('/', { waitUntil: 'networkidle' })
     const button = await page
       .getByRole('banner')
-      .getByRole('link', { name: 'Get early access' })
+      .getByRole('link', { name: 'Get the app' })
       .boundingBox()
     expect((button?.x ?? 0) + (button?.width ?? 0)).toBeLessThanOrEqual(1200)
   })
 
   test('shows both call-to-action buttons', async ({ page }) => {
     await page.goto('/', { waitUntil: 'networkidle' })
-    await expect(
-      page.getByRole('banner').getByRole('link', { name: 'Get early access' }),
-    ).toBeVisible()
+    await expect(page.getByRole('banner').getByRole('link', { name: 'Get the app' })).toBeVisible()
     await expect(
       page.getByRole('banner').getByRole('link', { name: 'Book a conversation' }),
     ).toBeVisible()

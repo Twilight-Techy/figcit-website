@@ -7,26 +7,35 @@ import type { CtaBandBlock } from '@/payload-types'
 // It follows a padded section, so it adds space below only. Below 1280px the circles
 // shrink into the corners so they never sit behind the text.
 //
-// The home page band (its first action is "Get early access") also shows a QR code (Figma
+// A band whose first action is "Get the app" (/download) also shows a QR code (Figma
 // "With QR code"): a white tile on the right, on desktop only (from 1280px). Phones and
 // tablets have no QR code: there is no room beside the text, and nobody can scan the
-// screen they are holding. The code opens this same band on the home page, so the visitor
-// lands where they can choose Get early access or Book a conversation. Other bands, such
-// as Insights (first action "Book a conversation"), get no QR code and no anchor.
+// screen they are holding. The code opens the download page on the phone that scans it.
+// Bands still pointing at early access keep the older code, which opens this band on the
+// home page. Other bands, such as Insights (first action "Book a conversation"), get no
+// QR code and no anchor.
 const QR_ANCHOR = 'get-started'
 
 export function CtaBand({ block, index }: { block: CtaBandBlock; index: number }) {
   const headingId = `section-${index}`
-  const showQr = (block.actions ?? [])[0]?.href.endsWith('#get-early-access') ?? false
-  const qr = showQr
+  const first = (block.actions ?? [])[0]?.href ?? ''
+  const toApp = first === '/download' || first === '/download/'
+  const showQr = toApp || first.endsWith('#get-early-access')
+  const qr = toApp
     ? {
-        // Always the live site, never NEXT_PUBLIC_SITE_URL: that setting is a preview or
-        // vercel.app address on some deployments, and a QR code is scanned from any device.
-        value: qrTarget(`/#${QR_ANCHOR}`, QR_ORIGIN),
-        label: 'QR code: opens the FigCit home page at get early access or book a conversation',
-        caption: 'Scan to get started',
+        value: qrTarget('/download', QR_ORIGIN),
+        label: 'QR code: opens the FigCit app download on your phone',
+        caption: 'Scan to get the app',
       }
-    : null
+    : showQr
+      ? {
+          // Always the live site, never NEXT_PUBLIC_SITE_URL: that setting is a preview or
+          // vercel.app address on some deployments, and a QR code is scanned from any device.
+          value: qrTarget(`/#${QR_ANCHOR}`, QR_ORIGIN),
+          label: 'QR code: opens the FigCit home page at get early access or book a conversation',
+          caption: 'Scan to get started',
+        }
+      : null
 
   return (
     <section

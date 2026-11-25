@@ -35,7 +35,7 @@ test.describe('Home page', () => {
     await page.goto('/#get-started', { waitUntil: 'networkidle' })
     const band = page.locator('#get-started')
     await expect(band).toBeInViewport()
-    await expect(band.getByRole('link', { name: 'Get early access' })).toBeVisible()
+    await expect(band.getByRole('link', { name: 'Get the app' })).toBeVisible()
     await expect(band.getByRole('link', { name: 'Book a conversation' })).toBeVisible()
     await expect(band.getByRole('img', { name: /QR code/ })).toBeVisible()
   })
@@ -47,7 +47,7 @@ test.describe('Home page', () => {
       await page.setViewportSize({ width, height: 900 })
       await page.goto('/#get-started', { waitUntil: 'networkidle' })
       const band = page.locator('#get-started')
-      await expect(band.getByRole('link', { name: 'Get early access' })).toBeVisible()
+      await expect(band.getByRole('link', { name: 'Get the app' })).toBeVisible()
       await expect(band.getByRole('link', { name: 'Book a conversation' })).toBeVisible()
       await expect(band.getByRole('img', { name: /QR code/ })).toHaveCount(0)
     }

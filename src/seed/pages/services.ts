@@ -25,8 +25,8 @@ export const servicesPage = (): PageData => ({
       lead: 'FigCit combines adaptive technology, professional services and inclusive environments to help people and systems work better together.',
       actions: [
         {
-          label: 'Get early access',
-          href: '/contact#get-early-access',
+          label: 'Get the app',
+          href: '/download',
           variant: 'primary',
           arrow: true,
         },
@@ -95,8 +95,8 @@ export const appPage = (img: ImageIds): PageData => ({
       lead: 'Support for everyday life, before things reach a crisis point.',
       actions: [
         {
-          label: 'Get early access',
-          href: '/contact#get-early-access',
+          label: 'Get the app',
+          href: '/download',
           variant: 'primary',
           arrow: true,
         },
@@ -216,8 +216,8 @@ export const appPage = (img: ImageIds): PageData => ({
           blockType: 'actions',
           actions: [
             {
-              label: 'Get early access',
-              href: '/contact#get-early-access',
+              label: 'Get the app',
+              href: '/download',
               variant: 'primary',
               arrow: true,
             },

@@ -42,6 +42,8 @@ export type KeyEvent =
   | 'organisation_click'
   | 'start_profile_click'
   | 'contact_form_sent'
+  | 'get_app_click'
+  | 'android_download'
 
 export function trackEvent(name: KeyEvent, params?: Record<string, string>) {
   if (!GA_MEASUREMENT_ID || readConsent() !== 'accepted' || !window.dataLayer) return
@@ -54,6 +56,8 @@ export function keyEventForLink(href: string, label: string): KeyEvent | null {
   if (/^I.m an organisation$/i.test(label.trim())) return 'organisation_click'
   if (/^Start your profile$/i.test(label.trim())) return 'start_profile_click'
   if (href.endsWith('#get-early-access')) return 'get_early_access_click'
+  if (href === '/download' || href === '/download/') return 'get_app_click'
+  if (href.endsWith('/download/figcit.apk')) return 'android_download'
   if (href.endsWith('#book-a-conversation')) return 'book_conversation_click'
   return null
 }

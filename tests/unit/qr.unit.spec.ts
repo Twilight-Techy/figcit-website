@@ -146,4 +146,29 @@ describe('CtaBand QR code', () => {
     expect(html).not.toContain('Scan to')
     expect(html).not.toContain('id="get-started"')
   })
+
+  it('sends people from a "Get the app" band to the download page on their phone', () => {
+    const html = renderToStaticMarkup(
+      createElement(CtaBand, {
+        block: band([
+          { label: 'Get the app', href: '/download', variant: 'primary', arrow: true },
+          {
+            label: 'Book a conversation',
+            href: '/contact#book-a-conversation',
+            variant: 'outline',
+          },
+        ]),
+        index: 0,
+      }),
+    )
+    const m =
+      /viewBox="0 0 (\d+) \d+"[^>]*aria-label="QR code: opens the FigCit app download[^"]*"[^>]*><path d="([^"]+)"/.exec(
+        html,
+      )
+    expect(html).toContain('Scan to get the app')
+    // printed QR codes still open this band
+    expect(html).toMatch(/<section id="get-started"/)
+    const decoded = decodePath(m![2]!, Number(m![1]), 2)
+    expect(decoded).toBe(`${QR_ORIGIN}/download`)
+  })
 })

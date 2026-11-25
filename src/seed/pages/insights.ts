@@ -87,7 +87,7 @@ export const insightsPage = (): RequiredDataFromCollectionSlug<'pages'> => ({
           variant: 'primary',
           arrow: true,
         },
-        { label: 'Get early access', href: '/contact#get-early-access', variant: 'outline' },
+        { label: 'Get the app', href: '/download', variant: 'outline' },
       ],
     },
   ],

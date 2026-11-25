@@ -18,8 +18,8 @@ export const homePage = (img: ImageIds): RequiredDataFromCollectionSlug<'pages'>
       lead: 'FigCit helps create a better fit between people and the world around them. An app that adapts to your day, consulting and training that help workplaces, colleges and services adapt, and a calm Hub to connect, explore and recharge.',
       actions: [
         {
-          label: 'Get early access',
-          href: '/contact#get-early-access',
+          label: 'Get the app',
+          href: '/download',
           variant: 'primary',
           arrow: true,
         },
@@ -221,8 +221,8 @@ export const homePage = (img: ImageIds): RequiredDataFromCollectionSlug<'pages'>
       body: 'Helping people thrive. Helping systems adapt.',
       actions: [
         {
-          label: 'Get early access',
-          href: '/contact#get-early-access',
+          label: 'Get the app',
+          href: '/download',
           variant: 'primary',
           arrow: true,
         },
