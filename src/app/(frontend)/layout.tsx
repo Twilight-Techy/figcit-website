@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 import { Analytics } from '@/components/layout/Analytics'
+import { AppBanner } from '@/components/layout/AppBanner'
 import { ComfortInit } from '@/components/layout/ComfortInit'
 import { CookieBanner } from '@/components/layout/CookieBanner'
 import { Footer } from '@/components/layout/Footer'
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <SkipLink />
+        <AppBanner />
         <JsonLd data={organizationJsonLd()} />
         <Header />
         <main id="main">{children}</main>

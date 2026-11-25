@@ -16,6 +16,8 @@ describe('key events', () => {
     expect(keyEventForLink('/contact#book-a-conversation', 'Start your profile')).toBe(
       'start_profile_click',
     )
+    expect(keyEventForLink('/download', 'Get the app')).toBe('get_app_click')
+    expect(keyEventForLink('/download/figcit.apk', 'Download the app')).toBe('android_download')
     expect(keyEventForLink('/about', 'About')).toBeNull()
   })
 })

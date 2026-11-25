@@ -278,3 +278,44 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Outside the layers on purpose: these switch Tailwind's display utilities (hidden, flex)
+ * on and off, and unlayered rules win over every layer. */
+/* "Get the app" bar: gone once closed, and on the download page itself. */
+:root[data-app-banner='hidden'] .app-banner,
+body:has([data-page='download']) .app-banner {
+  display: none;
+}
+
+/* Download page: the visitor's own device first, labelled. */
+[data-platform='android'] [data-card='android'],
+[data-platform='ios'] [data-card='ios'],
+[data-platform='desktop'] [data-card='desktop'] {
+  order: -1;
+}
+[data-platform='android'] [data-card='android'] .download-yours,
+[data-platform='ios'] [data-card='ios'] .download-yours,
+[data-platform='desktop'] [data-card='desktop'] .download-yours {
+  display: block;
+}
+.download-steps {
+  counter-reset: step;
+}
+.download-steps > li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+.download-steps > li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  font-weight: 700;
+}

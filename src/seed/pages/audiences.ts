@@ -23,8 +23,8 @@ export const forYouPage = (img: ImageIds): PageData => ({
       lead: 'Whether you’re living with anxiety, unstable mood, trauma, ADHD, autism, dyslexia, dyscalculia or dyspraxia diagnosed or not; FigCit helps you feel steadier, rest and recover, and keep moving towards the life you want.',
       actions: [
         {
-          label: 'Get early access',
-          href: '/contact#get-early-access',
+          label: 'Get the app',
+          href: '/download',
           variant: 'primary',
           arrow: true,
         },
@@ -79,8 +79,8 @@ export const forYouPage = (img: ImageIds): PageData => ({
       body: 'You don’t need a label to get help from FigCit. There are no streaks to keep and no one telling you, you’re behind. You’re not in a competition with anyone. Start with a free check-in and go at your own pace.',
       actions: [
         {
-          label: 'Get early access',
-          href: '/contact#get-early-access',
+          label: 'Get the app',
+          href: '/download',
           variant: 'primary',
           arrow: true,
         },

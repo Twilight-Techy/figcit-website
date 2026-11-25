@@ -82,7 +82,7 @@ export const mainNav: NavGroup[] = [
 
 export const headerActions = {
   secondary: { label: 'Book a conversation', href: '/contact#book-a-conversation' },
-  primary: { label: 'Get early access', href: '/contact#get-early-access' },
+  primary: { label: 'Get the app', href: '/download' },
 } satisfies Record<string, NavLink>
 
 // Footer columns (Figma 30:89). Services and Who we help reuse the header menu links.
