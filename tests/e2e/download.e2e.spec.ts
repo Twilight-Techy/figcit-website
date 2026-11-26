@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import AxeBuilder from '@axe-core/playwright'
 import { devices, expect, test, type Page } from '@playwright/test'
 
@@ -36,6 +37,16 @@ test.describe('Download page', () => {
     expect(res.headers()['content-disposition']).toContain('FigCit.apk')
     // an APK is a zip file
     expect((await res.body()).subarray(0, 2).toString()).toBe('PK')
+  })
+
+  test('tells the installed app which version is out, matching the APK', async ({ request }) => {
+    const res = await request.get('/download/figcit.json')
+    expect(res.status()).toBe(200)
+    const info = (await res.json()) as { versionCode: number; bytes: number; sha256: string }
+    const apk = await (await request.get('/download/figcit.apk')).body()
+    expect(info.bytes).toBe(apk.length)
+    expect(info.sha256).toBe(createHash('sha256').update(apk).digest('hex'))
+    expect(info.versionCode).toBeGreaterThan(10000)
   })
 
   test('the header button leads here', async ({ page }) => {
